@@ -1,0 +1,28 @@
+<link rel="stylesheet" href="user/css/loginStyle.css" />
+<div class="wrapper">
+  <div class="logo">
+    <img
+      src="https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-bird-symbols-png-logo-0.png"
+      alt=""
+    />
+  </div>
+  <div class="text-center mt-4 name">PetPlanet</div>
+  <form class="p-3 mt-3" action="/signup" method="post" class="validated-form" novalidate>
+    <div class="form-field d-flex align-items-center">
+      <span class="far fa-user"></span>
+      <input type="text" name="username" id="username" placeholder="Username" required>
+    </div>
+    <div class="form-field d-flex align-items-center">
+      <span class="far fa-user"></span>
+      <input type="text" name="email" id="email" placeholder="Email" required>
+    </div>
+    <div class="form-field d-flex align-items-center">
+      <span class="fas fa-key"></span>
+      <input type="password" name="password" id="pwd" placeholder="Password" required>
+    </div>
+    <button type="submit" class="btn mt-3">Signup</button>
+  </form>
+  <div class="text-center fs-6">
+    <p>Already have an account ?    <a href="/login">Login</a></p>
+  </div>
+</div>
