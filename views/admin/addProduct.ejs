@@ -1,0 +1,70 @@
+
+
+<%- include('adminHeader.ejs')  %>  
+  <div class="col-lg">
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title">Add product</div>
+        <hr>
+        <form action="/admin/addproduct" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="input-1">Animal Type</label>
+            <select class="group input-group form-control" name="animal" id="">
+              <option value="" selected>Select Your Animal Type</option>
+              <% type.forEach(function(type){ %>
+
+                <option value="<%= type._id%>">
+                  <%= type.typeName %>
+                </option>
+                <% }) %>
+            </select>
+            <!-- <input type="text" class="form-control" id="input-1" placeholder="Enter Your Name"> -->
+          </div>
+
+          <div class="form-group">
+            <label for="input-2">Age</label>
+            <select class="group input-group form-control" name="age" id="">
+              <option value="" selected>Select Your Age</option>
+              <% age.forEach(function(age){ %>
+                <option value="<%= age._id %>">
+                  <%= age.age %>
+                </option>
+                <% }) %>
+            </select>
+            <!-- <input type="text" class="form-control" id="input-2" placeholder="Enter Your Email Address"> -->
+          </div>
+
+
+          
+
+          <div class="form-group">
+            <label for="input-4">Product Name</label>
+            <input class="form-control" id="input-4" type="text" placeholder="Product Name" required name="name">
+          </div>
+
+          <div class="form-group">
+            <label for="input-5">Details</label>
+            <input class="form-control" id="input-5" type="text" placeholder="Details" required name="description">
+          </div>
+
+          <div class="form-group">
+            <label for="input-5">Price</label>
+            <input class="form-control" id="input-5" type="tel" placeholder="Price" required name="price">
+          </div>
+          
+          
+
+          <div class="form-group">
+            <label for="input-5">Image</label>
+            <input type="file" multiple class="form-control" id="input-5" name="image" required
+              placeholder="Choose an image" />
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-success px-5"> Add Product</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <%- include('adminFooter.ejs')  %> 

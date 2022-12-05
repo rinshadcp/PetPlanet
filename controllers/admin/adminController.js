@@ -86,7 +86,24 @@ deleteAge: async (req, res) => {
   } catch (err) {
       next(err)
   }
-}
+},
+
+    //add product page
+    addproductpage: async (req, res) => {
+      try {
+          // if (req.session.adminLogin) {
+              const animal = await animalCategorySchema.find()
+              const age = await ageCategorySchema.find()
+
+              res.render('admin/addproduct', { animal, age})//admin: req.session.admin })
+
+          }
+
+      // }
+       catch (err) {
+          next(err)
+      }
+  }
 
 
 

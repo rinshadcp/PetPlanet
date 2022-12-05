@@ -3,11 +3,11 @@ const mongoose = require("mongoose");
 
 
 const addProductSchema = new mongoose.Schema({
-  category:{
+  animal:{
     type:String,
     required:true
   },
-  subCategory:{
+  age:{
     type: String,
     required:true
   },  
@@ -17,7 +17,7 @@ const addProductSchema = new mongoose.Schema({
   },
   brand: {
     type: String,
-    required: true
+    required: false
   },
   description: {
     type: String,

@@ -4,8 +4,10 @@ const controller = require('../controllers/admin/adminController');
 
 router.get('/',controller.adminHome);
 router.get('/viewUser',controller.viewUser) ;
-router.get('/animalPage',controller.animalPage)
-router.get('/agePage',controller.agePage)
+router.get('/animalPage',controller.animalPage);
+router.get('/agePage',controller.agePage);
+router.get('/addProduct',controller.addproductpage);
+
 
 router.post('/addAnimal',controller.addAnimal)
 router.post('/deleteAnimal/:id',controller.deleteAnimal)
