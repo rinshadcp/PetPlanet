@@ -11,9 +11,10 @@ const logger = require("morgan");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const ExpressError = require('./utils/expressError');
-const User = require("./models/userModel");
+const User = require("./models/user/userModel");
 
-const userRoutes= require('./routes/user')
+const userRoutes= require('./routes/user');
+const adminRoutes= require('./routes/admin');
 
 const app = express();
 
@@ -54,6 +55,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/',userRoutes);
+app.use('/admin',adminRoutes);
 
 
 
@@ -61,6 +63,7 @@ app.use('/',userRoutes);
 app.get('/', (req, res) => {
   res.render('user/index')
 });
+
 
 
 app.all('*', (req, res, next) => {

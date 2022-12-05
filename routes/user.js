@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const catchAsync = require('../utils/catchAsync');
-const User = require('../models/userModel');
+const User = require('../models/user/userModel');
 const user = require('../controllers/user/authController');
 
 router.route('/signup')
