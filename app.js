@@ -12,7 +12,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const ExpressError = require('./utils/expressError');
 const User = require("./models/user/userModel");
-
+const multer= require('multer');
 const userRoutes= require('./routes/user');
 const adminRoutes= require('./routes/admin');
 
@@ -24,6 +24,22 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
+
+
+
+// Multer (file upload setup)
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+      cb(null, "public/images/petproduct/");
+  },
+  filename: (req, file, cb) => {
+      cb(null, file.fieldname + "_" + Date.now() + path.extname(file.originalname))
+      console.log(file.fieldname + Date.now() + path.extname(file.originalname));
+  },
+});
+// const upload = multer({ storage: storage})
+app.use(multer({ storage: storage }).array("image", 10))
+
 const secret = process.env.SECRET || 'thisshouldbeabettersecret!';
 const sessionConfig = {
   secret,
@@ -58,11 +74,6 @@ app.use('/',userRoutes);
 app.use('/admin',adminRoutes);
 
 
-
-
-app.get('/', (req, res) => {
-  res.render('user/index')
-});
 
 
 

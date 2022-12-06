@@ -4,7 +4,7 @@ const passport = require('passport');
 const catchAsync = require('../utils/catchAsync');
 const User = require('../models/user/userModel');
 const user = require('../controllers/user/authController');
-
+router.get('/',user.home);
 router.route('/signup')
     .get(user.renderRegister)
     .post(catchAsync(user.register));

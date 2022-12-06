@@ -1,103 +1,36 @@
-<%- include('adminHeader.ejs')  %> 
-  <div class="col-lg">
-    <div class="card">
-      <div class="card-body ">
-        <div style="display: flex; justify-content: space-between;">
-          <h5 class="card-title">Products</h5>
-          <div>
-            <form action="/admin/addproductpage" method="get">
-              <button class="btn btn-success me-md-2" type="submit">Add Product</button>
-            </form>
-          </div>
-        </div>
-        <br>
-        <!-- <div class="d-grid gap-2 d-md-flex justify-content-md-end"></div> -->
-
-        <% if (products.length == 0) { %> 
-          <div class="col-12 text-center">
-            <img src="https://ibellstore.com/images/no-item-found-here.png" alt="no order" style="width: 400px; height:300px ;">
-          </div>
-        <% } else { %> 
-        <div class="table-responsive">
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Type</th>
-                <th scope="col">Age</th>
-                <th scope="col">Product Name</th>
-                <th scope="col">Details</th>
-                <th scope="col">Price</th>
-                <th scope="col">Image</th>
-                <th scope="col">OPTIONS</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% products.forEach(function(product){ %>
-                <tr>
-                  <th scope="row">
-                    <%= index++ %>
-                  </th>
-                  <td>
-                    <%= product.animal.typeName %>
-                  </td>
-                  <td>
-                    <%= product.age.age %>
-                  </td>
-                  
-                  <td>
-                    <%= product.productName %>
-                  </td>
-                  <td>
-                    <%= product.description %>
-                  </td>
-                  <td>
-                    <%= product.price %>
-                  </td>
-                  
-                  <td><img src='/images/car/<%= product.image[0] %>' alt="" style="height: 50px; width: 60px;"></td>
-                  <td><a class="btn btn-primary" href="/admin/editproductpage/<%= product._id %>" role="button"
-                      style="width: 100px;"><i class="bi bi-pen-fill"></i></a> <br>
-
-                      <!-- Blocked or not Blocked -->
-                      <% if (product.status=="listed" ) { %>
-                        <br>
-                        <form action="/admin/unblockCar/<%= product._id %> " method="post">
-                          <button type="submit" class="btn btn-danger" style="width: 100px;"> UnBlock</button>
-                        </form>
-                      <% } %>
-                        <br>
-
-                    
-                        <br>
-                        <form action="/admin/deleteproduct/<%= product._id %>" method="post">
-                          <button type="submit" class="btn  btn-danger" style="width: 100px;" ><i class="bi bi-trash-fill"></i></button>
-                        </form>
-                  </td>
-                </tr>
-              <% }) %>
-            </tbody>
-          </table>
-        </div>
-        <section class="d-flex justify-content-center mt-2">
-          <% if(hasPreviousPage){ %>
-            <a style="text-decoration: none;padding: .5rem; margin:0 1rem; color:white" class="text-center"
-              href="/admin/allproduct?page=<%= PreviousPage %>"><i class="fa fa-chevron-left"
-                aria-hidden="true"></i>&nbsp; Previous</a>
-            <% } %>
-              <a style="text-decoration: none;padding: .5rem; margin:0 1rem; color:white; border: 2px solid white; border-radius: 50px;"
-                href="/admin/allproduct?page=<%= page %>">
-                <%= page %>
-              </a>
-              <% if(hasNextPage) { %>
-                <a style="text-decoration: none;padding: .5rem; margin:0 1rem; color:white;"
-                  href="/admin/allproduct?page=<%=  page+1 %>">Next &nbsp; <i class="fa fa-chevron-right"
-                    aria-hidden="true"></i></a>
-                <% } %>
-        </section>
-        <% } %>
-      </div>
-    </div>
+<%- include('adminHeader.ejs') %>
+<div class="col-sm-12 col-xl-12">
+  <div class="bg-secondary rounded h-100 p-4">
+    <h6 class="mb-4">Products</h6>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Animal name</th>
+          <th scope="col">Age Type</th>
+          <th scope="col">Animal Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Price</th>
+          <th scope="col">Image</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% products.forEach(function(product){ %>
+        <tr>
+          <th scope="row"><%= index++ %></th>
+          <td><%= product.animal %></td>
+          <td><%= product.age%></td>
+          <td><%= product.name %></td>
+          <td><%= product.description %></td>
+          <td><%= product.price %></td>
+          <td>
+            <img src='/images/petproduct/<%= product.image[0] %>' alt=""
+            style="height: 50px; width: 60px;"
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
   </div>
-  <%- include('adminFooter.ejs')  %> 
-   
+</div>
+<%- include('adminFooter.ejs') %>

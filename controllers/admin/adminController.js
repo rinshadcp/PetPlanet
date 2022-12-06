@@ -95,7 +95,7 @@ deleteAge: async (req, res) => {
               const animal = await animalCategorySchema.find()
               const age = await ageCategorySchema.find()
 
-              res.render('admin/addproduct', { animal, age})//admin: req.session.admin })
+              res.render('admin/addProduct', { animal, age})//admin: req.session.admin })
 
           }
 
@@ -103,17 +103,78 @@ deleteAge: async (req, res) => {
        catch (err) {
           next(err)
       }
-  }
+  },
+   //add products
+   addproduct: async (req, res) => {
+    
+    try {
+        const { animal, age,  name, description, price } = req.body;
 
+        const image = req.files;
+        image.forEach(img => { });
+        console.log(image);
+        const productimages = image != null ? image.map((img) => img.filename) : null
+        console.log(productimages)
 
+        const newProduct = addProduct({
+            animal,
+            age,
+            name,
+            description,
+            price,
+           // image: image.filename,
+            image: productimages
+        });
+        console.log(newProduct)
 
+        await newProduct
+            .save()
+            .then(() => {
+                res.redirect("/admin/addProductPage");
+            }).catch((err) => {
+                console.log(err.message);
+                res.redirect("/admin/addproductpage");
+            });
 
+    } catch (err) {
+        next(err)
+    }
 
+},
+   //view all products
+   viewproduct: async (req, res) => {
+    // try { 
+        // const page = parseInt(req.query.page) || 1;
+        // const items_per_page = 5;
+        // const totalproducts = await ProductModel.find().countDocuments()
+        // console.log(totalproducts);
+        const products = await addProduct.
+        find()
+        // .sort({ date: -1 }).skip((page - 1) * items_per_page).limit(items_per_page)
+        console.log(products)
+        res.render('admin/viewProduct', {
+            products, index: 1})
+            //  admin: req.session.admin, page,
+            // hasNextPage: items_per_page * page < totalproducts,
+            // hasPreviousPage: page > 1,
+            // PreviousPage: page - 1,
+    
 
-
-
-
+    // } catch (err) {
+    //     next(err)
+    // }
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
     
@@ -156,4 +217,4 @@ deleteAge: async (req, res) => {
 
 
 
-
+}

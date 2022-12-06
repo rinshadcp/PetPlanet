@@ -1,24 +1,21 @@
 const mongoose = require("mongoose");
 
-
-
 const addProductSchema = new mongoose.Schema({
   animal:{
     type:String,
-    required:true
+    required:true,
+    ref:'animalCategory'
   },
   age:{
     type: String,
-    required:true
+    required:true,
+    ref:'ageCategory'
   },  
   name: {
     type: String,
     required: true
   },
-  brand: {
-    type: String,
-    required: false
-  },
+  
   description: {
     type: String,
     required: true
@@ -28,7 +25,7 @@ const addProductSchema = new mongoose.Schema({
     required: true
   },
   image:{
-    type: String,
+    type: [String],
     required: true
 
   },

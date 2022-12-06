@@ -1,6 +1,11 @@
 
 const User = require('../../models/user/userModel');
+const addProduct = require("../../models/admin/addProduct");
 
+module.exports.home = async (req, res) => {
+const  products  =await addProduct.find();
+     res.render('user/index',{products});
+}
 module.exports.renderRegister = (req, res) => {
     res.render('user/signup');
 }
