@@ -3,9 +3,7 @@ const Schema = mongoose.Schema;
 const passportLocalMongoose = require("passport-local-mongoose");
 
 const UserSchema = new Schema({
-  usernaname: {
-    type: String,
-  },
+  
   phone: {
     type: Number,
   },
@@ -14,11 +12,8 @@ const UserSchema = new Schema({
     required: true,
     unique: true,
   },
-  password: {
-    type: String,
-    required: true,
-  },
-  isVarified: {
+ 
+  isVerified: {
     type: Boolean,
   },
   status: {

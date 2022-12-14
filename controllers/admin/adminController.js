@@ -62,7 +62,7 @@ deleteAnimal: async (req, res) => {
 agePage: async (req, res) => {
   let ageCategory = await ageCategorySchema.find({})
 
-  res.render("admin/ageCategory", { ageCategory ,index:1});
+  res.render("admin/Category", { ageCategory ,index:1});
 },
  // NEW AGE
  addAge: (req, res) => {

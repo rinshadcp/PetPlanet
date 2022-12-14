@@ -5,6 +5,7 @@ if (process.env.NODE_ENV !== "production") {
 const express = require("express");
 const path = require("path");
 const ejs = require("ejs");
+const bodyParser = require('body-parser');
 const session = require("express-session");
 const flash = require("connect-flash");
 const logger = require("morgan");
@@ -21,8 +22,8 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 
@@ -74,6 +75,9 @@ app.use('/',userRoutes);
 app.use('/admin',adminRoutes);
 
 
+app.get('/', (req, res) => {
+  res.render('user/index')
+});
 
 
 
@@ -81,10 +85,10 @@ app.all('*', (req, res, next) => {
   next(new ExpressError('Page Not Found', 404))
 })
 
-app.use((err, req, res, next) => {
-  const { statusCode = 500 } = err;
-  if (!err.message) err.message = 'Oh No, Something Went Wrong!'
-  res.status(statusCode).render('user/error', { err })
-})
+// app.use((err, req, res, next) => {
+//   const { statusCode = 500 } = err;
+//   if (!err.message) err.message = 'Oh No, Something Went Wrong!'
+//   res.status(statusCode).render('user/error', { err })
+// })
 
 module.exports = app;

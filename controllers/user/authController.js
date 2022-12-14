@@ -1,6 +1,7 @@
 
 const User = require('../../models/user/userModel');
 const addProduct = require("../../models/admin/addProduct");
+const {isLoggedIn}= require('../../middlewrares/authentication');
 
 module.exports.home = async (req, res) => {
 const  products  =await addProduct.find();
@@ -12,8 +13,8 @@ module.exports.renderRegister = (req, res) => {
 
 module.exports.register = async (req, res, next) => {
     try {
-        const { email, username, password } = req.body;
-        const user = new User({ email, username });
+        const { phone,email, username, password } = req.body;
+        const user = new User({ email, username,phone });
         const registeredUser = await User.register(user, password);
         req.login(registeredUser, err => {
             if (err) return next(err);
@@ -40,7 +41,7 @@ module.exports.login = (req, res) => {
 
 module.exports.logout = (req, res) => {
     req.logout();
-    // req.session.destroy();
+    req.session.destroy();
     req.flash('success', "Goodbye!");
     res.redirect('/');
 }
