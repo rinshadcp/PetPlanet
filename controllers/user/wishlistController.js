@@ -4,9 +4,10 @@ module.exports = {
   //wishlist page
 
   wishlist: (req, res) => {
-    let userId = req.user._id;
+    let user= req.user;
+    let userId=user._id;
+    console.log(userId)
     
-    console.log("........................."+ userId)
     return new Promise(async (resolve, reject) => {
       let list = await wishlistSchema
         .findOne({ userId: userId })
@@ -31,7 +32,10 @@ module.exports = {
   addToWishlist: async (req, res, next) => {
     
     let productId = req.body.id;
-    let user_id = req.user._id;
+    console.log(productId);
+    let user=req.user;
+    let user_id=user._id;
+    
     let wishlist = await wishlistSchema.findOne({ userId: user_id });
     if (wishlist) {
       await wishlistSchema.findOneAndUpdate(

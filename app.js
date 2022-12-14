@@ -8,7 +8,6 @@ const ejs = require("ejs");
 const bodyParser = require('body-parser');
 const session = require("express-session");
 const flash = require("connect-flash");
-const logger = require("morgan");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const ExpressError = require('./utils/expressError');
@@ -53,7 +52,6 @@ const sessionConfig = {
   },
 };
 
-app.use(logger("dev"));
 app.use(session(sessionConfig));
 app.use(flash());
 

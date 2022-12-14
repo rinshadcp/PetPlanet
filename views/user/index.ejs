@@ -112,7 +112,7 @@
                     ></a>
                   </li>
                   <li>
-                    <a href="/wishlist"><span class="icon_heart_alt"></span></a>
+                    <a onclick="itemAdded('<%= x._id  %>') "><span class="icon_heart_alt"></span></a>
                   </li>
                   <li>
                     <a href="/cart"><span class="icon_bag_alt"></span></a>
@@ -738,6 +738,37 @@
         </div>
       </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+
     <!-- Instagram End -->
+    <script>
+      function itemAdded(id){
+  
+        $.ajax({
+            url: "/addToWishlist",
+            data: {
+              id
+            },
+            method: "post",
+            success: (response) => {
+              if (response.success) {
+                
+                Swal.fire({
+                  icon: "success",
+                  title: "Success",
+                  text: "item added to wishlist",
+                });
+          
+              } else {
+          Swal.fire({
+                  icon: "error",
+                  title: "error",
+                  text: "item already exist ",
+                });
+          
+        }
+      }})
+      }
+    </script>
 
 <%- include('userFooter.ejs') %>

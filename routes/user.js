@@ -23,7 +23,7 @@ router.get('/logout', user.logout)
 
 //wishlist routes
 
-router.get("/wishlist",  wishlistController.wishlist);
+router.get("/wishlist", isLoggedIn,wishlistController.wishlist);
 router.post("/addToWishlist",wishlistController.addToWishlist);
 router.get("/removeWishlistProduct/:id",wishlistController.removeWishlistProduct);
 router.get('/moveToCart/:id', isLoggedIn , wishlistController.moveToCart);
