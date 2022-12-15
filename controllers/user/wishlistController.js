@@ -6,7 +6,7 @@ module.exports = {
   wishlist: (req, res) => {
     let user= req.user;
     let userId=user._id;
-    console.log(userId)
+    console.log("......................",userId)
     
     return new Promise(async (resolve, reject) => {
       let list = await wishlistSchema

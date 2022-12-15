@@ -95,20 +95,20 @@
           </div>
           <div class="col-lg-3">
               <div class="header__right">
-          <% if(!login){ %> 
+          <% if(login){ %> 
+            <a href="/profile" class="btn btn-outline-secondary">Profile</a>
+            <a href="/logout" class="btn btn-outline-secondary">Logout</a>
+            <% }else { %> 
 
                   <div class="header__right__auth">
                       <a href="/login">Login</a>
                       <a href="/signup">Register</a>
                   </div>
-                  <% }else { %> 
-                    <a href="/profile" class="btn btn-outline-secondary">Profile</a>
-                    <a href="/logout" class="btn btn-outline-secondary">Logout</a>
 
 
                     <% } %> 
                   <ul class="header__right__widget">
-                      <li><span class="icon_search search-switch"></span></li>
+                      <!-- <li><span class="icon_search search-switch"></span></li> -->
                       <li><a href="/wishlist"><span class="icon_heart_alt"></span>
                           <div class="tip">2</div>
                       </a></li>

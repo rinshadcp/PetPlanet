@@ -1,17 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-const catchAsync = require('../utils/catchAsync');
 const {isLoggedIn}= require('../middlewrares/authentication')
 const User = require('../models/user/userModel');
-const user = require('../controllers/user/authController');
+const user = require('../controllers/user/userController');
 const cartController = require("../controllers/user/cartController");
 const wishlistController = require("../controllers/user/wishlistController");
 
 router.get('/',user.home);
 router.route('/signup')
     .get(user.renderRegister)
-    .post(catchAsync(user.register));
+    .post(user.register);
 
 router.route('/login')
     .get(user.renderLogin)
@@ -20,6 +19,14 @@ router.route('/login')
 router.get('/logout', user.logout)
 
 
+
+//user profile and address management
+
+router.get('/profile',isLoggedIn,user.profile);
+router.get("/addAddressPage", isLoggedIn, user.addAddress);
+router.post("/newAddress", user.newAddress);
+router.get("/manageAddress", isLoggedIn, user.manageAddress);
+router.get("/deleteAddress/:id",isLoggedIn,user.deleteAddress);
 
 //wishlist routes
 

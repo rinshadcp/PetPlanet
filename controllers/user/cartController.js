@@ -20,7 +20,7 @@ module.exports = {
       let cartTotal = cart.cartTotal;
       let discount = cart.offer.discount;
 
-      res.render("user/cart", { products, cartTotal, discount });
+      res.render("user/cart", { products, cartTotal, discount,login:true });
     } else {
       res.render("user/cart", { products: [] });
     }
@@ -80,7 +80,7 @@ module.exports = {
 
   removeCartProduct: async (req, res) => {
     const productId = req.params.id;
-
+    let user= req.user;
     let userId = user._id;
     let total = parseInt(req.params.total);
 
@@ -126,6 +126,7 @@ module.exports = {
   //cart quantity increment
 
   QtyIncrement: async (req, res) => {
+    let user= req.user;
     let userId = user._id;
 
     let productId = req.body.productId;
