@@ -59,26 +59,33 @@
                                         </div>
                                     </td>
                                     <td class="cart__price"><%= x.productId.price %></td>
-                                    <td class="cart__quantity">
-                                        <div class="pro-qty">
-                                            <a onclick="QtyDecrement('<%= x.productId._id %>','<%= x.productId.price %>')" >
-                                                <button id="button" style="width: 40px">-</button>
-                                              </a>
-                                              <input
-                          type="text"
-                          name="quantity"
-                          class="quantity form-control input-number"
-                          value="<%= x.quantity %>"
-                        />
-                        <a onclick="QtyIncrement('<%= x.productId._id %>','<%= x.productId.price %> ')" >
-                          <button id="plusbutton" style="width: 40px">+</button>
-                        </a>
-                                            <!-- <input type="text" value="1"> -->
+                                    <td class="quantity">
+                                        <div class="input-group mb-3" style="margin-top: 38px;">
+                                          <a onclick="QtyDecrement('<%= x.productId._id %>','<%= x.productId.price %>')" >
+                                            <button id="button" style="width: 40px">-</button>
+                                          </a>
+                                          &nbsp;
+                                          <input
+                                            type="text"
+                                            style="width: 40px;"
+                                            name="quantity"
+                                            class="quantity form-control input-number"
+                                            value="<%= x.quantity %>"
+                                          />
+                                          <a onclick="QtyIncrement('<%= x.productId._id %>','<%= x.productId.price %> ')" >
+                                            <button id="plusbutton" style="width: 40px">+</button>
+                                          </a>
                                         </div>
-                                    </td>
                                     <td class="cart__total"><%= x.total %></td>
                                     <td class="cart__close"><span class="icon_close"></span></td>
                                 </tr>
+                                <tr>
+
+
+
+
+                                            <!-- <input type="text" value="1"> -->
+                                     
                                 <!-- <tr>
                                     <td class="cart__product__item">
                                         <img src="img/shop-cart/cp-2.jpg" alt="">
@@ -157,24 +164,24 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="cart__btn">
-                        <a href="#">Continue Shopping</a>
+                        <a href="/">Continue Shopping</a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="cart__btn update__btn">
+                    <!-- <div class="cart__btn update__btn">
                         <a href="#"><span class="icon_loading"></span> Update cart</a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-6">
-                    <div class="discount__content">
+                    <!-- <div class="discount__content">
                         <h6>Discount codes</h6>
                         <form action="/coupon">
                             <input type="text" placeholder="Enter your coupon code">
                             <button type="submit" class="site-btn">Apply</button>
                         </form>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-lg-4 offset-lg-2">
                     <div class="cart__total__procced">

@@ -77,7 +77,7 @@ module.exports.profile = async (req, res) => {
   // add address
 
   module.exports.addAddress = async (req, res) => {
-    res.render("user/addAddress");
+    res.render("user/addAddress",{login:true});
   }
   module.exports.manageAddress = async (req, res) => {
     let userId = req.user._id;
@@ -92,7 +92,7 @@ module.exports.profile = async (req, res) => {
       address = [];
     }
 
-    res.render("user/manageAddress", { address, index: 1 });
+    res.render("user/manageAddress", { address,login:true, index: 1 });
   }
   module.exports.deleteAddress = async (req, res) => {
     let userId = req.user._id;

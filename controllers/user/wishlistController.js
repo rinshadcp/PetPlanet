@@ -6,7 +6,6 @@ module.exports = {
   wishlist: (req, res) => {
     let user= req.user;
     let userId=user._id;
-    console.log("......................",userId)
     
     return new Promise(async (resolve, reject) => {
       let list = await wishlistSchema
@@ -62,8 +61,9 @@ module.exports = {
 
   removeWishlistProduct: async (req, res) => {
     const id = req.params.id;
-    let user = req.user;
-    let userId = user._id;
+    
+    let userId = req.user._id;
+    console.log(userId,id)
     await wishlistSchema
       .findOneAndUpdate({ userId }, { $pull: { productIds: id } })
       .then(() => {

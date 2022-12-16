@@ -155,7 +155,7 @@ module.exports = {
   //cart quantity decrement
 
   QtyDecrement: async (req, res) => {
-    let userId = user._id;
+    let userId = req.user._id;
 
     let productId = req.body.productId;
     let price = req.body.price;

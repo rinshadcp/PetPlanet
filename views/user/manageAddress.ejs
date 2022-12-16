@@ -1,0 +1,103 @@
+<%- include('userHeader.ejs') -%>
+
+    
+    <div >
+        
+    
+
+      
+      <div class="container" style="margin-top: 100px; width: 750px;">
+
+        <a
+        style="margin-left: 600px;"
+      class="btn btn-success"
+     
+      href="/addAddressPage"
+      >Add address</a
+    >
+        <div class="main-body mt-1" >
+          
+          
+          <!-- Breadcrumb -->
+          
+          <% address.forEach(function(x) { %>
+           
+          <!-- /Breadcrumb -->
+          
+          <div class="row gutters-sm">
+            
+            <div class="col-md-8">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <h5>Address <%= index++ %></h5>
+                  <br>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Full Name</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary"><%= x.fullName %></div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">House Name</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary"><%= x.houseName %></div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Phone</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary"><%= x.phone %></div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">City</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary"><%= x.city %></div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">State</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary"><%= x.state %></div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Address</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary"><%= x.houseName %> <br>
+                      <%= x.city %>, <%= x.state %> - <%= x.pincode %></div>
+                  </div>
+               
+                  <br>
+                 
+                  <div class="row" style="margin-left: 325px;">
+                    <div class="col-sm-12" >
+                      <a class="btn btn-danger"  href="/deleteAddress/<%= x._id %>">Delete</a>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              
+               
+
+                
+              </div>
+            </div>
+          </div>
+          
+          <% }) %>
+        </div>
+      </div>
+   
+ </div>
+  </body>
+</html>
+<%- include('userFooter.ejs') -%>

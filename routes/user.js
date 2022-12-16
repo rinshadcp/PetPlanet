@@ -6,7 +6,7 @@ const User = require('../models/user/userModel');
 const user = require('../controllers/user/userController');
 const cartController = require("../controllers/user/cartController");
 const wishlistController = require("../controllers/user/wishlistController");
-
+const orderController =require('../controllers/user/orderController')
 router.get('/',user.home);
 router.route('/signup')
     .get(user.renderRegister)
@@ -44,5 +44,17 @@ router.post("/QtyIncrement",isLoggedIn,cartController.QtyIncrement);
 router.post("/QtyDecrement",isLoggedIn,cartController.QtyDecrement);
 
 
+
+
+//order management
+router.post("/changeAddress", orderController.checkout);   
+router.get('/checkout',isLoggedIn, orderController.checkout)
+router.post('/placeOrder', orderController.placeOrder);
+router.get('/orderSuccess',isLoggedIn , orderController.orderSuccess)
+router.post('/checkoutNewAddress',orderController.checkoutNewAddress)
+// router.post('/verifyPayment' , isLoggedIn ,orderController.verifyPayment)
+// router.get('/orders',isLoggedIn, orderController.orders)
+// router.post('/cancelOrder',isLoggedIn,orderController.cancelOrder)
+// router.post('/checkCoupen' ,isLoggedIn, cartController.checkCoupen)
 
 module.exports = router;

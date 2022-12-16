@@ -1,201 +1,576 @@
-<%- include('userHeader.ejs')  %> 
-    <!-- Breadcrumb End -->
+ 
+ <%- include('userHeader.ejs')  %> 
+ 
+ <!-- breadcrumb -->
+ <div class="m-t-70 d-none d-lg-block" style="margin-top: 105px"></div>
+ <!-- <div class="container ">
+     <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+         <a href="/login/userHome" class="stext-109 cl8 hov-cl1 trans-04">
+             Home
+             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+         </a>
+         <a href="/login/cart" class="stext-109 cl8 hov-cl1 trans-04">
+             Cart
+             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+         </a>
+         <span class="stext-109 cl4">
+             Checkout
+         </span>
+     </div>
+ </div> -->
+ <!-- Checkout -->
+ <div id="checkout"  class="container bg0 p-t-20 p-b-85">
+   <div class="row">
+     <div class="col-lg-10 col-xl-7 m-lr-auto">
+       <div class="m-l-25 m-r--38 m-lr-0-xl">
+         <div class="wrap-table-shopping-cart">
+           <% if(address !=0){ %>
+           <table class="table-shopping-cart">
+             <tr class="table_head">
+               <th class="p-l-15">
+                 <h6 class="text-info">Current Address</h6>
+               </th>
+               <td class="p-r-20">
+                 <button
+                   class="btn text-primary"
+                   data-toggle="collapse"
+                   data-target="#collapseExample"
+                   aria-expanded="false"
+                   aria-controls="collapseExample"
+                 >
+                   <h6 class="text-info">Change</h6>
+                 </button>
+               </td>
+             </tr>
+             <tr class="table_row">
+               <td class="p-l-30">
+                 <p>
+                   <strong>Name :</strong>
+                   <%= address[index].fullName %>
+                 </p>
+                 <p>
+                   <strong>house Name :</strong>
+                   <%= address[index].houseName %>
+                 </p>
+                 <p>
+                   <strong>City :</strong>
+                   <%= address[index].city %>
+                 </p>
+                 <p>
+                   <strong>State :</strong>
+                   <%= address[index].state %>
+                 </p>
+                 <p>
+                   <strong>Pincode :</strong>
+                   <%= address[index].pincode %>
+                 </p>
+                 <p>
+                   <strong>Phone Number :</strong>
+                   <%= address[index].phone %>
+                 </p>
+                 <!-- <p><strong>Address :</strong>
+                 <%= address[index].city %> ,
+                 <%= address[index].state %> - <%= address[index].pincode %></span>
+                 </p> -->
+               </td>
+             </tr>
+           </table>
+           <div class="collapse" id="collapseExample">
+             <form action="/login/changeAddress" method="post">
+               <div class="card card-body">
+                 <% address.forEach(function(address,index){ %>
+                 <div class="form-check card card-body">
+                   <input
+                     class="form-check-input"
+                     type="radio"
+                     value="<%= index %>"
+                     name="index"
+                     id="exampleRadios1"
+                     value="option1"
+                   />
+                   <label class="form-check-label" for="exampleRadios1">
+                     <p>
+                       <strong>Name :</strong>
 
-    <!-- Checkout Section Begin -->
-    <section class="checkout spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h6 class="coupon__link"><span class="icon_tag_alt"></span> <a href="#">Have a coupon?</a> Click
-                    here to enter your code.</h6>
-                </div>
-            </div>
-            <form action="#" class="checkout__form">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <h5>Billing detail</h5>
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="checkout__form__input">
-                                    <p>First Name <span>*</span></p>
-                                    <input type="text">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="checkout__form__input">
-                                    <p>Last Name <span>*</span></p>
-                                    <input type="text">
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="checkout__form__input">
-                                    <p>Country <span>*</span></p>
-                                    <input type="text">
-                                </div>
-                                <div class="checkout__form__input">
-                                    <p>Address <span>*</span></p>
-                                    <input type="text" placeholder="Street Address">
-                                    <input type="text" placeholder="Apartment. suite, unite ect ( optinal )">
-                                </div>
-                                <div class="checkout__form__input">
-                                    <p>Town/City <span>*</span></p>
-                                    <input type="text">
-                                </div>
-                                <div class="checkout__form__input">
-                                    <p>Country/State <span>*</span></p>
-                                    <input type="text">
-                                </div>
-                                <div class="checkout__form__input">
-                                    <p>Postcode/Zip <span>*</span></p>
-                                    <input type="text">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="checkout__form__input">
-                                    <p>Phone <span>*</span></p>
-                                    <input type="text">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="checkout__form__input">
-                                    <p>Email <span>*</span></p>
-                                    <input type="text">
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="checkout__form__checkbox">
-                                    <label for="acc">
-                                        Create an acount?
-                                        <input type="checkbox" id="acc">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <p>Create am acount by entering the information below. If you are a returing
-                                        customer login at the <br />top of the page</p>
-                                    </div>
-                                    <div class="checkout__form__input">
-                                        <p>Account Password <span>*</span></p>
-                                        <input type="text">
-                                    </div>
-                                    <div class="checkout__form__checkbox">
-                                        <label for="note">
-                                            Note about your order, e.g, special noe for delivery
-                                            <input type="checkbox" id="note">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
-                                    <div class="checkout__form__input">
-                                        <p>Oder notes <span>*</span></p>
-                                        <input type="text"
-                                        placeholder="Note about your order, e.g, special noe for delivery">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="checkout__order">
-                                <h5>Your order</h5>
-                                <div class="checkout__order__product">
-                                    <ul>
-                                        <li>
-                                            <span class="top__text">Product</span>
-                                            <span class="top__text__right">Total</span>
-                                        </li>
-                                        <li>01. Chain buck bag <span>$ 300.0</span></li>
-                                        <li>02. Zip-pockets pebbled<br /> tote briefcase <span>$ 170.0</span></li>
-                                        <li>03. Black jean <span>$ 170.0</span></li>
-                                        <li>04. Cotton shirt <span>$ 110.0</span></li>
-                                    </ul>
-                                </div>
-                                <div class="checkout__order__total">
-                                    <ul>
-                                        <li>Subtotal <span>$ 750.0</span></li>
-                                        <li>Total <span>$ 750.0</span></li>
-                                    </ul>
-                                </div>
-                                <div class="checkout__order__widget">
-                                    <label for="o-acc">
-                                        Create an acount?
-                                        <input type="checkbox" id="o-acc">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <p>Create am acount by entering the information below. If you are a returing customer
-                                    login at the top of the page.</p>
-                                    <label for="check-payment">
-                                        Cheque payment
-                                        <input type="checkbox" id="check-payment">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <label for="paypal">
-                                        PayPal
-                                        <input type="checkbox" id="paypal">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                                <button type="submit" class="site-btn">Place oder</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </section>
-        <!-- Checkout Section End -->
+                       <%= address.fullName %>
+                     </p>
+                     <p>
+                       <strong>house Name :</strong>
+                       <%= address.houseName %>
+                     </p>
+                     <p>
+                       <strong>City :</strong>
+                       <%= address.city %>
+                     </p>
+                     <p>
+                       <strong>State :</strong>
+                       <%= address.state %>
+                     </p>
+                     <p>
+                       <strong>Pincode :</strong>
+                       <%= address.pincode %>
+                     </p>
+                     <p>
+                       <strong>Phone Number :</strong>
+                       <%= address.phone %>
+                     </p>
+                   </label>
+                 </div>
+                 <% }) %>
+                 <button
+                   type="submit"
+                   class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10"
+                 >
+                   Deliver Here
+                 </button>
+               </div>
+             </form>
+           </div>
+           <% } %>
+           <div class="card card-body">
+             <button
+               type="button"
+               data-toggle="collapse"
+               data-target="#newAddress"
+               aria-expanded="false"
+               aria-controls="newAddress"
+             >
+               ADD NEW ADDRESS
+             </button>
+             <div class="collapse" id="newAddress">
+               <div class="card card-body mt-4">
+                 <form
+                   action="/login/checkoutNewAddress"
+                   class="mb-0"
+                   method="post"
+                 >
+                   <div class="row mb-4">
+                     <div class="col">
+                       <div class="form-outline">
+                         <input
+                           type="text"
+                           id="form9Example1"
+                           name="fullName"
+                           class="form-control input-custom"
+                         />
+                         <label class="form-label" for="form9Example1"
+                           >Full name</label
+                         >
+                       </div>
+                     </div>
+                     <div class="col">
+                       <div class="form-outline">
+                         <input
+                           type="text"
+                           id="form9Example2"
+                           name="houseName"
+                           class="form-control input-custom"
+                         />
+                         <label class="form-label" for="form9Example2"
+                           >House name / Office name</label
+                         >
+                       </div>
+                     </div>
+                   </div>
+                   <div class="row mb-4">
+                     <div class="col">
+                       <div class="form-outline">
+                         <input
+                           type="text"
+                           id="form9Example3"
+                           name="city"
+                           class="form-control input-custom"
+                         />
+                         <label class="form-label" for="form9Example3"
+                           >City</label
+                         >
+                       </div>
+                     </div>
+                     <div class="col">
+                       <div class="form-outline">
+                         <input
+                           type="text"
+                           id="form9Example4"
+                           name="state"
+                           class="form-control input-custom"
+                         />
+                         <label class="form-label" for="form9Example4"
+                           >State</label
+                         >
+                       </div>
+                     </div>
+                   </div>
+                   <div class="row mb-4">
+                     <div class="col">
+                       <div class="form-outline">
+                         <input
+                           type="number"
+                           id="form9Example6"
+                           name="pincode"
+                           class="form-control input-custom"
+                         />
+                         <label class="form-label" for="form9Example6"
+                           >Pincode</label
+                         >
+                       </div>
+                     </div>
+                     <div class="col">
+                       <div class="form-outline">
+                         <input
+                           type="number"
+                           id="typeEmail"
+                           name="phone"
+                           class="form-control input-custom"
+                         />
+                         <label class="form-label" for="typeEmail"
+                           >Phone</label
+                         >
+                       </div>
+                     </div>
+                   </div>
 
-        <!-- Instagram Begin -->
-        <div class="instagram">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                        <div class="instagram__item set-bg" data-setbg="img/instagram/insta-1.jpg">
-                            <div class="instagram__text">
-                                <i class="fa fa-instagram"></i>
-                                <a href="#">@ ashion_shop</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                        <div class="instagram__item set-bg" data-setbg="img/instagram/insta-2.jpg">
-                            <div class="instagram__text">
-                                <i class="fa fa-instagram"></i>
-                                <a href="#">@ ashion_shop</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                        <div class="instagram__item set-bg" data-setbg="img/instagram/insta-3.jpg">
-                            <div class="instagram__text">
-                                <i class="fa fa-instagram"></i>
-                                <a href="#">@ ashion_shop</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                        <div class="instagram__item set-bg" data-setbg="img/instagram/insta-4.jpg">
-                            <div class="instagram__text">
-                                <i class="fa fa-instagram"></i>
-                                <a href="#">@ ashion_shop</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                        <div class="instagram__item set-bg" data-setbg="img/instagram/insta-5.jpg">
-                            <div class="instagram__text">
-                                <i class="fa fa-instagram"></i>
-                                <a href="#">@ ashion_shop</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                        <div class="instagram__item set-bg" data-setbg="img/instagram/insta-6.jpg">
-                            <div class="instagram__text">
-                                <i class="fa fa-instagram"></i>
-                                <a href="#">@ ashion_shop</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Instagram End -->
-        <%- include('userFooter.ejs')  %> 
+                   <div class="float-end">
+                     <!-- Submit button -->
+                     <button
+                       type="submit"
+                       class="btn btn-primary btn-rounded"
+                       style="background-color: #0062cc"
+                     >
+                       add address
+                     </button>
+                   </div>
+                 </form>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
 
-       
+     <div id="order" class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
+       <div
+         class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm"
+       >
+         <h4 class="mtext-109 cl2 p-b-30">Your orders</h4>
+         <% cartItems.forEach(function(product){ %>
+         <div class="flex-w flex-t bor12 p-b-13">
+           <img
+             src="/<%= product.productId.image %>"
+             alt=""
+             style="width: 60px"
+           />
+           <div class="m-l-30">
+             <p><strong> <%= product.productId.name %> </strong></p>
+             <p><strong>Quantity : <%= product.quantity %> </strong></p>
+             <p><strong>Total : <%= product.total %> </strong></p>
+           </div>
+         </div>
+         <% }) %>
+
+         <div class="flex-w flex-t p-t-27 p-b-33">
+           <div class="size-208 p-b-5">
+             <span class="mtext-101 cl2">Sub Total </span>
+           </div>
+
+
+           <div class="size-209 p-t-1 p-b-5 d-flex justify-content-end">
+             <span class="mtext-110 cl2">₹ <%= cartTotal+discount %> </span>
+           </div>
+
+           <div class="size-208 p-b-5">
+             <span class="mtext-101 cl2">Discount </span>
+           </div>
+
+           <div class="size-209 p-t-1 p-b-5 d-flex justify-content-end">
+             <span class="mtext-110 cl2"> ₹<%= discount %> </span>
+           </div>
+
+           <div class="size-208 p-b-5">
+             <span class="mtext-101 cl2">Shpping </span>
+           </div>
+
+           <div class="size-209 p-t-1 p-b-5 d-flex justify-content-end">
+             <span class="mtext-110 cl2">Free</span>
+           </div>
+
+           <div class="size-208 p-b-5">
+             <span class="mtext-101 cl2">Total </span>
+           </div>
+
+           <div class="size-209 p-t-1 p-b-5 d-flex justify-content-end">
+             <span class="mtext-110 cl2">₹ <%= cartTotal %></span>
+           </div>
+         </div>
+
+         <div
+           id="coupon"
+           class="d-flex justify-content-between flex-w flex-t bor12 p-t-27 p-b-33"
+         >
+           <style>
+             #codeInput::placeholder {
+               font-size: small;
+             }
+             #codeInput {
+               font-size: small;
+             }
+             .apply:hover {
+               background-color: #717fe0;
+               color: #fff;
+             }
+           </style>
+           <div class="row">
+             <span class="mtext-101 cl2 col-6">
+               <input
+                 type="text"
+                 class="border p-3"
+                 id="codeInput"
+                 placeholder="Apply coupen"
+                 style="border-radius: 10px; height: 3rem; width: 12rem"
+               />
+             </span>
+           </div>
+
+           <div class="p-t-1 flex-w">
+             <span>
+               <button
+                 class="btn border apply"
+                 style="border-radius: 10px; width: 75px; height: 3rem"
+                 onclick="getcoupen('<%= cartTotal %>','<%= cartId %>')"
+               >
+                 Apply
+               </button>
+             </span>
+           </div>
+         </div>
+
+         <div class="form-check p-t-10">
+           <input
+             class="form-check-input"
+             type="radio"
+             name="paymentMethod"
+             id="paynow"
+             value="Razorpay"
+             checked
+           />
+           <label class="form-check-label" for="paynow"> Razorpay </label>
+         </div>
+         <div class="form-check">
+           <input
+             class="form-check-input"
+             type="radio"
+             name="paymentMethod"
+             id="cod"
+             value="COD"
+           />
+           <label class="form-check-label" for="cod">
+             Cash on delivery
+           </label>
+         </div>
+         <% if(address != 0 ) {%>
+         <button
+           onclick="placeOrder('<%= index %>')"
+           class="btn-success mt-4 flex-c-m stext-101 cl0 size-116 bor14 p-lr-15 trans-04 pointer"
+         >
+           Place Order
+         </button>
+         <% }else { %>
+         <button
+           onclick="adressError()"
+           class="btn-success mt-4 flex-c-m stext-101 cl0 size-116 bor14 p-lr-15 trans-04 pointer"
+         >
+           Place Order
+         </button>
+         <% } %>
+       </div>
+     </div>
+   </div>
+ </div>
+ <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+ <script>
+   
+   function placeOrder(index) {
+     let num = parseInt(index);
+
+     let paymentMethod = document.getElementById("cod").checked
+       ? "COD"
+       : "Razorpay";
+
+     $.ajax({
+       url: "/login/placeOrder",
+       data: {
+         index: num,
+         paymentMethod: paymentMethod,
+       },
+       method: "post",
+       success: (response) => {
+         if (response.codSuccess) {
+           location.href = "/login/orderSuccess";
+         } else {
+           razorpayPayment(response);
+         }
+       },
+     });
+   }
+   function razorpayPayment(order) {
+     var options = {
+       key: "rzp_test_mp1q8YWcYr4vEC", // Enter the Key ID generated from the Dashboard
+       amount: order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+       currency: "INR",
+       name: "Insoles",
+       description: "Test Transaction",
+       image: "https://example.com/your_logo",
+       order_id: order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+       callback_url: "https://eneqd3r9zrjok.x.pipedream.net/",
+       handler: function (response) {
+         // alert(response.razorpay_payment_id);
+         // alert(response.razorpay_order_id);
+         // alert(response.razorpay_signature)
+
+         verifyPayment(response, order);
+       },
+       prefill: {
+         name: "nihal",
+         email: "nihal@gmail.com",
+         contact: "9633726803",
+       },
+       notes: {
+         address: "Razorpay Corporate Office",
+       },
+       theme: {
+         color: "#7c7efc",
+       },
+     };
+     var rzp1 = new Razorpay(options);
+     rzp1.open();
+   }
+   function verifyPayment(payment, order) {
+     $.ajax({
+       url: "/login/verifyPayment",
+       data: {
+         payment,
+         order,
+       },
+       method: "post",
+       success: (response) => {
+         if (response.status) {
+           location.href = "/login/orderSuccess";
+         } else {
+           Swal.fire({
+             icon: "error",
+             title: "Oops...",
+             text: "Payment Failed!",
+           });
+         }
+       },
+     });
+   }
+
+   
+   function getcoupen(cartTotal, cartId) {
+     const code = document.querySelector("#codeInput").value;
+     $.ajax({
+       url: "/login/checkCoupen",
+       data: {
+         cartTotal,
+         cartId,
+         code
+       },
+       method: "post",
+       success: (response) => {
+         if (response.apply) {
+           window.location.reload()
+           Swal.fire({
+             icon: "success",
+             title: "Success",
+             text: "coupon applied",
+           });
+         } else if (response.exist) {
+           
+           Swal.fire({
+             icon: "error",
+             title: "Bad luck",
+             text: "coupon already applied",
+           });
+         } else {
+           
+           Swal.fire({
+             icon: "error",
+             title: "Bad luck",
+             text: "coupon not exist",
+           });
+         }
+       },
+     });
+   }
+   function adressError() {
+     Swal.fire({
+       icon: "error",
+       title: "Oops...",
+       text: "Address not added!",
+     });
+   }
+
+   
+ </script>
+
+
+ <!-- loader -->
+ <div id="ftco-loader" class="show fullscreen">
+   <svg class="circular" width="48px" height="48px">
+     <circle
+       class="path-bg"
+       cx="24"
+       cy="24"
+       r="22"
+       fill="none"
+       stroke-width="4"
+       stroke="#eeeeee"
+     />
+     <circle
+       class="path"
+       cx="24"
+       cy="24"
+       r="22"
+       fill="none"
+       stroke-width="4"
+       stroke-miterlimit="10"
+       stroke="#F96D00"
+     />
+   </svg>
+ </div>
+
+ 
+
+ <script>
+   $(document).ready(function () {
+     var quantitiy = 0;
+     $(".quantity-right-plus").click(function (e) {
+       // Stop acting like a button
+       e.preventDefault();
+       // Get the field name
+       var quantity = parseInt($("#quantity").val());
+
+       // If is not undefined
+
+       $("#quantity").val(quantity + 1);
+
+       // Increment
+     });
+
+     $(".quantity-left-minus").click(function (e) {
+       // Stop acting like a button
+       e.preventDefault();
+       // Get the field name
+       var quantity = parseInt($("#quantity").val());
+
+       // If is not undefined
+
+       // Increment
+       if (quantity > 0) {
+         $("#quantity").val(quantity - 1);
+       }
+     });
+   });
+ </script>
+
+<%- include('userFooter.ejs')  %> 
