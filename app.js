@@ -1,11 +1,11 @@
 if (process.env.NODE_ENV !== "production") {
-  require('dotenv').config();
+  require("dotenv").config();
 }
 
 const express = require("express");
 const path = require("path");
 const ejs = require("ejs");
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const session = require("express-session");
@@ -13,9 +13,9 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user/userModel");
-const multer= require('multer');
-const userRoutes= require('./routes/user');
-const adminRoutes= require('./routes/admin');
+const multer = require("multer");
+const userRoutes = require("./routes/user");
+const adminRoutes = require("./routes/admin");
 
 const app = express();
 
@@ -27,23 +27,23 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser());
 
-
 // Multer (file upload setup)
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-      cb(null, "public/images/petproduct/");
+    cb(null, "public/images/petproduct/");
   },
   filename: (req, file, cb) => {
-      cb(null, file.fieldname + "_" + Date.now() + path.extname(file.originalname))
-      console.log(file.fieldname + Date.now() + path.extname(file.originalname));
+    cb(
+      null,
+      file.fieldname + "_" + Date.now() + path.extname(file.originalname)
+    );
+    console.log(file.fieldname + Date.now() + path.extname(file.originalname));
   },
 });
 // const upload = multer({ storage: storage})
-app.use(multer({ storage: storage }).array("image", 10))
+app.use(multer({ storage: storage }).array("image", 10));
 
-
-
-const secret = process.env.SECRET || 'thisshouldbeabettersecret!';
+const secret = process.env.SECRET || "thisshouldbeabettersecret!";
 const sessionConfig = {
   secret,
   resave: false,
@@ -71,19 +71,16 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/',userRoutes);
-app.use('/admin',adminRoutes);
+app.use("/", userRoutes);
+app.use("/admin", adminRoutes);
 
-
-app.get('/', (req, res) => {
-  res.render('user/index')
+app.get("/", (req, res) => {
+  res.render("user/index");
 });
 
-
-
-app.use('*',(req,res)=>{
-  res.render('user/error')
-})
+app.use("*", (req, res) => {
+  res.render("user/error");
+});
 
 // app.use((err, req, res, next) => {
 //   const { statusCode = 500 } = err;

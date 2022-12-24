@@ -1,92 +1,93 @@
-
-
-
-
- 
-    <%- include('userHeader.ejs')  %> 
-
-    <% if(products.length==0){ %>
-        <div class="text-center">
-          <a href="/"><img src="/images/empty.webp" alt="empty-cart" style=" height:100vh;"></a>
+<%- include('./partials/userHeader.ejs') -%> <% if(products.length==0){ %>
+<div class="text-center">
+  <a href="/"
+    ><img src="/images/empty.webp" alt="empty-cart" style="height: 100vh"
+  /></a>
+</div>
+<% }else{ %>
+<!-- Breadcrumb Begin -->
+<div class="breadcrumb-option">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="breadcrumb__links">
+          <a href="./index.html"><i class="fa fa-home"></i> Home</a>
+          <span>Shopping cart</span>
         </div>
-        <% }else{ %>
-    <!-- Breadcrumb Begin -->
-    <div class="breadcrumb-option">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb__links">
-                        <a href="./index.html"><i class="fa fa-home"></i> Home</a>
-                        <span>Shopping cart</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-    <!-- Breadcrumb End -->
+  </div>
+</div>
+<!-- Breadcrumb End -->
 
-    <!-- Shop Cart Section Begin -->
-    <section class="shop-cart spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="shop__cart__table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <% products.forEach(function(x){ %>
-                            <tbody>
-                                <tr>
-                                    <td class="cart__product__item">
-                                        <img style="width: 50px;" src="/images/petproduct/<%= x.image %>" alt="">
-                                        <div class="cart__product__item__title">
-                                            <h6><%= x.productId.name %></h6>
-                                            <p><%= x.productId.description %></p>
-                                            <div class="rating">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="cart__price"><%= x.productId.price %></td>
-                                    <td class="quantity">
-                                        <div class="input-group mb-3" style="margin-top: 38px;">
-                                          <a onclick="QtyDecrement('<%= x.productId._id %>','<%= x.productId.price %>')" >
-                                            <button id="button" style="width: 40px">-</button>
-                                          </a>
-                                          &nbsp;
-                                          <input
-                                            type="text"
-                                            style="width: 40px;"
-                                            name="quantity"
-                                            class="quantity form-control input-number"
-                                            value="<%= x.quantity %>"
-                                          />
-                                          <a onclick="QtyIncrement('<%= x.productId._id %>','<%= x.productId.price %> ')" >
-                                            <button id="plusbutton" style="width: 40px">+</button>
-                                          </a>
-                                        </div>
-                                    <td class="cart__total"><%= x.total %></td>
-                                    <td class="cart__close"><span class="icon_close"></span></td>
-                                </tr>
-                                <tr>
+<!-- Shop Cart Section Begin -->
+<section class="shop-cart spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="shop__cart__table">
+          <table>
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th></th>
+              </tr>
+            </thead>
+            <% products.forEach(function(x){ %>
+            <tbody>
+              <tr>
+                <td class="cart__product__item">
+                  <img
+                    style="width: 50px"
+                    src="/images/petproduct/<%= x.image %>"
+                    alt=""
+                  />
+                  <div class="cart__product__item__title">
+                    <h6><%= x.productId.name %></h6>
+                    <p><%= x.productId.description %></p>
+                    <div class="rating">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                    </div>
+                  </div>
+                </td>
+                <td class="cart__price"><%= x.productId.price %></td>
+                <td class="quantity">
+                  <div class="input-group mb-3" style="margin-top: 38px">
+                    <a
+                      onclick="QtyDecrement('<%= x.productId._id %>','<%= x.productId.price %>')"
+                    >
+                      <button id="button" style="width: 40px">-</button>
+                    </a>
+                    &nbsp;
+                    <input
+                      type="text"
+                      style="width: 40px"
+                      name="quantity"
+                      class="quantity form-control input-number"
+                      value="<%= x.quantity %>"
+                    />
+                    <a
+                      onclick="QtyIncrement('<%= x.productId._id %>','<%= x.productId.price %> ')"
+                    >
+                      <button id="plusbutton" style="width: 40px">+</button>
+                    </a>
+                  </div>
+                </td>
 
+                <td class="cart__total"><%= x.total %></td>
+                <td class="cart__close"><span class="icon_close"></span></td>
+              </tr>
+              <tr>
+                <!-- <input type="text" value="1"> -->
 
-
-
-                                            <!-- <input type="text" value="1"> -->
-                                     
-                                <!-- <tr>
+                <!-- <tr>
                                     <td class="cart__product__item">
                                         <img src="img/shop-cart/cp-2.jpg" alt="">
                                         <div class="cart__product__item__title">
@@ -155,145 +156,163 @@
                                     <td class="cart__total">$ 110.0</td>
                                     <td class="cart__close"><span class="icon_close"></span></td>
                                 </tr> -->
-                            </tbody>
-                            <% }) %>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="cart__btn">
-                        <a href="/">Continue Shopping</a>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <!-- <div class="cart__btn update__btn">
+              </tr>
+            </tbody>
+
+            <% }) %>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="cart__btn">
+          <a href="/">Continue Shopping</a>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6">
+        <!-- <div class="cart__btn update__btn">
                         <a href="#"><span class="icon_loading"></span> Update cart</a>
                     </div> -->
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <!-- <div class="discount__content">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <!-- <div class="discount__content">
                         <h6>Discount codes</h6>
                         <form action="/coupon">
                             <input type="text" placeholder="Enter your coupon code">
                             <button type="submit" class="site-btn">Apply</button>
                         </form>
                     </div> -->
-                </div>
-                <div class="col-lg-4 offset-lg-2">
-                    <div class="cart__total__procced">
-                        <h6>Cart total</h6>
-                        <ul>
-                            <li>Sub Total <span><%= cartTotal+discount %></span></li>
-                            <li>Delivery <span>Free</span> </li>
-                            <li>Discount <span><%= discount %></span> </li>
-                            <li>Total <span><%= cartTotal %></span> </li>
-                        </ul>
-                        <a href="/checkout" class="primary-btn">Proceed to checkout</a>
-                    </div>
-                </div>
-            </div>
+      </div>
+      <div class="col-lg-4 offset-lg-2">
+        <div class="cart__total__procced">
+          <h6>Cart total</h6>
+          <ul>
+            <li>Sub Total <span><%= cartTotal+discount %></span></li>
+            <li>Delivery <span>Free</span></li>
+            <li>Discount <span><%= discount %></span></li>
+            <li>Total <span><%= cartTotal %></span></li>
+          </ul>
+          <a href="/checkout" class="primary-btn">Proceed to checkout</a>
         </div>
-    </section>
-    <!-- Shop Cart Section End -->
-
-    <!-- Instagram Begin -->
-    <div class="instagram">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-1.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-2.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-3.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-4.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-5.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-6.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-    <% } %> 
+  </div>
+</section>
+<!-- Shop Cart Section End -->
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+<!-- Instagram Begin -->
+<div class="instagram">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+        <div
+          class="instagram__item set-bg"
+          data-setbg="img/instagram/insta-1.jpg"
+        >
+          <div class="instagram__text">
+            <i class="fa fa-instagram"></i>
+            <a href="#">@ ashion_shop</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+        <div
+          class="instagram__item set-bg"
+          data-setbg="img/instagram/insta-2.jpg"
+        >
+          <div class="instagram__text">
+            <i class="fa fa-instagram"></i>
+            <a href="#">@ ashion_shop</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+        <div
+          class="instagram__item set-bg"
+          data-setbg="img/instagram/insta-3.jpg"
+        >
+          <div class="instagram__text">
+            <i class="fa fa-instagram"></i>
+            <a href="#">@ ashion_shop</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+        <div
+          class="instagram__item set-bg"
+          data-setbg="img/instagram/insta-4.jpg"
+        >
+          <div class="instagram__text">
+            <i class="fa fa-instagram"></i>
+            <a href="#">@ ashion_shop</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+        <div
+          class="instagram__item set-bg"
+          data-setbg="img/instagram/insta-5.jpg"
+        >
+          <div class="instagram__text">
+            <i class="fa fa-instagram"></i>
+            <a href="#">@ ashion_shop</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+        <div
+          class="instagram__item set-bg"
+          data-setbg="img/instagram/insta-6.jpg"
+        >
+          <div class="instagram__text">
+            <i class="fa fa-instagram"></i>
+            <a href="#">@ ashion_shop</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% } %>
 
-    <!-- Instagram End -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
 
-    <script>
-      
+<!-- Instagram End -->
 
-        function QtyIncrement(productId, price) {
-          console.log(productId);
-          $.ajax({
-            url: "/QtyIncrement",
-            data: {
-              productId,
-              price
-            },
-            method: "post",
-            success: (response) => {
-              console.log("cart updated");
-              window.location.reload()
-            },
-          });
-        }
-  
-        function QtyDecrement(productId, price) {
-          console.log(productId);
-          $.ajax({
-            url: "/QtyDecrement",
-            data: {
-              productId,
-              price
-            },
-            method: "post",
-            success: (response) => {
-              console.log("cart updated");
-              window.location.reload()
-            },
-          });
-        }
-      </script>
-    <%- include('userFooter.ejs')  %> 
+<script>
+  function QtyIncrement(productId, price) {
+    console.log(productId);
+    $.ajax({
+      url: "/QtyIncrement",
+      data: {
+        productId,
+        price,
+      },
+      method: "post",
+      success: (response) => {
+        console.log("cart updated");
+        window.location.reload();
+      },
+    });
+  }
+
+  function QtyDecrement(productId, price) {
+    console.log(productId);
+    $.ajax({
+      url: "/QtyDecrement",
+      data: {
+        productId,
+        price,
+      },
+      method: "post",
+      success: (response) => {
+        console.log("cart updated");
+        window.location.reload();
+      },
+    });
+  }
+</script>
+<%- include('./partials/userFooter.ejs') %>

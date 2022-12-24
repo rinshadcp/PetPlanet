@@ -2,13 +2,16 @@ const bcrypt = require("bcrypt");
 const adminSignup = require("../../models/admin/adminSignup");
 const addProduct = require("../../models/admin/addProduct");
 
+const signupModel = require("../../models/user/userModel");
 const userSchema = require("../../models/user/userModel");
+const couponSchema = require("../../models/admin/couponSchema");
+const orderSchema = require("../../models/user/orderSchema");
+const bannerModel = require("../../models/admin/bannerModel");
 
 const animalCategorySchema = require("../../models/admin/animalCategorySchema");
-
 const ageCategorySchema = require("../../models/admin/ageCategorySchema");
-const moment = require("moment");
 
+const moment = require("moment");
 
 module.exports = {
   // admin Login
@@ -27,6 +30,48 @@ module.exports = {
     const users= await userSchema.find({ })
     res.render('admin/viewUser',{users,index:1});   
 },
+// block a user
+
+blockUser: async (req, res) => {
+    let id = req.params.id;
+    await signupModel
+      .findByIdAndUpdate(
+        { _id: id },
+        {
+          $set: {
+            status: "blocked",
+          },
+        }
+      )
+      .then(() => {
+        res.redirect("/admin/showUser");
+      });
+  },
+
+  //unblock a user
+
+  unblockUser: async (req, res) => {
+    let id = req.params.id;
+    await signupModel
+      .findByIdAndUpdate(
+        { _id: id },
+        {
+          $set: {
+            status: "unblocked",
+          },
+        }
+      )
+      .then(() => {
+        res.redirect("/admin/showUser");
+      });
+  },
+
+
+
+
+
+
+
 //show categroy section
 
 animalPage: async (req, res) => {
@@ -163,7 +208,96 @@ deleteAge: async (req, res) => {
     // } catch (err) {
     //     next(err)
     // }
-}
+},
+ //list product
+
+ listProduct: async (req, res) => {
+    let id = req.params.id;
+    await addProduct
+      .findByIdAndUpdate(
+        { _id: id },
+        {
+          $set: {
+            status: "listed",
+          },
+        }
+      )
+      .then(() => {
+        res.redirect("/admin/viewProduct");
+      });
+  },
+
+  //unlist product
+
+  unListProduct: async (req, res) => {
+    let id = req.params.id;
+    await addProduct
+      .findByIdAndUpdate(
+        { _id: id },
+        {
+          $set: {
+            status: "unlisted",
+          },
+        }
+      )
+      .then(() => {
+        res.redirect("/admin/viewProduct");
+      });
+  },
+
+  //edit product page
+
+  editProductForm: async (req, res) => {
+    try{
+    const id = req.params.id;
+
+    const singleProduct = await addProduct.findOne({ _id: id });
+    let ageCategorySchema = await ageCategorySchema.find();
+    let animalCategorySchema = await animalCategorySchema.find();
+    res.render("admin/editProductForm", {
+      singleProduct,
+      age,
+      animal
+    });
+  }catch{
+    res.render('error')
+  }
+  },
+
+  // update product
+
+  editProduct: async (req, res) => {
+    try{
+    const id = req.params.id;
+    
+    const image = req.file;
+
+    const { age, name, animal, description, price } = req.body;
+
+    await addProduct
+      .updateOne(
+        { _id: id },
+        {
+          $set: {
+            age,
+            
+            name,
+            animal,
+            description,
+            price,
+            image: image.path,
+          },
+        }
+      )
+
+      .then(() => {
+        res.redirect("/admin/viewProduct");
+      })
+     
+    }catch{
+      res.render('error')
+    }
+  },
 
 
 

@@ -140,3 +140,138 @@ module.exports.profile = async (req, res) => {
         });
     }
   };
+
+  // single product details page
+
+ module.exports. showProductdetails =async (req, res) => {
+    const id = req.params.id;
+    const singleProduct = await addProduct.findById({ _id: id });
+    res.render("user/productdetail", { singleProduct });
+  };
+
+  module.exports.shop=async (req, res) => {
+    const agecategory = req.query.category;
+    const brand = req.query.brand;
+    const sort = req.query.sort;
+
+    const page = parseInt(req.query.page) || 1;
+    const items_per_page = 10;
+    const totalproducts = await addProduct.find().countDocuments();
+    const mainCategory = await categorySchema.find({});
+
+    if (category) {
+      let product = await addProduct
+        .find({ category: category })
+        .populate("category")
+        .sort({ date: -1 })
+        .skip((page - 1) * items_per_page)
+        .limit(items_per_page);
+
+      res.render("user/shop", {
+        product,
+        mainCategory,
+        brands,
+        items_per_page,
+        totalproducts,
+        page,
+        hasNextPage: items_per_page * page < totalproducts,
+        hasPreviousPage: page > 1,
+        PreviousPage: page - 1,
+      });
+    } else if (brand) {
+      let product = await addProduct
+        .find({ brand: brand })
+        .populate("brand")
+        .sort({ date: -1 })
+        .skip((page - 1) * items_per_page)
+        .limit(items_per_page);
+
+      res.render("user/shop", {
+        product,
+        brands,
+        mainCategory,
+        items_per_page,
+        totalproducts,
+        page,
+        hasNextPage: items_per_page * page < totalproducts,
+        hasPreviousPage: page > 1,
+        PreviousPage: page - 1,
+      });
+    }else if(sort=='ascending'){
+      let product = await addProduct
+        .find({})
+        
+        .sort({ price: 1 })
+        .skip((page - 1) * items_per_page)
+        .limit(items_per_page);
+
+      res.render("user/shop", {
+        product,
+        brands,
+        mainCategory,
+        items_per_page,
+        totalproducts,
+        page,
+        hasNextPage: items_per_page * page < totalproducts,
+        hasPreviousPage: page > 1,
+        PreviousPage: page - 1,
+      });
+    }else if(sort=='descending'){
+      let product = await addProduct
+        .find({})
+        
+        .sort({ price: -1 })
+        .skip((page - 1) * items_per_page)
+        .limit(items_per_page);
+
+      res.render("user/shop", {
+        product,
+        brands,
+        mainCategory,
+        items_per_page,
+        totalproducts,
+        page,
+        hasNextPage: items_per_page * page < totalproducts,
+        hasPreviousPage: page > 1,
+        PreviousPage: page - 1,
+      });
+    }
+    else if(sort=='new'){
+      let product = await addProduct
+        .find({})
+        
+        .sort({ dare: -1 })
+        .skip((page - 1) * items_per_page)
+        .limit(items_per_page);
+
+      res.render("user/shop", {
+        product,
+        brands,
+        mainCategory,
+        items_per_page,
+        totalproducts,
+        page,
+        hasNextPage: items_per_page * page < totalproducts,
+        hasPreviousPage: page > 1,
+        PreviousPage: page - 1,
+      });
+    }
+     else {
+      let product = await addProduct
+        .find({})
+        .sort({ date: -1 })
+        .skip((page - 1) * items_per_page)
+        .limit(items_per_page);
+      res.render("user/shop", {
+        product,
+        mainCategory,
+        brands,
+        items_per_page,
+        totalproducts,
+        page,
+        hasNextPage: items_per_page * page < totalproducts,
+        hasPreviousPage: page > 1,
+        PreviousPage: page - 1,
+      });
+    }
+  };

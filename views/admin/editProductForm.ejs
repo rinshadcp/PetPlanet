@@ -1,0 +1,109 @@
+<%- include('./partials/adminHeader.ejs') %>
+
+<!-- / Navbar -->
+
+<!-- Content wrapper -->
+<div class="content-wrapper">
+  <!-- Content -->
+
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4">
+      <span class="text-muted fw-light">Products/</span> Edit Products
+    </h4>
+
+    <!-- Form Layout -->
+    <div class="row">
+      <div class="col-xl">
+        <div class="card mb-4">
+          <div class="card-body">
+            <form
+              action="/admin/editProduct/<%= singleProduct._id %>"
+              method="post"
+              enctype="multipart/form-data"
+            >
+              <div class="mb-3">
+                <div class="form-group">
+                  <label class="form-label" for="basic-default-fullname"
+                    >Animal</label
+                  >
+
+                  <select class="form-control" name="category">
+                    <% animalCategory.forEach(function(x) { %>
+                    <option value="<%= x._id %>"><%= x.animal %></option>
+                    <% }) %>
+                  </select>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <div class="form-group">
+                  <label class="form-label" for="basic-default-fullname">
+                    Category</label
+                  >
+                  <select class="form-control" name="subCategory">
+                    <% ageCategory.forEach(function(x) { %>
+                    <option><%= x.age %></option>
+                    <% }) %>
+                  </select>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label" for="product">Product Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  value="<%= singleProduct.name %>"
+                  name="name"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label" for="description">Description</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  value="<%= singleProduct.description%>"
+                  name="description"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label" for="price">Price</label>
+                <input
+                  type="Number"
+                  class="form-control"
+                  value="<%= singleProduct.price %>"
+                  name="price"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="image">Image</label>
+                <div class="custom-file">
+                  <input
+                    type="file"
+                    class="custom-file-input"
+                    name="image"
+                    required
+                  />
+                  <label class="custom-file-label" for="customFile"
+                    >Choose file</label
+                  >
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">UPDATE</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- / Content -->
+
+  <div class="content-backdrop fade"></div>
+</div>
+<!-- Content wrapper -->
+<%- include('./partials/adminFooter.ejs') %>

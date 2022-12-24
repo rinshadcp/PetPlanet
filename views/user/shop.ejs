@@ -1,712 +1,368 @@
-<!DOCTYPE html>
-<html lang="zxx">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Ashion Template">
-    <meta name="keywords" content="Ashion, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ashion | Template</title>
-
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
-
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-</head>
-
+<%- include('./partials/userHeader.ejs') -%>
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
+  <div
+    class="hero-wrap hero-bread"
+    style="background-image: url('../../public/images/bg_6.jpg')"
+  >
+    <div class="container">
+      <div
+        class="row no-gutters slider-text align-items-center justify-content-center"
+      >
+        <div class="col-md-9 ftco-animate text-center">
+          <p class="breadcrumbs">
+            <span class="mr-2"><a href="/">Home</a></span>
+            <span>Prooduct details</span>
+          </p>
+          <h1 class="mb-0 bread">Product</h1>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <!-- Offcanvas Menu Begin -->
-    <div class="offcanvas-menu-overlay"></div>
-    <div class="offcanvas-menu-wrapper">
-        <div class="offcanvas__close">+</div>
-        <ul class="offcanvas__widget">
-            <li><span class="icon_search search-switch"></span></li>
-            <li><a href="#"><span class="icon_heart_alt"></span>
-                <div class="tip">2</div>
-            </a></li>
-            <li><a href="#"><span class="icon_bag_alt"></span>
-                <div class="tip">2</div>
-            </a></li>
-        </ul>
-        <div class="offcanvas__logo">
-            <a href="./index.html"><img src="img/logo.png" alt=""></a>
+  <section class="ftco-section mb-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 mb-5 ftco-animate">
+          <a href="/<%= singleProduct.image %>" class="image-popup prod-img-bg"
+            ><img
+              src="/<%= singleProduct.image %> "
+              class="img-fluid h-100"
+              alt="Colorlib Template"
+          /></a>
         </div>
-        <div id="mobile-menu-wrap"></div>
-        <div class="offcanvas__auth">
-            <a href="#">Login</a>
-            <a href="#">Register</a>
+        <div class="col-lg-6 product-details pl-md-5 ftco-animate">
+          <h3><%= singleProduct.name %></h3>
+          <div class="rating d-flex">
+            <!-- <p class="text-left mr-4">
+								<a href="#" class="mr-2">5.0</a>
+								<a href="#"><span class="ion-ios-star-outline"></span></a>
+								<a href="#"><span class="ion-ios-star-outline"></span></a>
+								<a href="#"><span class="ion-ios-star-outline"></span></a>
+								<a href="#"><span class="ion-ios-star-outline"></span></a>
+								<a href="#"><span class="ion-ios-star-outline"></span></a>
+							</p>
+							<p class="text-left mr-4">
+								<a href="#" class="mr-2" style="color: #000;">100 <span style="color: #bbb;">Rating</span></a>
+							</p>
+							<p class="text-left">
+								<a href="#" class="mr-2" style="color: #000;">500 <span style="color: #bbb;">Sold</span></a>
+							</p> -->
+          </div>
+          <p class="price"><span>Rs.<%= singleProduct.price %></span></p>
+          <p>
+            A small river named Duden flows by their place and supplies it with
+            the necessary regelialia. It is a paradisematic country, in which
+            roasted parts of sentences fly into your mouth.
+          </p>
+          <p>
+            On her way she met a copy. The copy warned the Little Blind Text,
+            that where it came from it would have been rewritten a thousand
+            times and everything that was left from its origin would be the word
+            "and" and the Little Blind Text should turn around and return to its
+            own, safe country. But nothing the copy said could convince her and
+            so it didn’t take long until a few insidious Copy Writers ambushed
+            her, made her drunk with Longe and Parole and dragged her into their
+            agency, where they abused her for their.
+          </p>
+          <form action="/addToCart/<%= singleProduct._id %>" method="post">
+            <div class="row mt-4">
+              <div class="col-md-6">
+                <div class="form-group d-flex">
+                  <div class="select-wrap"></div>
+                </div>
+              </div>
+              <div class="w-100"></div>
+              <div
+                class="input-group col-md-6 d-flex mb-3"
+                style="margin-top: 150px"
+              >
+                <input
+                  class="mtext-104 cl3 txt-center num-product"
+                  type="number"
+                  name="quantity"
+                  value="1"
+                />
+
+                <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                  <i class="fs-16 zmdi zmdi-plus"></i>
+                </div>
+              </div>
+              <div class="w-100"></div>
+              <div class="col-md-12 mt-1">
+                <p style="color: #000"><%= singleProduct.stock %></p>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              style="color: rgb(46, 42, 42)"
+              class="btn bg-primary btn-secondary mt-1"
+            >
+              Add to Cart
+            </button>
+          </form>
         </div>
+      </div>
+
+      <!-- <div class="row mt-5">
+        <div class="col-md-12 nav-link-wrap">
+          <div
+            class="nav nav-pills d-flex text-center"
+            id="v-pills-tab"
+            role="tablist"
+            aria-orientation="vertical"
+          >
+            <a
+              class="nav-link ftco-animate active mr-lg-1"
+              id="v-pills-1-tab"
+              data-toggle="pill"
+              href="#v-pills-1"
+              role="tab"
+              aria-controls="v-pills-1"
+              aria-selected="true"
+              >Description</a
+            >
+
+            <a
+              class="nav-link ftco-animate mr-lg-1"
+              id="v-pills-2-tab"
+              data-toggle="pill"
+              href="#v-pills-2"
+              role="tab"
+              aria-controls="v-pills-2"
+              aria-selected="false"
+              >Manufacturer</a
+            >
+
+            <a
+              class="nav-link ftco-animate"
+              id="v-pills-3-tab"
+              data-toggle="pill"
+              href="#v-pills-3"
+              role="tab"
+              aria-controls="v-pills-3"
+              aria-selected="false"
+              >Reviews</a
+            >
+          </div>
+        </div>
+        <div class="col-md-12 tab-wrap">
+          <div class="tab-content bg-light" id="v-pills-tabContent">
+            <div
+              class="tab-pane fade show active"
+              id="v-pills-1"
+              role="tabpanel"
+              aria-labelledby="day-1-tab"
+            >
+              <div class="p-4">
+                <h3 class="mb-4"><%= singleProduct.name %></h3>
+                <p>
+                  On her way she met a copy. The copy warned the Little Blind
+                  Text, that where it came from it would have been rewritten a
+                  thousand times and everything that was left from its origin
+                  would be the word "and" and the Little Blind Text should turn
+                  around and return to its own, safe country. But nothing the
+                  copy said could convince her and so it didn’t take long until
+                  a few insidious Copy Writers ambushed her, made her drunk with
+                  Longe and Parole and dragged her into their agency, where they
+                  abused her for their.
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="tab-pane fade"
+              id="v-pills-2"
+              role="tabpanel"
+              aria-labelledby="v-pills-day-2-tab"
+            >
+              <div class="p-4">
+                <h3 class="mb-4">Manufactured By Nike</h3>
+                <p>
+                  On her way she met a copy. The copy warned the Little Blind
+                  Text, that where it came from it would have been rewritten a
+                  thousand times and everything that was left from its origin
+                  would be the word "and" and the Little Blind Text should turn
+                  around and return to its own, safe country. But nothing the
+                  copy said could convince her and so it didn’t take long until
+                  a few insidious Copy Writers ambushed her, made her drunk with
+                  Longe and Parole and dragged her into their agency, where they
+                  abused her for their.
+                </p>
+              </div>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="v-pills-3"
+              role="tabpanel"
+              aria-labelledby="v-pills-day-3-tab"
+            >
+              <div class="row p-4">
+                <div class="col-md-7">
+                  <h3 class="mb-4">23 Reviews</h3>
+                  <div class="review">
+                    <div
+                      class="user-img"
+                      style="
+                        background-image: url(../../public/images/person_1.jpg);
+                      "
+                    ></div>
+                    <div class="desc">
+                      <h4>
+                        <span class="text-left">Jacob Webb</span>
+                        <span class="text-right">14 March 2018</span>
+                      </h4>
+                      <p class="star">
+                        <span>
+                          <i class="ion-ios-star-outline"></i>
+                          <i class="ion-ios-star-outline"></i>
+                          <i class="ion-ios-star-outline"></i>
+                          <i class="ion-ios-star-outline"></i>
+                          <i class="ion-ios-star-outline"></i>
+                        </span>
+                        <span class="text-right"
+                          ><a href="#" class="reply"
+                            ><i class="icon-reply"></i></a
+                        ></span>
+                      </p>
+                      <p>
+                        When she reached the first hills of the Italic
+                        Mountains, she had a last view back on the skyline of
+                        her hometown Bookmarksgrov
+                      </p>
+                    </div>
+                  </div>
+                  <div class="review">
+                    <div
+                      class="user-img"
+                      style="
+                        background-image: url(../../public/images/person_2.jpg);
+                      "
+                    ></div>
+                    <div class="desc">
+                      <h4>
+                        <span class="text-left">Jacob Webb</span>
+                        <span class="text-right">14 March 2018</span>
+                      </h4>
+                      <p class="star">
+                        <span>
+                          <i class="ion-ios-star-outline"></i>
+                          <i class="ion-ios-star-outline"></i>
+                          <i class="ion-ios-star-outline"></i>
+                          <i class="ion-ios-star-outline"></i>
+                          <i class="ion-ios-star-outline"></i>
+                        </span>
+                        <span class="text-right"
+                          ><a href="#" class="reply"
+                            ><i class="icon-reply"></i></a
+                        ></span>
+                      </p>
+                      <p>
+                        When she reached the first hills of the Italic
+                        Mountains, she had a last view back on the skyline of
+                        her hometown Bookmarksgrov
+                      </p>
+                    </div>
+                  </div>
+                  <div class="review">
+                    <div
+                      class="user-img"
+                      style="
+                        background-image: url(../../public/images/person_3.jpg);
+                      "
+                    ></div>
+                    <div class="desc">
+                      <h4>
+                        <span class="text-left">Jacob Webb</span>
+                        <span class="text-right">14 March 2018</span>
+                      </h4>
+                      <p class="star">
+                        <span>
+                          <i class="ion-ios-star-outline"></i>
+                          <i class="ion-ios-star-outline"></i>
+                          <i class="ion-ios-star-outline"></i>
+                          <i class="ion-ios-star-outline"></i>
+                          <i class="ion-ios-star-outline"></i>
+                        </span>
+                        <span class="text-right"
+                          ><a href="#" class="reply"
+                            ><i class="icon-reply"></i></a
+                        ></span>
+                      </p>
+                      <p>
+                        When she reached the first hills of the Italic
+                        Mountains, she had a last view back on the skyline of
+                        her hometown Bookmarksgrov
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="rating-wrap">
+                    <h3 class="mb-4">Give a Review</h3>
+                    <p class="star">
+                      <span>
+                        <i class="ion-ios-star-outline"></i>
+                        <i class="ion-ios-star-outline"></i>
+                        <i class="ion-ios-star-outline"></i>
+                        <i class="ion-ios-star-outline"></i>
+                        <i class="ion-ios-star-outline"></i>
+                        (98%)
+                      </span>
+                      <span>20 Reviews</span>
+                    </p>
+                    <p class="star">
+                      <span>
+                        <i class="ion-ios-star-outline"></i>
+                        <i class="ion-ios-star-outline"></i>
+                        <i class="ion-ios-star-outline"></i>
+                        <i class="ion-ios-star-outline"></i>
+                        <i class="ion-ios-star-outline"></i>
+                        (85%)
+                      </span>
+                      <span>10 Reviews</span>
+                    </p>
+                    <p class="star">
+                      <span>
+                        <i class="ion-ios-star-outline"></i>
+                        <i class="ion-ios-star-outline"></i>
+                        <i class="ion-ios-star-outline"></i>
+                        <i class="ion-ios-star-outline"></i>
+                        <i class="ion-ios-star-outline"></i>
+                        (98%)
+                      </span>
+                      <span>5 Reviews</span>
+                    </p>
+                    <p class="star">
+                      <span>
+                        <i class="ion-ios-star-outline"></i>
+                        <i class="ion-ios-star-outline"></i>
+                        <i class="ion-ios-star-outline"></i>
+                        <i class="ion-ios-star-outline"></i>
+                        <i class="ion-ios-star-outline"></i>
+                        (98%)
+                      </span>
+                      <span>0 Reviews</span>
+                    </p>
+                    <p class="star">
+                      <span>
+                        <i class="ion-ios-star-outline"></i>
+                        <i class="ion-ios-star-outline"></i>
+                        <i class="ion-ios-star-outline"></i>
+                        <i class="ion-ios-star-outline"></i>
+                        <i class="ion-ios-star-outline"></i>
+                        (98%)
+                      </span>
+                      <span>0 Reviews</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
     </div>
-    <!-- Offcanvas Menu End -->
-
-    <!-- Header Section Begin -->
-    <header class="header">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xl-3 col-lg-2">
-                    <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-xl-6 col-lg-7">
-                    <nav class="header__menu">
-                        <ul>
-                            <li><a href="./index.html">Home</a></li>
-                            <li><a href="#">Women’s</a></li>
-                            <li><a href="#">Men’s</a></li>
-                            <li class="active"><a href="./shop.html">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="./product-details.html">Product Details</a></li>
-                                    <li><a href="./shop-cart.html">Shop Cart</a></li>
-                                    <li><a href="./checkout.html">Checkout</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="col-lg-3">
-                    <div class="header__right">
-                        <div class="header__right__auth">
-                            <a href="#">Login</a>
-                            <a href="#">Register</a>
-                        </div>
-                        <ul class="header__right__widget">
-                            <li><span class="icon_search search-switch"></span></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span>
-                                <div class="tip">2</div>
-                            </a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span>
-                                <div class="tip">2</div>
-                            </a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="canvas__open">
-                <i class="fa fa-bars"></i>
-            </div>
-        </div>
-    </header>
-    <!-- Header Section End -->
-
-    <!-- Breadcrumb Begin -->
-    <div class="breadcrumb-option">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb__links">
-                        <a href="./index.html"><i class="fa fa-home"></i> Home</a>
-                        <span>Shop</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Breadcrumb End -->
-
-    <!-- Shop Section Begin -->
-    <section class="shop spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-3">
-                    <div class="shop__sidebar">
-                        <div class="sidebar__categories">
-                            <div class="section-title">
-                                <h4>Categories</h4>
-                            </div>
-                            <div class="categories__accordion">
-                                <div class="accordion" id="accordionExample">
-                                    <div class="card">
-                                        <div class="card-heading active">
-                                            <a data-toggle="collapse" data-target="#collapseOne">Women</a>
-                                        </div>
-                                        <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
-                                            <div class="card-body">
-                                                <ul>
-                                                    <li><a href="#">Coats</a></li>
-                                                    <li><a href="#">Jackets</a></li>
-                                                    <li><a href="#">Dresses</a></li>
-                                                    <li><a href="#">Shirts</a></li>
-                                                    <li><a href="#">T-shirts</a></li>
-                                                    <li><a href="#">Jeans</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-heading">
-                                            <a data-toggle="collapse" data-target="#collapseTwo">Men</a>
-                                        </div>
-                                        <div id="collapseTwo" class="collapse" data-parent="#accordionExample">
-                                            <div class="card-body">
-                                                <ul>
-                                                    <li><a href="#">Coats</a></li>
-                                                    <li><a href="#">Jackets</a></li>
-                                                    <li><a href="#">Dresses</a></li>
-                                                    <li><a href="#">Shirts</a></li>
-                                                    <li><a href="#">T-shirts</a></li>
-                                                    <li><a href="#">Jeans</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-heading">
-                                            <a data-toggle="collapse" data-target="#collapseThree">Kids</a>
-                                        </div>
-                                        <div id="collapseThree" class="collapse" data-parent="#accordionExample">
-                                            <div class="card-body">
-                                                <ul>
-                                                    <li><a href="#">Coats</a></li>
-                                                    <li><a href="#">Jackets</a></li>
-                                                    <li><a href="#">Dresses</a></li>
-                                                    <li><a href="#">Shirts</a></li>
-                                                    <li><a href="#">T-shirts</a></li>
-                                                    <li><a href="#">Jeans</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-heading">
-                                            <a data-toggle="collapse" data-target="#collapseFour">Accessories</a>
-                                        </div>
-                                        <div id="collapseFour" class="collapse" data-parent="#accordionExample">
-                                            <div class="card-body">
-                                                <ul>
-                                                    <li><a href="#">Coats</a></li>
-                                                    <li><a href="#">Jackets</a></li>
-                                                    <li><a href="#">Dresses</a></li>
-                                                    <li><a href="#">Shirts</a></li>
-                                                    <li><a href="#">T-shirts</a></li>
-                                                    <li><a href="#">Jeans</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-heading">
-                                            <a data-toggle="collapse" data-target="#collapseFive">Cosmetic</a>
-                                        </div>
-                                        <div id="collapseFive" class="collapse" data-parent="#accordionExample">
-                                            <div class="card-body">
-                                                <ul>
-                                                    <li><a href="#">Coats</a></li>
-                                                    <li><a href="#">Jackets</a></li>
-                                                    <li><a href="#">Dresses</a></li>
-                                                    <li><a href="#">Shirts</a></li>
-                                                    <li><a href="#">T-shirts</a></li>
-                                                    <li><a href="#">Jeans</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="sidebar__filter">
-                            <div class="section-title">
-                                <h4>Shop by price</h4>
-                            </div>
-                            <div class="filter-range-wrap">
-                                <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                data-min="33" data-max="99"></div>
-                                <div class="range-slider">
-                                    <div class="price-input">
-                                        <p>Price:</p>
-                                        <input type="text" id="minamount">
-                                        <input type="text" id="maxamount">
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="#">Filter</a>
-                        </div>
-                        <div class="sidebar__sizes">
-                            <div class="section-title">
-                                <h4>Shop by size</h4>
-                            </div>
-                            <div class="size__list">
-                                <label for="xxs">
-                                    xxs
-                                    <input type="checkbox" id="xxs">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="xs">
-                                    xs
-                                    <input type="checkbox" id="xs">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="xss">
-                                    xs-s
-                                    <input type="checkbox" id="xss">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="s">
-                                    s
-                                    <input type="checkbox" id="s">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="m">
-                                    m
-                                    <input type="checkbox" id="m">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="ml">
-                                    m-l
-                                    <input type="checkbox" id="ml">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="l">
-                                    l
-                                    <input type="checkbox" id="l">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="xl">
-                                    xl
-                                    <input type="checkbox" id="xl">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="sidebar__color">
-                            <div class="section-title">
-                                <h4>Shop by size</h4>
-                            </div>
-                            <div class="size__list color__list">
-                                <label for="black">
-                                    Blacks
-                                    <input type="checkbox" id="black">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="whites">
-                                    Whites
-                                    <input type="checkbox" id="whites">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="reds">
-                                    Reds
-                                    <input type="checkbox" id="reds">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="greys">
-                                    Greys
-                                    <input type="checkbox" id="greys">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="blues">
-                                    Blues
-                                    <input type="checkbox" id="blues">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="beige">
-                                    Beige Tones
-                                    <input type="checkbox" id="beige">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="greens">
-                                    Greens
-                                    <input type="checkbox" id="greens">
-                                    <span class="checkmark"></span>
-                                </label>
-                                <label for="yellows">
-                                    Yellows
-                                    <input type="checkbox" id="yellows">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-9 col-md-9">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/shop/shop-1.jpg">
-                                    <div class="label new">New</div>
-                                    <ul class="product__hover">
-                                        <li><a href="img/shop/shop-1.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Furry hooded parka</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="product__price">$ 59.0</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/shop/shop-2.jpg">
-                                    <ul class="product__hover">
-                                        <li><a href="img/shop/shop-2.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Flowy striped skirt</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="product__price">$ 49.0</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/shop/shop-3.jpg">
-                                    <ul class="product__hover">
-                                        <li><a href="img/shop/shop-3.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Croc-effect bag</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="product__price">$ 59.0</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/shop/shop-4.jpg">
-                                    <ul class="product__hover">
-                                        <li><a href="img/shop/shop-4.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Dark wash Xavi jeans</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="product__price">$ 59.0</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="product__item sale">
-                                <div class="product__item__pic set-bg" data-setbg="img/shop/shop-5.jpg">
-                                    <div class="label">Sale</div>
-                                    <ul class="product__hover">
-                                        <li><a href="img/shop/shop-5.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Ankle-cuff sandals</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="product__price">$ 49.0 <span>$ 59.0</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/shop/shop-6.jpg">
-                                    <ul class="product__hover">
-                                        <li><a href="img/shop/shop-6.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Contrasting sunglasses</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="product__price">$ 59.0</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/shop/shop-7.jpg">
-                                    <ul class="product__hover">
-                                        <li><a href="img/shop/shop-7.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Circular pendant earrings</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="product__price">$ 59.0</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="img/shop/shop-8.jpg">
-                                    <div class="label stockout stockblue">Out Of Stock</div>
-                                    <ul class="product__hover">
-                                        <li><a href="img/shop/shop-8.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Cotton T-Shirt</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="product__price">$ 59.0</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="product__item sale">
-                                <div class="product__item__pic set-bg" data-setbg="img/shop/shop-9.jpg">
-                                    <div class="label">Sale</div>
-                                    <ul class="product__hover">
-                                        <li><a href="img/shop/shop-9.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                        <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                                        <li><a href="#"><span class="icon_bag_alt"></span></a></li>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="#">Water resistant zips backpack</a></h6>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="product__price">$ 49.0 <span>$ 59.0</span></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12 text-center">
-                            <div class="pagination__option">
-                                <a href="#">1</a>
-                                <a href="#">2</a>
-                                <a href="#">3</a>
-                                <a href="#"><i class="fa fa-angle-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Shop Section End -->
-
-    <!-- Instagram Begin -->
-    <div class="instagram">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-1.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-2.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-3.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-4.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-5.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-6.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Instagram End -->
-
-    <!-- Footer Section Begin -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-7">
-                    <div class="footer__about">
-                        <div class="footer__logo">
-                            <a href="./index.html"><img src="img/logo.png" alt=""></a>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                        cilisis.</p>
-                        <div class="footer__payment">
-                            <a href="#"><img src="img/payment/payment-1.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-2.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-3.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-4.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-5.png" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-5">
-                    <div class="footer__widget">
-                        <h6>Quick links</h6>
-                        <ul>
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Blogs</a></li>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">FAQ</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-4">
-                    <div class="footer__widget">
-                        <h6>Account</h6>
-                        <ul>
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">Orders Tracking</a></li>
-                            <li><a href="#">Checkout</a></li>
-                            <li><a href="#">Wishlist</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-8 col-sm-8">
-                    <div class="footer__newslatter">
-                        <h6>NEWSLETTER</h6>
-                        <form action="#">
-                            <input type="text" placeholder="Email">
-                            <button type="submit" class="site-btn">Subscribe</button>
-                        </form>
-                        <div class="footer__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-youtube-play"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    <div class="footer__copyright__text">
-                        <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
-                    </div>
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- Footer Section End -->
-
-    <!-- Search Begin -->
-    <div class="search-model">
-        <div class="h-100 d-flex align-items-center justify-content-center">
-            <div class="search-close-switch">+</div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">
-            </form>
-        </div>
-    </div>
-    <!-- Search End -->
-
-    <!-- Js Plugins -->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-    <script src="js/mixitup.min.js"></script>
-    <script src="js/jquery.countdown.min.js"></script>
-    <script src="js/jquery.slicknav.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.nicescroll.min.js"></script>
-    <script src="js/main.js"></script>
+  </section>
 </body>
-
-</html>
+<%- include('./partials/userFooter.ejs') %>

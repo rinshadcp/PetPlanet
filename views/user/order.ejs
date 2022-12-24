@@ -1,0 +1,174 @@
+<%- include('./partials/userHeader.ejs') -%>
+
+<div class="container " style="margin-bottom: 150px;">
+    <div class="main-body mt-5  " id="main">
+        <br> <br>
+        <h3 class="text-center">Your Orders</h3>
+        <div class="row gutters-sm mt-5">
+
+
+
+        </div>
+        <div class="card">
+            <div class="card-body d-flex  justify-content-around">
+                <div  style="width:30%;margin-left: 15px;">
+                    <p>Image</p>
+                </div>
+                <div class="" style="width:25%">
+                    <table>
+
+                        <tr>
+                            <td>Products</td>
+                        </tr>
+
+                    </table>
+                </div>
+                <div style="width:100%;">
+                    <ul class="d-flex justify-content-around">
+                        <p>OrderStatus</p>
+
+                        <li>
+                            TotalPrice</li>
+                        <li>Ordered Date</li>
+                        <li>View</li>
+                        <li>Cancel</li>
+
+                    </ul>
+                </div>
+            </div>
+            <div>
+
+            </div>
+        </div>
+        <% orders.forEach(function(order){ %>
+            <% order.products.forEach(function(x){ %>
+        <div class="card" id="card">
+            <div class="card-body d-flex  justify-content-around  align-items-around">
+                <div style="width:30%;height:100px;">
+                    
+                    <ol>
+                        <img src="/<%= x.productId.image  %> " style="width:50px;height:50px">
+                    </ol>
+                   
+                </div>
+                <div class="" style="width:25% ; margin-left: 15px;" >
+                    <table>
+                       
+                        <ol>
+                            <li> <%= x.productId.name  %> </li>
+                        </ol>
+                        
+                    </table>
+                </div>
+                <div style="width:100%;" class="d-flex justify-content-around align-items-around">
+                    
+
+                        <input type="hidden" name="stat" class="stat class" value="<%= x.orderStatus  %>">
+                        
+                        <div style="width: 20%;" id="status1">
+                            <p id="Status_i" style="margin-left: 55px;" class="OrderStatus text-center text-success">
+                                <%= x.orderStatus  %> </p>
+                        </div>
+                        <div class="d-flex justify-content-center" style="width: 20%;">
+
+                            <span style="margin-left: 25px;" class="text-center ms-3"><%= x.productId.price  %></span>
+                        </div>
+                        
+                        <div class="d-flex justify-content-center" style="width: 20%; ">
+                            <li style="margin-left: 25px;"><%= moment(order.date).format("LL")  %></li>
+                        </div>
+                        
+                        <div class="d-flex justify-content-center" style="width: 15%;">
+                            <li style="margin-right: 35px;"> <a href="/login/productdetail/<%= x.productId._id %>" class="">
+                                    <i class="fa fa-eye" aria-hidden="false"></i></a></li>
+                        </div>
+                </div>
+                <div class="d-flex justify-content-center" style="width: 15%;">
+                    <li style="margin-right: 35px;"> <button onclick="cancelorder('<%= order._id %>','<%= x.productId._id %>')" class=""> <i style="color: red;"
+                        class=" fa fa-ban" aria-hidden="true"></i>
+                    </button></li>
+                </div>
+                
+
+
+                </ul>
+            </div>
+
+            
+        </div>
+
+        <% }) %>
+        <% }) %>
+    
+        <div>
+
+            <section class="d-flex justify-content-center mt-2">
+                <% if(hasPreviousPage){ %>
+                  <a style="text-decoration: none;padding: .5rem; margin:0 1rem; color:rgb(223, 54, 54)" class="text-center"
+                    href="/login/orders?page=<%= PreviousPage %>"><i class="fa-solid fa-chevron-left"
+                      aria-hidden="true"></i></a>
+                  <% } %>
+                    <a style="text-decoration: none;padding: .5rem; margin:0 1rem; color:black; border: 1px solid black;"
+                      href="/login/orders?page=<%= page %>">
+                      <%= page %>
+                    </a>
+                    <% if(hasNextPage) { %>
+                      <a style="text-decoration: none;padding: .5rem; margin:0 1rem; color:black;"
+                        href="/login/orders?page=<%=  page+1 %>"><i class="fa-solid fa-chevron-right"
+                          aria-hidden="true"></i></a>
+                      <% } %>
+                </section>
+
+        </div>
+    </div>
+  
+</div>
+
+</div>
+</div>
+</div>
+<script>
+    
+    function cancelorder(id , productId ) {
+        if(confirm('Do you want to cancel the order')){
+            var div=$('#card').html();
+            $.ajax({
+          url: "/login/cancelOrder",
+          data: {
+            id,
+            productId,
+           
+          },
+          method: "post",
+          success: (response) => {
+              if (response.status) {
+                  Swal.fire({
+                      icon: "success",
+                      title: "Order cancelled ",
+                      text: "order cancelled",
+                    });
+                window.location.reload()
+            } 
+          },
+        });
+        } else {
+              Swal.fire({
+                icon: "success",
+                title: "cancelled",
+                text: "cancelled",
+              });
+        }
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+
+        console.log(stat)
+        if (stat == 'Cancelled') {
+            $("p.OrderStatus").addClass("text-danger");
+        }
+    });
+</script>
+
+<%- include('./partials/userFooter.ejs') %>

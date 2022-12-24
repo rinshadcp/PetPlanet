@@ -1,19 +1,17 @@
-<%- include('userHeader.ejs') -%>
+<%- include('./partials/userHeader.ejs') -%>
 
-
-
-
-
-<div style="height: 100vh; margin-top: 100px;">
-    <div class="mt-lg-5 d-flex justify-content-center align-items-center">
-         <img src="\public\images\order-success.gif" alt="">
-    </div>
-    <div class="text-center">
+<div style="height: 100vh; margin-top: 100px">
+  <div class="mt-lg-5 d-flex justify-content-center align-items-center">
+    <img src="\public\images\order-success.gif" alt="" />
+  </div>
+  <div class="text-center">
     <h3 class="mb-5"><strong>Order placed successfully </strong></h3>
-        <a href="/orders" class="stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 p-tb-10">Track order</a>
-    </div>
+    <a
+      href="/orders"
+      class="stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 p-tb-10"
+      >Track order</a
+    >
+  </div>
 </div>
 
-
-<%- include('userFooter.ejs') -%>
-
+<%- include('./partials/userFooter.ejs') %>

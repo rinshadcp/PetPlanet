@@ -17,7 +17,7 @@ router.route('/login')
     .post(passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), user.login)
 
 router.get('/logout', user.logout)
-
+router.get("/shop",user.shop)
 
 
 //user profile and address management

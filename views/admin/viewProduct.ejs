@@ -1,36 +1,99 @@
-<%- include('adminHeader.ejs') %>
-<div class="col-sm-12 col-xl-12">
-  <div class="bg-secondary rounded h-100 p-4">
-    <h6 class="mb-4">Products</h6>
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Animal name</th>
-          <th scope="col">Sub Category</th>
-          <th scope="col">Product Name</th>
-          <th scope="col">Description</th>
-          <th scope="col">Price</th>
-          <th scope="col">Image</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% products.forEach(function(product){ %>
-        <tr>
-          <th scope="row"><%= index++ %></th>
-          <td><%= product.animal %></td>
-          <td><%= product.age%></td>
-          <td><%= product.name %></td>
-          <td><%= product.description %></td>
-          <td><%= product.price %></td>
-          <td>
-            <img src='/images/petproduct/<%= product.image[0] %>' alt=""
-            style="height: 50px; width: 60px;"
-          </td>
-        </tr>
-        <% }) %>
-      </tbody>
-    </table>
+<%- include('./partials/adminHeader.ejs') %>
+
+<!-- / Navbar -->
+
+<!-- Content wrapper -->
+<div class="content-wrapper">
+  <!-- Content -->
+
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4">
+      <span class="text-muted fw-light">Users/</span> Show Products
+    </h4>
+
+    <!-- Basic Layout -->
+    <div class="card">
+      <div class="table-responsive text-nowrap">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Animal</th>
+              <th>Category</th>
+              <th>Image</th>
+              <th>Price</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody class="table-border-bottom-0">
+            <% products.forEach(function(x) { %>
+            <tr>
+              <td>
+                <i class="fab fa-angular fa-lg text-danger me-3"></i>
+                <strong><%= x.name %></strong>
+              </td>
+              <td><%= x.animal%></td>
+              <td><%= x.age%></td>
+              <td>
+                <img
+                  src="/images/petproduct/<%= x.image %>"
+                  style="height: 60px; width: 60px"
+                />
+              </td>
+              <td><%= x.price %></td>
+
+              <td>
+                <form
+                  action="/admin/editProductForm/<%= x._id %>"
+                  method="post"
+                  enctype="multipart/form-data"
+                >
+                  <button
+                    type="submit"
+                    class="btn btn-secondary"
+                    style="width: 100px; height: 35px; margin-top: 2px"
+                  >
+                    Edit
+                  </button>
+                </form>
+                <% if( x.status == "listed") { %>
+                <form
+                  action="/admin/unListProduct/<%= x._id %>"
+                  method="post"
+                  enctype="multipart/form-data"
+                >
+                  <button
+                    type="submit"
+                    class="btn btn-danger"
+                    style="width: 100px; height: 35px"
+                  >
+                    unlist
+                  </button>
+                </form>
+                <% } else { %>
+                <form
+                  action="/admin/listProduct/<%= x._id %>"
+                  method="post"
+                  enctype="multipart/form-data"
+                >
+                  <button
+                    type="submit"
+                    class="btn btn-danger"
+                    style="width: 100px; height: 35px"
+                  >
+                    list
+                  </button>
+                </form>
+
+                <% } %>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- / Content -->
   </div>
 </div>
-<%- include('adminFooter.ejs') %>
+<%- include('./partials/adminFooter.ejs') %>

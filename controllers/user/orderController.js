@@ -1,13 +1,13 @@
 const addressSchema = require("../../models/user/addressSchema");
 const cartModel = require("../../models/user/cartModel");
 const orderSchema = require("../../models/user/orderSchema");
-// const Razorpay = require("razorpay");
+const Razorpay = require("razorpay");
 const moment = require('moment')
 
-// var instance = new Razorpay({
-//   key_id: "rzp_test_mp1q8YWcYr4vEC",
-//   key_secret: "RV5KxjCb2F6JQwSsoMxADYxs",
-// });
+var instance = new Razorpay({
+  key_id: "rzp_test_mp1q8YWcYr4vEC",
+  key_secret: "RV5KxjCb2F6JQwSsoMxADYxs",
+});
 
 module.exports = {
   //checkout
@@ -56,7 +56,7 @@ module.exports = {
     console.log(total);
     let products = cart.products;
     let discount = cart.offer.discount
-    
+    console.log(paymentMethod);
 
 
     const newOrder = new orderSchema({
@@ -136,7 +136,7 @@ module.exports = {
   //order success
 
   orderSuccess: (req, res) => {
-    res.render("user/orderSuccess");
+    res.render("user/orderSuccess",{login:true});
   },
 
   //order management

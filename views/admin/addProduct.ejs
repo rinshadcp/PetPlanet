@@ -1,49 +1,74 @@
-<%- include('adminHeader.ejs') %>
-  <div class="col-sm-12 col-xl-12">
-    <div class="bg-secondary rounded h-100 p-4">
-      <h6 class="mb-4">Add Products</h6>
-      <form action="/admin/addProduct" method="post" enctype="multipart/form-data">
-        <!-- <div class="mb-3"> -->
-        <label for="exampleInputEmail1" class="form-label">Animal Category</label>
-        <select class="form-control" name="animal">
-          <% animal.forEach(function(x) { %>
-            <option>
-              <%= x.animal %>
-            </option>
-            <% }) %>
+<%- include('./partials/adminHeader.ejs') %>
+<div class="col-sm-12 col-xl-12">
+  <div class="bg-secondary rounded h-100 p-4">
+    <h6 class="mb-4">Add Products</h6>
+    <form
+      action="/admin/addProduct"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <!-- <div class="mb-3"> -->
+      <label for="exampleInputEmail1" class="form-label">Animal Category</label>
+      <select class="form-control" name="animal">
+        <% animal.forEach(function(x) { %>
+        <option><%= x.animal %></option>
+        <% }) %>
+      </select>
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Categories</label>
+        <select class="form-control" name="age">
+          <% age.forEach(function(x) { %>
+          <option><%= x.age %></option>
+          <% }) %>
         </select>
+      </div>
 
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Categories</label>
-          <select class="form-control" name="age">
-            <% age.forEach(function(x) { %>
-              <option>
-                <%= x.age %>
-              </option>
-              <% }) %>
-          </select>
-        </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label"
+          >Product Name</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="exampleInputPassword1"
+          name="name"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label"
+          >Description</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="exampleInputPassword1"
+          name="description"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">price</label>
+        <input
+          type="number"
+          class="form-control"
+          id="exampleInputPassword1"
+          name="price"
+        />
+      </div>
 
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Product Name</label>
-          <input type="text" class="form-control" id="exampleInputPassword1" name="name" />
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Description</label>
-          <input type="text" class="form-control" id="exampleInputPassword1" name="description" />
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">price</label>
-          <input type="number" class="form-control" id="exampleInputPassword1" name="price" />
-        </div>
+      <div class="mb-3">
+        <label for="formFile" class="form-label">Image</label>
+        <input
+          class="form-control bg-dark"
+          type="file"
+          multiple
+          id="formFile"
+          name="image"
+        />
+      </div>
 
-        <div class="mb-3">
-          <label for="formFile" class="form-label">Image</label>
-          <input class="form-control bg-dark" type="file" multiple id="formFile" name="image" />
-        </div>
-
-        <button type="submit" class="btn btn-primary">Add product</button>
-      </form>
-    </div>
+      <button type="submit" class="btn btn-primary">Add product</button>
+    </form>
   </div>
-  <%- include('adminFooter.ejs') %>
+</div>
+<%- include('./partials/adminFooter.ejs') %>

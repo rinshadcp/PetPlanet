@@ -2,8 +2,19 @@ const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/admin/adminController');
 
+
 router.get('/',controller.adminHome);
+
+
+
+
+//User Management
+router.post('/blockUser/:id',controller.blockUser);
+router.post('/unblockUser/:id',controller.unblockUser);
 router.get('/viewUser',controller.viewUser) ;
+
+
+
 router.get('/animalPage',controller.animalPage);
 router.get('/agePage',controller.agePage);
 router.get('/addProductPage',controller.addproductpage);
