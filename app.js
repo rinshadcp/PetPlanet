@@ -14,9 +14,11 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user/userModel");
 const multer = require("multer");
+const { notFound, errorHandler } = require("./middlewrares/errorHandler");
 const userRoutes = require("./routes/user");
 const adminRoutes = require("./routes/admin");
-
+const dbConnect = require("./config/dbConnect");
+dbConnect();
 const app = express();
 
 app.set("view engine", "ejs");
@@ -74,18 +76,11 @@ app.use((req, res, next) => {
 app.use("/", userRoutes);
 app.use("/admin", adminRoutes);
 
-app.get("/", (req, res) => {
-  res.render("user/index");
+app.use(notFound);
+app.use(errorHandler);
+
+// start server
+const PORT = process.env.PORT || 3333;
+app.listen(PORT, () => {
+  console.log(`App is running on http://localhost:${PORT}`);
 });
-
-app.use("*", (req, res) => {
-  res.render("user/error");
-});
-
-// app.use((err, req, res, next) => {
-//   const { statusCode = 500 } = err;
-//   if (!err.message) err.message = 'Oh No, Something Went Wrong!'
-//   res.status(statusCode).render('user/error', { err })
-// })
-
-module.exports = app;

@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 const passportLocalMongoose = require("passport-local-mongoose");
 
 const UserSchema = new Schema({
-  
   phone: {
     type: Number,
   },
@@ -12,7 +11,7 @@ const UserSchema = new Schema({
     required: true,
     unique: true,
   },
- 
+
   isVerified: {
     type: Boolean,
   },
@@ -27,10 +26,8 @@ const UserSchema = new Schema({
   type: {
     type: String,
     default: "user",
-  }
+  },
 });
-  
-
 
 UserSchema.plugin(passportLocalMongoose);
 

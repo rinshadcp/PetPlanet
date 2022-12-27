@@ -1,17 +1,16 @@
+const asyncHandler = require("express-async-handler");
 
-
-module.exports.isLoggedIn = (req, res, next) => {
-    if (!req.isAuthenticated()) {
-        
-        req.session.returnTo = req.originalUrl
-        // req.flash('error', 'You must be signed in first!');
-        return res.redirect('/login');
-    }
-    next();
-}
+module.exports.isLoggedIn = asyncHandler((req, res, next) => {
+  if (!req.isAuthenticated()) {
+    req.session.returnTo = req.originalUrl;
+    req.flash("error", "You must be signed in first!");
+    return res.redirect("/login");
+  }
+  next();
+});
 module.exports.checkReturnTo = (req, res, next) => {
-    if (req.session.returnTo) {
-        res.locals.returnTo = req.session.returnTo;
-    }
-    next();
-}
+  if (req.session.returnTo) {
+    res.locals.returnTo = req.session.returnTo;
+  }
+  next();
+};

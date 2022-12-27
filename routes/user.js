@@ -3,34 +3,48 @@ const router = express.Router();
 const passport = require("passport");
 const { isLoggedIn } = require("../middlewrares/authentication");
 const User = require("../models/user/userModel");
-const user = require("../controllers/user/userController");
+const {
+  home,
+  renderRegister,
+  register,
+  renderLogin,
+  login,
+  logout,
+  profile,
+  newAddress,
+  manageAddress,
+  deleteAddress,
+  showProductdetails,
+  shop,
+  addAddress,
+} = require("../controllers/user/userController");
 const cartController = require("../controllers/user/cartController");
 const wishlistController = require("../controllers/user/wishlistController");
 const orderController = require("../controllers/user/orderController");
-router.get("/", user.home);
-router.route("/signup").get(user.renderRegister).post(user.register);
+router.get("/", home);
+router.route("/signup").get(renderRegister).post(register);
 
 router
   .route("/login")
-  .get(user.renderLogin)
+  .get(renderLogin)
   .post(
     passport.authenticate("local", {
       failureFlash: true,
       failureRedirect: "/login",
     }),
-    user.login
+    login
   );
 
-router.get("/logout", user.logout);
-router.get("/shop", user.shop);
+router.get("/logout", logout);
+router.get("/shop", shop);
 
 //user profile and address management
 
-router.get("/profile", isLoggedIn, user.profile);
-router.get("/addAddressPage", isLoggedIn, user.addAddress);
-router.post("/newAddress", user.newAddress);
-router.get("/manageAddress", isLoggedIn, user.manageAddress);
-router.get("/deleteAddress/:id", isLoggedIn, user.deleteAddress);
+router.get("/profile", isLoggedIn, profile);
+router.get("/addAddressPage", isLoggedIn, addAddress);
+router.post("/newAddress", newAddress);
+router.get("/manageAddress", isLoggedIn, manageAddress);
+router.get("/deleteAddress/:id", isLoggedIn, deleteAddress);
 
 //wishlist routes
 

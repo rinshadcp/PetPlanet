@@ -1,13 +1,14 @@
 const User = require("../../models/user/userModel");
+const asyncHandler = require("express-async-handler");
 const addressSchema = require("../../models/user/addressSchema");
-
+const flash = require("connect-flash");
 const addProduct = require("../../models/admin/addProduct");
 const {
   isLoggedIn,
   checkReturnTo,
 } = require("../../middlewrares/authentication");
 
-module.exports.home = async (req, res) => {
+const home = asyncHandler(async (req, res) => {
   const products = await addProduct.find();
   let user = req.user;
   if (user) {
@@ -15,12 +16,12 @@ module.exports.home = async (req, res) => {
   } else {
     res.render("user/index", { products, login: false });
   }
-};
-module.exports.renderRegister = (req, res) => {
+});
+const renderRegister = (req, res) => {
   res.render("user/signup");
 };
 
-module.exports.register = async (req, res, next) => {
+const register = asyncHandler(async (req, res, next) => {
   try {
     const { phone, email, username, password } = req.body;
     const user = new User({ email, username, phone });
@@ -34,19 +35,19 @@ module.exports.register = async (req, res, next) => {
     req.flash("error", e.message);
     res.redirect("/signup");
   }
-};
-module.exports.renderLogin = (req, res) => {
+});
+const renderLogin = (req, res) => {
   res.render("user/login");
 };
 
-module.exports.login = (req, res) => {
+const login = (req, res) => {
   req.flash("success", "welcome back!");
   const redirectUrl = req.session.returnTo || "/";
   delete req.session.returnTo;
   res.redirect(redirectUrl);
 };
 
-module.exports.logout = (req, res) => {
+const logout = (req, res) => {
   // req.logout();
   req.session.destroy();
   // req.flash('success', "Goodbye!");
@@ -54,7 +55,7 @@ module.exports.logout = (req, res) => {
 };
 //profile page
 
-module.exports.profile = async (req, res) => {
+const profile = asyncHandler(async (req, res) => {
   let userId = req.user._id;
   let user = req.user;
 
@@ -72,13 +73,13 @@ module.exports.profile = async (req, res) => {
   }
 
   res.render("user/profile", { address, user, login: true, home: false });
-};
+});
 // add address
 
-module.exports.addAddress = async (req, res) => {
+const addAddress = async (req, res) => {
   res.render("user/addAddress", { login: true });
 };
-module.exports.manageAddress = async (req, res) => {
+const manageAddress = asyncHandler(async (req, res) => {
   let userId = req.user._id;
 
   let address = await addressSchema.findOne({ userId: userId });
@@ -92,8 +93,8 @@ module.exports.manageAddress = async (req, res) => {
   }
 
   res.render("user/manageAddress", { address, login: true, index: 1 });
-};
-module.exports.deleteAddress = async (req, res) => {
+});
+const deleteAddress = asyncHandler(async (req, res) => {
   let userId = req.user._id;
   let addressId = req.params.id;
 
@@ -105,8 +106,8 @@ module.exports.deleteAddress = async (req, res) => {
     .then(() => {
       res.redirect("/manageAddress");
     });
-};
-module.exports.newAddress = async (req, res) => {
+});
+const newAddress = asyncHandler(async (req, res) => {
   let userId = req.user._id;
   const { fullName, houseName, city, state, pincode, phone } = req.body;
   let exist = await addressSchema.findOne({ userId: userId });
@@ -138,17 +139,17 @@ module.exports.newAddress = async (req, res) => {
         console.log(err.message);
       });
   }
-};
+});
 
 // single product details page
 
-module.exports.showProductdetails = async (req, res) => {
+const showProductdetails = asyncHandler(async (req, res) => {
   const id = req.params.id;
   const singleProduct = await addProduct.findById({ _id: id });
   res.render("user/productdetail", { singleProduct });
-};
+});
 
-module.exports.shop = async (req, res) => {
+const shop = asyncHandler(async (req, res) => {
   const agecategory = req.query.category;
   const brand = req.query.brand;
   const sort = req.query.sort;
@@ -271,4 +272,20 @@ module.exports.shop = async (req, res) => {
       PreviousPage: page - 1,
     });
   }
+});
+
+module.exports = {
+  home,
+  renderRegister,
+  register,
+  renderLogin,
+  login,
+  logout,
+  profile,
+  newAddress,
+  manageAddress,
+  deleteAddress,
+  showProductdetails,
+  shop,
+  addAddress,
 };
