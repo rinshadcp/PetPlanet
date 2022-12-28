@@ -10,6 +10,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const session = require("express-session");
 const flash = require("connect-flash");
+const methodOverride = require("method-override");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user/userModel");
@@ -24,6 +25,7 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(cors());
+app.use(methodOverride("_method"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "public")));
@@ -78,6 +80,10 @@ app.use("/admin", adminRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
+
+app.get("*", (req, res) => {
+  app.render(error / error);
+});
 
 // start server
 const PORT = process.env.PORT || 3333;

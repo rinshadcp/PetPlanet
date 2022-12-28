@@ -44,7 +44,7 @@
 
               <td>
                 <form
-                  action="/admin/editProductForm/<%= x._id %>"
+                  action="/admin/editProduct/<%= x._id %>?_method=PUT"
                   method="post"
                   enctype="multipart/form-data"
                 >
@@ -58,7 +58,7 @@
                 </form>
                 <% if( x.status == "listed") { %>
                 <form
-                  action="/admin/unListProduct/<%= x._id %>"
+                  action="/admin/unListProduct/<%= x._id %>?_method=PATCH"
                   method="post"
                   enctype="multipart/form-data"
                 >
@@ -72,7 +72,7 @@
                 </form>
                 <% } else { %>
                 <form
-                  action="/admin/listProduct/<%= x._id %>"
+                  action="/admin/listProduct/<%= x._id %>?_method=PATCH"
                   method="post"
                   enctype="multipart/form-data"
                 >
