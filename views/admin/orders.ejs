@@ -1,4 +1,4 @@
-<%- include('./partials/adminHeader.ejs') -%>
+<%- include('./partials/adminHeader.ejs') %>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
 
     <div class="container  " style="margin-bottom: 100px;">
@@ -45,7 +45,7 @@
                         
 
                         <div style="width: 20%;  ">
-                            <p ><%= order.userId.name  %>  </p>
+                            <p ><%= order.userId.username %>  </p>
                         </div>
 
                         <div style="width: 20%;">
@@ -199,26 +199,7 @@
             <% }) %>
             <% }) %>
 
-            <div>
-
-              <section class="d-flex justify-content-center mt-2">
-                  <% if(hasPreviousPage){ %>
-                    <a style="text-decoration: none;padding: .5rem; margin:0 1rem; color:rgb(223, 54, 54)" class="text-center"
-                      href="/admin/orders?page=<%= PreviousPage %>"><i class="fa-solid fa-chevron-left"
-                        aria-hidden="true"></i></a>
-                    <% } %>
-                      <a style="text-decoration: none;padding: .5rem; margin:0 1rem; color:black; border: 1px solid black;"
-                        href="/admin/orders?page=<%= page %>">
-                        <%= page %>
-                      </a>
-                      <% if(hasNextPage) { %>
-                        <a style="text-decoration: none;padding: .5rem; margin:0 1rem; color:black;"
-                          href="/admin/orders?page=<%=  page+1 %>"><i class="fa-solid fa-chevron-right"
-                            aria-hidden="true"></i></a>
-                        <% } %>
-                  </section>
-  
-          </div>
+           
         
             <div>
     
@@ -283,4 +264,4 @@
         });
     </script>
     
-    <%- include('./partials/adminFooter.ejs') -%>
+    <%- include('./partials/adminFooter.ejs') %>

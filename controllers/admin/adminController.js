@@ -443,32 +443,32 @@ module.exports = {
   },
   //orders page
 
-  orders: async (req, res) => {
+  orders: asyncHandler(async (req, res) => {
     try {
-      const page = parseInt(req.query.page) || 1;
-      const items_per_page = 8;
+      // const page = parseInt(req.query.page) || 1;
+      // const items_per_page = 8;
       const totalproducts = await orderSchema.find().countDocuments();
       const orders = await orderSchema
         .find({})
         .populate("products.productId")
-        .populate("userId")
-        .sort({ date: -1 })
-        .skip((page - 1) * items_per_page)
-        .limit(items_per_page);
+        .populate("userId");
+      // .sort({ date: -1 })
+      // .skip((page - 1) * items_per_page)
+      // .limit(items_per_page);
 
       res.render("admin/orders", {
         orders,
         moment,
         index: 1,
-        page,
-        hasNextPage: items_per_page * page < totalproducts,
-        hasPreviousPage: page > 1,
-        PreviousPage: page - 1,
+        // page,
+        // hasNextPage: items_per_page * page < totalproducts,
+        // hasPreviousPage: page > 1,
+        // PreviousPage: page - 1,
       });
     } catch {
       res.render("error");
     }
-  },
+  }),
   //invoice
 
   invoice: async (req, res) => {
