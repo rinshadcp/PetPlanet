@@ -1,0 +1,146 @@
+<%- include('./partials/adminHeader.ejs')  %> 
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+      integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+
+  <body>
+    <div class="d-flex m-5 justify-content-center align-items-center row">
+      <div class="d-flex justify-content-end">
+        <button
+          id="download-button"
+          type="button"
+          class="btn btn-outline-info btn-icon-text"
+        >
+          Print/Download
+          <i class="ti-printer btn-icon-append"></i>
+        </button>
+      </div>
+      <div id="invoice" class="col-6 p-5 card">
+        <div class="row">
+          <img
+            class=""
+            src="/images/Untitled__1_-removebg-preview.png"
+            style="width: 11rem; object-fit: cover"
+            alt=""
+          />
+        </div>
+        <div class="my-4 row">
+          <div class="fs-0 col-6">
+            <p class="fst-italic">
+              Digitally Signed by PETPLANET PRIVATE LIMITED to Date:
+              2022.01.15 20:30:07 UTCReason: Invoic
+            </p>
+          </div>
+
+          <div class="col text-end">
+            <p>Tax Invoice/Bill of Supply/Cash Memo(Original for Recipient)</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <h5>Sold by:</h5>
+            <P>
+              Gadsto India Private Limited *Building No. CCU1, Mouza,
+              Amraberia,Phase 2:ESR Warehousing Pvt Ltd, Vill : Amraberia,
+              Parudur Gram Panchayet, Pattambi, Dist.Palakkad , KERALA, 711303
+              IN</P
+            >
+          </div>
+          <div class="col text-end">
+            <h5>Billing Address :</h5>
+            <p>Nihal C , Areekode , Malappuram pin:673639</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            <h5>Shipping Address :</h5>
+          </div>
+          <div class="pt-5 col-6 text-end">
+            <p>
+              GST Registration No:19AAQCS4259Q1Z7 <br />
+              Order ID: <%= order._id %> <br />
+              Order Date: <%= moment(order.date).format('LL') %>
+            </p>
+          </div>
+        </div>
+        <div class="row mt-2 p-2">
+          <div class="col-2">SL NO:</div>
+          <div class="col-4">Product Name</div>
+          <div class="col-2">Price</div>
+          <div class="col-2">Quantity</div>
+          <div class="col-2">Subtotal</div>
+        </div>
+        <hr />
+
+        <% products.forEach((pro,count)=>{ %>
+
+        <div class="row mt-2 p-2">
+          <div class="col-2"><%=count+=1 %></div>
+          <div class="col-4 font-monospace"><%= pro.productId.name %></div>
+          <div class="col-2"><%= pro.productId.price %></div>
+          <div class="col-2"><%= pro.quantity %></div>
+          <div class="col-2"><%= pro.total %></div>
+        </div>
+
+        <% }) %>
+        <hr />
+        <div class="row d-flex justify-content-end me-3">
+          <div class="pb-3 col-5">
+            <div class="row">
+              <div class="col-8">
+                Discount <br />
+                Delivery Charge
+              </div>
+              <div class="text-end col-4">
+                <%= order.discount %> <br />
+                FREE
+              </div>
+            </div>
+            <hr />
+
+            <div class="row">
+              <div class="fw-bold col-8">Total Price</div>
+              <div class="text-end fw-bold col-4"><%= order.total %></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const button = document.getElementById("download-button");
+      function generatePDF() {
+        const opt = {
+          margin: 1,
+          filename: "invoice.pdf",
+          image: { type: "jpeg", quality: 0.98 },
+          html2canvas: { scale: 2 },
+          jsPDF: { format: "A4" },
+        };
+        // Choose the element that your content will be rendered to.
+        const element = document.getElementById("invoice");
+        // Choose the element and save the PDF for your user.
+        html2pdf().set(opt).from(element).save();
+      }
+      button.addEventListener("click", generatePDF);
+    </script>
+  </body>
+</html>

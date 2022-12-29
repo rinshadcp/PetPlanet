@@ -1,0 +1,58 @@
+<%- include ('./partials/adminHeader.ejs')  %> 
+  </head>
+
+  <div class="card mb-5 m-auto mt-5" style="height: 350px; width: 700px">
+    <div class="card-body">
+      <form
+        action="/admin/subCategoryAdd/"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <div class="mb-3">
+          <div class="form-group">
+            <label class="form-label" for="basic-default-fullname"
+              >Category</label
+            >
+            <select name="category" class="form-control">
+              <% category.forEach(function(y) { %>
+
+              <option value="<%= y._id %>"><%= y.category %></option>
+
+              <% }) %>
+            </select>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="basic-default-company"
+            >Sub Category</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="subCategory"
+            id="basic-default-company"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="image">Image</label>
+          <div class="custom-file">
+            <input
+              type="file"
+              class="custom-file-input"
+              name="image"
+              required
+            />
+            <label class="custom-file-label" for="customFile"
+              >Choose file</label
+            >
+          </div>
+        </div>
+
+        <div class="mt-3">
+          <button type="submit" class="btn btn-primary">Send</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</html>

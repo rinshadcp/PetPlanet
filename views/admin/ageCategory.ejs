@@ -1,0 +1,56 @@
+<%- include('./partials/adminHeader.ejs') %>
+
+<div class="container-fluid pt-4 px-4">
+  <div class="row g-4">
+    <div class="col-sm-12 col-xl-12">
+      <div class="bg-secondary rounded h-100 p-4">
+        <h6 class="mb-4">Sub Category</h6>
+        <form action="/admin/addAge" method="post">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Category</label>
+            <input
+              type="text"
+              name="age"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="col-sm-12 col-xl-12">
+      <div class="bg-secondary rounded h-100 p-4">
+        <h6 class="mb-4">Sub Categories</h6>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Type</th>
+              <th scope="col">Options</th>
+              <!-- <th scope="col">Email</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <% ageCategory.forEach((age)=>{ %>
+
+            <tr>
+              <th scope="row"><%= index++ %></th>
+              <td><%= age.age %></td>
+              <td>
+                <form action="/admin/deleteAge/<%= age._id %>" method="post">
+                  <button type="submit" class="btn btn-primary">Delete</button>
+                </form>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('./partials/adminFooter.ejs') %>

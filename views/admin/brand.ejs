@@ -1,0 +1,31 @@
+<%- include ('./partials/adminHeader.ejs')  %> 
+  </head>
+
+  <div class="card mb-5 m-auto mt-5" style="height: 180px; width: 700px">
+    <div class="card-body">
+      
+      <form
+        action="/admin/brand"
+        method="post"
+      >
+      
+      <div class="mb-3">
+        <label class="form-label" for="basic-default-company"
+          >Name</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          name="brand"
+          id="basic-default-company"
+          required
+        />
+      </div>
+        <div class="mb-5 mx-4">
+          <button type="submit" class="btn btn-primary">Send</button>
+        </div>
+      </form>
+      
+    </div>
+  </div>
+</html>

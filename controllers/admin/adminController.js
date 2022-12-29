@@ -7,7 +7,9 @@ const userSchema = require("../../models/user/userModel");
 const couponSchema = require("../../models/admin/couponSchema");
 const orderSchema = require("../../models/user/orderSchema");
 const bannerModel = require("../../models/admin/bannerModel");
-
+const brandSchema = require("../../models/admin/brandModel");
+const categorySchema = require("../../models/admin/categorySchema");
+const subCategorySchema = require("../../models/admin/subCategorySchema");
 const animalCategorySchema = require("../../models/admin/animalCategorySchema");
 const ageCategorySchema = require("../../models/admin/ageCategorySchema");
 
@@ -99,7 +101,7 @@ module.exports = {
   agePage: async (req, res) => {
     let ageCategory = await ageCategorySchema.find({});
 
-    res.render("admin/Category", { ageCategory, index: 1 });
+    res.render("admin/ageCategory", { ageCategory, index: 1 });
   },
   // NEW AGE
   addAge: (req, res) => {
@@ -126,20 +128,35 @@ module.exports = {
   //add product page
   addproductpage: asyncHandler(async (req, res) => {
     try {
-      // if (req.session.adminLogin) {
       const animal = await animalCategorySchema.find();
       const age = await ageCategorySchema.find();
-
-      res.render("admin/addProduct", { animal, age }); //admin: req.session.admin })
+      let category = await categorySchema.find().populate("category");
+      let subCategory = await subCategorySchema.find();
+      let brand = await brandSchema.find();
+      res.render("admin/addProduct", {
+        animal,
+        age,
+        category,
+        subCategory,
+        brand,
+      });
     } catch (err) {
-      // }
       next(err);
     }
   }),
   //add products
   addproduct: asyncHandler(async (req, res) => {
     try {
-      const { animal, age, name, description, price } = req.body;
+      const {
+        animal,
+        age,
+        category,
+        subCategory,
+        brand,
+        name,
+        description,
+        price,
+      } = req.body;
 
       const image = req.files;
       image.forEach((img) => {});
@@ -151,6 +168,9 @@ module.exports = {
       const newProduct = addProduct({
         animal,
         age,
+        category,
+        subCategory,
+        brand,
         name,
         description,
         price,
@@ -240,10 +260,16 @@ module.exports = {
       const singleProduct = await addProduct.findOne({ _id: id });
       let age = await ageCategorySchema.find();
       let animal = await animalCategorySchema.find();
+      let category = await categorySchema.find().populate("category");
+      let subCategory = await subCategorySchema.find();
+      let brand = await brandSchema.find();
       res.render("/admin/editProductForm", {
         singleProduct,
         age,
         animal,
+        category,
+        subCategory,
+        brand,
       });
     } catch {
       res.render("error");
@@ -261,7 +287,16 @@ module.exports = {
       const productimages =
         image != null ? image.map((img) => img.filename) : null;
       console.log(productimages);
-      const { age, name, animal, description, price } = req.body;
+      const {
+        age,
+        name,
+        animal,
+        brand,
+        category,
+        subCategory,
+        description,
+        price,
+      } = req.body;
 
       await addProduct
         .updateOne(
@@ -269,7 +304,9 @@ module.exports = {
           {
             $set: {
               age,
-
+              brand,
+              category,
+              subCategory,
               name,
               animal,
               description,

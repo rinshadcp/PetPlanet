@@ -1,0 +1,79 @@
+<%- include('./partials/adminHeader.ejs') %>
+
+  </head>
+
+  <div class="card mb-5 m-auto mt-5" style="height: 400px; width: 700px">
+    <div class="card-body">
+
+      
+        <form action="/admin/deleteCategory/<%= singleCategory._id %>" method="post" enctype="multipart/form-data"> 
+       <button type="submit" class="btn btn-danger " style="margin-left: 480px;">Delete Category</button>
+     </form>
+     
+      
+      <form action="/admin/updateCategory/<%= singleCategory._id %> " method="post" enctype="multipart/form-data" >
+       
+        
+        <div class="mb-3">
+          <label class="form-label"  for="basic-default-fullname"
+            >Category</label
+          >
+          <select class="form-control" name="category">
+            <% category.forEach(function(x) { %>
+            <option value="<%= x._id %>"><%= x.category%></option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="basic-default-company"
+          >Sub Category</label
+          >
+          
+          <input
+            type="text"
+            class="form-control"
+            placeholder=""
+            value="<%= singleCategory.subCategory %>"
+            name="subCategory"
+            id="basic-default-company"
+            required
+          />
+          
+        </div>
+        
+        <div class="mb-3">
+          <label class="form-label" for="basic-default-company">Image</label>
+          <input
+            type="file"
+            name="image"
+            
+            
+            class="form-control"
+            id="inputGroupFile04"
+            
+            aria-describedby="inputGroupFileAddon04"
+            aria-label="Upload"
+            required
+            />
+          </div>
+          <!-- <div class="row"> -->
+            <!-- <div class="col-md-2 mt-3"> -->
+              <!-- <form action="/admin/updateCategory" method="post" enctype="multipart/form-data">  -->
+                <button type="submit" class="btn btn-primary">Update</button>
+                <!-- </form> -->
+              <!-- </div> -->
+              
+              
+            <!-- </div> -->
+            
+            
+          </form>
+      
+
+      
+      
+        
+      </div>
+    </div>
+  </div>
+</html>
