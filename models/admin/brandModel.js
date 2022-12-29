@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
-const brand = new mongoose.Schema({
+const brandModels = new mongoose.Schema({
   brand: {
     type: String,
     required: true,
   },
 });
 
-module.exports = brandSchema = mongoose.model("brand", brand);
+module.exports = brandSchema = mongoose.model("brand", brandModels);

@@ -44,7 +44,7 @@ const storage = multer.diskStorage({
     console.log(file.fieldname + Date.now() + path.extname(file.originalname));
   },
 });
-// const upload = multer({ storage: storage})
+const upload = multer({ storage: storage });
 app.use(
   multer({ dest: "public/images/petproduct/", storage: storage }).array(
     "image",

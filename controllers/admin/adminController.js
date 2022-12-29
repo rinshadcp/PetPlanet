@@ -125,6 +125,233 @@ module.exports = {
     }
   },
 
+  //brands
+
+  brand: async (req, res) => {
+    let Brand = await brandSchema.find({});
+
+    res.render("admin/brand", { Brand, index: 1 });
+  },
+
+  //add a new brand
+  addBrand: (req, res) => {
+    try {
+      const brand = req.body.brand;
+      const newBrand = brandSchema({ brand });
+      newBrand.save().then(res.redirect("/admin/brand"));
+    } catch (err) {
+      next(err);
+    }
+  },
+  // DELETE Age
+  deleteBrand: async (req, res) => {
+    try {
+      let id = req.params.id;
+      // console.log("delete")
+      await brandSchema.findByIdAndDelete({ _id: id });
+      res.redirect("/admin/brand");
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  //show categroy section
+
+  category: async (req, res) => {
+    let subCategory = await subCategorySchema.find({}).populate("category_id");
+
+    res.render("admin/category", { subCategory });
+  },
+
+  //adding new category
+
+  categoryAdd: async (req, res) => {
+    try {
+      const check_cat = await categorySchema.find({
+        category: req.body.category,
+      });
+      if (check_cat.length > 0) {
+        let checking = false;
+        for (let i = 0; i < check_cat.length; i++) {
+          if (
+            check_cat[i]["category"].toLowerCase() ===
+            req.body.category.toLowerCase()
+          ) {
+            checking = true;
+            break;
+          }
+        }
+        if (checking === false) {
+          const category = new categorySchema({
+            category: req.body.category,
+          });
+          const sub_cat_data = await category.save().then(() => {
+            res.redirect("/admin/category");
+          });
+        } else {
+          res.redirect("/admin/category");
+        }
+      } else {
+        const category = new categorySchema({
+          category: req.body.category,
+        });
+        const sub_cat_data = await category.save().then(() => {
+          res.redirect("/admin/category");
+        });
+      }
+    } catch (error) {
+      res.render("error");
+    }
+  },
+
+  //add main categroy
+
+  addMainCategory: (req, res) => {
+    res.render("admin/mainCategory");
+  },
+
+  //adding sub category
+
+  subCategoryAdd: async (req, res) => {
+    try {
+      const { category, subCategory } = req.body;
+      // if (req.file) {
+      // await ProductModel.findByIdAndUpdate(
+      //     { _id: req.params.id }, { $set: { image: image.filename } }
+      // );
+      const image = req.files;
+      image.forEach((img) => {});
+      console.log(image);
+      const productimages =
+        image != null ? image.map((img) => img.filename) : null;
+      console.log(categoryimages);
+
+      await ProductModel.findByIdAndUpdate(
+        { _id: req.params.id },
+        { $set: { image: productimages } }
+      );
+      // }
+      const check_sub = await subCategorySchema.find({
+        category_id: category,
+      });
+      if (check_sub.length > 0) {
+        let checking = false;
+        for (let i = 0; i < check_sub.length; i++) {
+          if (
+            check_sub[i]["subCategory"].toLowerCase() ===
+            req.body.subCategory.toLowerCase()
+          ) {
+            checking = true;
+            break;
+          }
+        }
+        if (checking === false) {
+          const subCategory = new subCategorySchema({
+            category_id: category,
+            subCategory: req.body.subCategory,
+            imageUrl: categoryimages,
+          });
+          const sub_cat_data = await subCategory.save().then(() => {
+            res.redirect("/admin/category");
+          });
+        } else {
+          res.redirect("/admin/category");
+        }
+      } else {
+        const subCategory = new subCategorySchema({
+          category_id: category,
+          subCategory: req.body.subCategory,
+          imageUrl: productimages,
+        });
+        const sub_cat_data = await subCategory.save().then(() => {
+          res.redirect("/admin/category");
+        });
+      }
+    } catch (error) {
+      res.render("error");
+    }
+  },
+
+  //edit category form
+
+  editCategory: async (req, res, next) => {
+    try {
+      const id = req.params.id;
+      const imageUrl = req.files;
+      console.log(imageUrl);
+      let category = await categorySchema.find();
+      const singleCategory = await subCategorySchema
+        .findOne({ _id: id })
+        .populate("category_id");
+
+      res.render("admin/editCategory", { singleCategory, category });
+    } catch {
+      res.render("error");
+    }
+  },
+
+  //categroy form
+
+  categoryForm: async (req, res) => {
+    let category = await categorySchema.find();
+    res.render("admin/categoryForm", { category });
+  },
+
+  //update category
+
+  updateCategory: async (req, res) => {
+    try {
+      const id = req.params.id;
+      if (req.file) {
+        // await ProductModel.findByIdAndUpdate(
+        //     { _id: req.params.id }, { $set: { image: image.filename } }
+        // );
+        const image = req.files;
+        image.forEach((img) => {});
+        console.log(image);
+        const categortimages =
+          image != null ? image.map((img) => img.filename) : null;
+        console.log(productimages);
+
+        await ProductModel.findByIdAndUpdate(
+          { _id: req.params.id },
+          { $set: { image: productimages } }
+        );
+      }
+      const { category, subCategory } = req.body;
+
+      await subCategorySchema
+        .updateOne(
+          { _id: id },
+          {
+            $set: {
+              category_id: category,
+              subCategory: subCategory,
+              imageUrl: productimages,
+            },
+          }
+        )
+
+        .then(() => {
+          res.redirect("/admin/category");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch {
+      res.render("error");
+    }
+  },
+
+  //delete category
+
+  deleteCategory: async (req, res, next) => {
+    let id = req.params.id;
+    await subCategorySchema.findByIdAndRemove({ _id: id }).then(() => {
+      res.redirect("/admin/category");
+    });
+  },
+
   //add product page
   addproductpage: asyncHandler(async (req, res) => {
     try {
@@ -281,12 +508,19 @@ module.exports = {
   editProduct: asyncHandler(async (req, res) => {
     try {
       const id = req.params.id;
-      const image = req.files;
-      image.forEach((img) => {});
-      console.log(image);
-      const productimages =
-        image != null ? image.map((img) => img.filename) : null;
-      console.log(productimages);
+      if (req.file) {
+        // await ProductModel.findByIdAndUpdate(
+        //     { _id: req.params.id }, { $set: { image: image.filename } }
+        // );
+        const image = req.files;
+        image.forEach((img) => {});
+        console.log(image);
+        const productimages =
+          image != null ? image.map((img) => img.filename) : null;
+        console.log(productimages);
+
+        // await ProductModel.findByIdAndUpdate({ _id: req.params.id }, { $set: { image: productimages } })
+      }
       const {
         age,
         name,

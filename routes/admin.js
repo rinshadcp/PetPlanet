@@ -24,6 +24,18 @@ router.post("/deleteAnimal/:id", controller.deleteAnimal);
 router.post("/addAge", controller.addAge);
 router.post("/deleteAge/:id", controller.deleteAge);
 router.post("/addproduct", controller.addproduct);
+router.route("/brand").get(controller.brand).post(controller.addBrand);
+router.post("/deleteBrand/:id", controller.deleteBrand);
+
+//Category Management
+router.get("/category", controller.category);
+router.post("/categoryAdd", controller.categoryAdd);
+router.get("/categoryForm", controller.categoryForm);
+router.post("/deleteCategory/:id", controller.deleteCategory);
+router.post("/updateCategory/:id", controller.updateCategory);
+router.get("/editCategory/:id", controller.editCategory);
+router.post("/subCategoryAdd", controller.subCategoryAdd);
+router.get("/addMainCategory", controller.addMainCategory);
 
 //banner management
 router.post("/deleteBanner/:id", controller.deleteBanner);
