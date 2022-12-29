@@ -1,0 +1,74 @@
+<%- include('./partials/adminHeader.ejs') -%>
+
+<!-- / Navbar -->
+
+<!-- Content wrapper -->
+<div class="content-wrapper">
+  <!-- Content -->
+
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4">
+      <span class="text-muted fw-light">Users/</span> Show Coupons
+    </h4>
+
+    <!-- Basic Layout -->
+    <div class="card">
+      <div class="table-responsive text-nowrap">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Coupon Code</th>
+              <th>Discount Rate</th>
+
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody class="table-border-bottom-0">
+            <% coupon.forEach(function(x) { %>
+            <tr>
+              <td>
+                <strong><%= x.name %></strong>
+              </td>
+              <td><%= x.code %></td>
+
+              <td><%= x.discount %></td>
+              <td>
+                <form
+                  action="/admin/editCoupon/<%= x._id %>"
+                  method="post"
+                  enctype="multipart/form-data"
+                >
+                  <button
+                    type="submit"
+                    class="btn btn-secondary"
+                    style="width: 100px; height: 35px; margin-top: 2px"
+                  >
+                    Edit
+                  </button>
+                </form>
+                <form
+                  action="/admin/deleteCoupon/<%= x._id %>"
+                  method="post"
+                  enctype="multipart/form-data"
+                >
+                  <button
+                    type="submit"
+                    class="btn btn-danger"
+                    style="width: 100px; height: 35px; margin-top: 2px"
+                  >
+                    Delete
+                  </button>
+                </form>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- / Content -->
+  </div>
+</div>
+
+<%- include('./partials/adminFooter.ejs') -%>
