@@ -45,7 +45,12 @@ const storage = multer.diskStorage({
   },
 });
 // const upload = multer({ storage: storage})
-app.use(multer({ storage: storage }).array("image", 10));
+app.use(
+  multer({ dest: "public/images/petproduct/", storage: storage }).array(
+    "image",
+    10
+  )
+);
 
 const secret = process.env.SECRET || "thisshouldbeabettersecret!";
 const sessionConfig = {

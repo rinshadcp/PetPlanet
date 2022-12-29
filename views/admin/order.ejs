@@ -1,0 +1,286 @@
+<%- include('./partials/adminHeader.ejs') -%>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+
+    <div class="container  " style="margin-bottom: 100px;">
+        <div class="main-body  ">
+            <br> <br>
+            <h4 class="fw-bold py-3 mb-4">
+              <span class="text-muted fw-light">Orders/</span> Show orders
+            </h4>
+    
+    
+    
+            </div>
+            <div class="card">
+                <div class="card-body d-flex  ">
+                    
+                    <div style="width:100%; ">
+                        <ul  class="d-flex justify-content-around">
+                            <li style="list-style-type: none; margin-right: 35px;">User</li>
+                            <li style="list-style-type: none;">Product</li>
+                            <li style="list-style-type: none;">Quantity</li>
+    
+                            <li style="list-style-type: none;">
+                                Price</li>
+                            <li style="list-style-type: none;">Ordered Date</li>
+                            <li style="list-style-type: none;">Payment Method</li>
+                            <li style="list-style-type: none;">Order Status</li>
+
+                            <li style="list-style-type: none;">Payment Status</li>
+                            <li style="list-style-type: none;">Bill</li>
+    
+                        </ul>
+                    </div>
+                </div>
+                <div>
+    
+                </div>
+            </div>
+            <% orders.forEach(function(order){ %>
+                <% order.products.forEach(function(x){ %>
+            <div class="card">
+                <div class="card-body d-flex  justify-content-around  align-items-around">
+                    
+                    <div style="width:100%;" class="d-flex ">
+                        
+
+                        <div style="width: 20%;  ">
+                            <p ><%= order.userId.name  %>  </p>
+                        </div>
+
+                        <div style="width: 20%;">
+                            <p id="Status_i"  class="OrderStatus text-center text-success">
+                                <%= x.productId.name  %>  </p>
+                        </div>
+                            
+                            
+                            <div style="width: 20%;">
+                                <p id="Status_i" class="OrderStatus text-center text-success">
+                                    <%= x.quantity  %> </p>
+                            </div>
+                           
+                            <div class="d-flex justify-content-center" style="width: 20%;">
+                                <span  class="text-center "><%= x.productId.price %></span>
+                            </div>
+                            
+                            <div class="d-flex justify-content-center" style="width: 20%; ">
+                                <%= moment(order.date).format("LL")  %>
+                            </div>
+                            <div class="d-flex justify-content-center" style="width: 20%;">
+    
+                                <span  class="text-center "><%= order.paymentMethod %></span>
+                            </div>
+                            <div class="d-flex justify-content-center" style="width: 20%;">
+    
+                                
+                                    <% if(x.orderStatus == "Order Placed") { %>
+                                    
+                                      <button
+                                        type="button"
+                                        onclick="changeStatus('<%= x.orderStatus %>','<%= order._id %>','<%= x.productId._id%>')"
+                                        class="btn btn-secondary btn-fw"
+                                        style="height: 50px;width: 130px;"
+                                        
+                                    >
+                                    Order confirm
+                                    </button>
+                                    <% } else if(x.orderStatus == "Packed"){ %>
+                                      <button
+                                        type="button"
+                                        onclick="changeStatus('<%= x.orderStatus %>','<%= order._id %>','<%= x.productId._id%>')"
+                                        class="btn btn-secondary btn-fw"
+                                        style="height: 50px;width: 130px;"
+                                    >
+                                    Packed
+                                    </button>
+                                    <% } else if(x.orderStatus == "Shipped"){ %>
+                                      <button
+                                        type="button"
+                                        onclick="changeStatus('<%= x.orderStatus %>','<%= order._id %>','<%= x.productId._id%>')"
+                                        class="btn btn-secondary btn-fw"
+                                        style="height: 50px;width: 130px;"
+                                    >
+                                    Shipped
+                                    </button>
+                                    <% } else if(x.orderStatus == "Delivered"){ %>
+                                      <button
+                                        type="button"
+                                        onclick="changeStatus('<%= x.orderStatus %>','<%= order._id %>','<%= x.productId._id%>')"
+                                        class="btn btn-secondary btn-fw "
+                                        style="height: 50px;width: 130px;" disabled
+                                    >
+                                    Delivered
+                                    </button>
+                                    <% } else { %>
+                                      <button
+                                        type="button"
+                                        onclick="changeStatus('<%= x.orderStatus %>','<%= order._id %>','<%= x.productId._id%>')"
+                                        class="btn btn-danger btn-fw"
+                                        style="height: 50px;width: 130px;"
+                                    >
+                                    Cancelled
+                                    </button>
+                                    <% } %> 
+
+                            </div>
+                            <div class="d-flex justify-content-center" style="width: 20%;">
+
+                                <span  class="text-center "><%= order.paymentStatus %></span>
+                            </div>
+                            <div class="d-flex justify-content-center" style="width: 20%;">
+                              <form action="/admin/invoice/<%= order._id %>/<%= x.productId._id%>" method="post" enctype="multipart/form-data">
+                                <% if(x.orderStatus == "Cancelled") { %>
+                                  <h6>No bill</h6>
+                                  <% } else if(x.orderStatus == "Cancelled") { %> 
+                              <button
+                              type="submit"
+                              
+                              class="btn btn-secondary btn-fw"
+                              style="height: 40px;width: 100px;"
+                          > 
+                          
+                          Print
+                          </button >
+                          <% } else if(x.orderStatus == "Order Placed") { %>
+                            <button
+                              type="submit"
+                              
+                              class="btn btn-secondary btn-fw"
+                              style="height: 40px;width: 100px;"
+                              disabled
+                          > 
+                          
+                          Print
+                          </button >
+                          <% } else if(x.orderStatus == "Packed") { %>
+                            <button
+                              type="submit"
+                              
+                              class="btn btn-secondary btn-fw"
+                              style="height: 40px;width: 100px;"
+                              disabled
+                          > 
+                          
+                          Print
+                          </button >
+                            <% } else if(x.orderStatus == "Shipped") { %>
+                              <button
+                              type="submit"
+                              
+                              class="btn btn-secondary btn-fw"
+                              style="height: 40px;width: 100px;"
+                              disabled
+                          > 
+                          
+                          Print
+                          </button >
+                              <% } else {  %>
+                                <button
+                                type="submit"
+                                
+                                class="btn btn-secondary btn-fw"
+                                style="height: 40px;width: 100px;"
+                            > 
+                            
+                            Print
+                            </button >
+                                <% } %>    
+                          
+                        </form>
+                            </div>
+                           
+                    </div>
+                    
+    
+    
+                    </ul>
+                </div>
+            </div>
+            <% }) %>
+            <% }) %>
+
+            <div>
+
+              <section class="d-flex justify-content-center mt-2">
+                  <% if(hasPreviousPage){ %>
+                    <a style="text-decoration: none;padding: .5rem; margin:0 1rem; color:rgb(223, 54, 54)" class="text-center"
+                      href="/admin/orders?page=<%= PreviousPage %>"><i class="fa-solid fa-chevron-left"
+                        aria-hidden="true"></i></a>
+                    <% } %>
+                      <a style="text-decoration: none;padding: .5rem; margin:0 1rem; color:black; border: 1px solid black;"
+                        href="/admin/orders?page=<%= page %>">
+                        <%= page %>
+                      </a>
+                      <% if(hasNextPage) { %>
+                        <a style="text-decoration: none;padding: .5rem; margin:0 1rem; color:black;"
+                          href="/admin/orders?page=<%=  page+1 %>"><i class="fa-solid fa-chevron-right"
+                            aria-hidden="true"></i></a>
+                        <% } %>
+                  </section>
+  
+          </div>
+        
+            <div>
+    
+            </div>
+        </div>
+      
+    </div>
+    
+    </div>
+    </div>
+    </div>
+    
+    <script>
+      
+      function changeStatus(status, orderId, productId){
+          if(confirm("Are You sure about this operation?")){
+            $.ajax({
+                url:"/admin/changeStatus",
+                data:{
+                    status,
+                    orderId,
+                    productId
+                },
+                method:"post",
+                success:(response)=>{
+                    if(response.success){
+                        window.location.reload()
+                    }
+                }
+            })
+          }
+        }
+
+        function invoice(orderId, productId){
+            
+            $.ajax({
+                url:"/admin/invoice",
+                data:{
+                    
+                    orderId,
+                    productId
+                },
+                method:"post",
+                success:(response)=>{
+                    if(response.success){
+                      location.href = "/admin/invoicePage"
+                  }
+                }
+            })
+        }
+    
+    </script>
+    
+    <script>
+        $(document).ready(function () {
+    
+            console.log(stat)
+            if (stat == 'Cancelled') {
+    
+                $("p.OrderStatus").addClass("text-danger");
+            }
+        });
+    </script>
+    
+    <%- include('./partials/adminFooter.ejs') -%>

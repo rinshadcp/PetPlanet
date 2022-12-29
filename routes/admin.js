@@ -39,4 +39,9 @@ router.post("/updateCoupon/:id", controller.updateCoupon);
 router.post("/editCoupon/:id", controller.editCoupon);
 router.get("/showCoupon", controller.showCoupon);
 
+//order management
+router.get("/orders", controller.orders);
+router.post("/invoice/:id/:productId", controller.invoice);
+router.post("/changeStatus", controller.changeStatus);
+
 module.exports = router;

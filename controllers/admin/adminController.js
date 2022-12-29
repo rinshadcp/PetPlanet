@@ -255,9 +255,12 @@ module.exports = {
   editProduct: asyncHandler(async (req, res) => {
     try {
       const id = req.params.id;
-
-      const image = req.file;
-
+      const image = req.files;
+      image.forEach((img) => {});
+      console.log(image);
+      const productimages =
+        image != null ? image.map((img) => img.filename) : null;
+      console.log(productimages);
       const { age, name, animal, description, price } = req.body;
 
       await addProduct
@@ -271,7 +274,7 @@ module.exports = {
               animal,
               description,
               price,
-              image: image.path,
+              image: productimages,
             },
           }
         )
@@ -295,19 +298,24 @@ module.exports = {
   addBanner: async (req, res) => {
     try {
       const { title, description } = req.body;
-      const image = req.file;
+      const image = req.files;
+      image.forEach((img) => {});
+      console.log(image);
+      const productimages =
+        image != null ? image.map((img) => img.filename) : null;
 
       await new bannerModel({
         title,
         description,
-        image: image.path,
+        image: productimages,
       })
         .save()
         .then(() => {
-          res.redirect("admin/banner");
+          res.redirect("/admin/banner");
         });
-    } catch {
-      res.render("error");
+    } catch (e) {
+      throw Error(e);
+      // res.render("error");
     }
   },
 
@@ -337,6 +345,8 @@ module.exports = {
       const id = req.params.id;
       const { title, description } = req.body;
       const image = req.file;
+      const productimages =
+        image != null ? image.map((img) => img.filename) : null;
       const banner = await bannerModel.findByIdAndUpdate(
         { _id: id },
         {
@@ -344,7 +354,7 @@ module.exports = {
             title,
             description,
 
-            image: image.path,
+            image: productimages,
           },
         }
       );
@@ -429,6 +439,99 @@ module.exports = {
       res.render("admin/editCoupon", { coupon });
     } catch {
       res.render("error");
+    }
+  },
+  //orders page
+
+  orders: async (req, res) => {
+    try {
+      const page = parseInt(req.query.page) || 1;
+      const items_per_page = 8;
+      const totalproducts = await orderSchema.find().countDocuments();
+      const orders = await orderSchema
+        .find({})
+        .populate("products.productId")
+        .populate("userId")
+        .sort({ date: -1 })
+        .skip((page - 1) * items_per_page)
+        .limit(items_per_page);
+
+      res.render("admin/orders", {
+        orders,
+        moment,
+        index: 1,
+        page,
+        hasNextPage: items_per_page * page < totalproducts,
+        hasPreviousPage: page > 1,
+        PreviousPage: page - 1,
+      });
+    } catch {
+      res.render("error");
+    }
+  },
+  //invoice
+
+  invoice: async (req, res) => {
+    try {
+      let orderId = req.params.id;
+      let productId = req.params.productId;
+
+      let order = await orderSchema
+        .findOne({ _id: orderId })
+        .populate("products.productId")
+        .populate("userId")
+        .populate("address");
+
+      const products = order.products;
+      const address = order.address;
+      res.render("admin/invoice", { order, address, products, moment });
+    } catch {
+      console.log("catchhhhh");
+      res.render("error");
+    }
+  },
+
+  //change order status in order management
+
+  changeStatus: async (req, res) => {
+    try {
+      const { status, orderId, productId } = req.body;
+      if (status == "Order Placed") {
+        await orderSchema.updateOne(
+          { _id: orderId, "products.productId": productId },
+          { $set: { "products.$.orderStatus": "Packed" } }
+        );
+      } else if (status == "Packed") {
+        await orderSchema.updateOne(
+          { _id: orderId, "products.productId": productId },
+          { $set: { "products.$.orderStatus": "Shipped" } }
+        );
+      } else if (status == "Shipped") {
+        await orderSchema.updateOne(
+          { _id: orderId, "products.productId": productId },
+          {
+            $set: {
+              "products.$.orderStatus": "Delivered",
+              "products.$.paymentStatus": "Paid",
+            },
+          },
+          { multi: true }
+        );
+      } else {
+        await orderSchema.updateOne(
+          { _id: orderId, "products.productId": productId },
+          {
+            $set: {
+              "products.$.orderStatus": "Cancelled",
+              "products.$.paymentStatus": "Unpaid",
+            },
+          },
+          { multi: true }
+        );
+      }
+      res.json({ success: "success" });
+    } catch {
+      res.render(error);
     }
   },
 };

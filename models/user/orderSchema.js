@@ -5,7 +5,7 @@ const orderModel = new mongoose.Schema({
   userId: {
     type: ObjectId,
     required: true,
-    ref:"userdata"
+    ref: "User",
   },
   products: [
     {
@@ -15,14 +15,13 @@ const orderModel = new mongoose.Schema({
       paymentStatus: {
         type: String,
         default: "Pending",
-        enum: ["Pending" , "Paid" ,"Unpaid"]
+        enum: ["Pending", "Paid", "Unpaid"],
       },
       orderStatus: {
         type: String,
         default: "Order Placed",
-        enum: ["Order Placed", "Packed",  "Shipped", "Delivered", "Cancelled"],
+        enum: ["Order Placed", "Packed", "Shipped", "Delivered", "Cancelled"],
       },
-
     },
   ],
   total: {
@@ -31,18 +30,18 @@ const orderModel = new mongoose.Schema({
   },
   discount: {
     type: Number,
-    default: 0
+    default: 0,
   },
   address: {
     type: ObjectId,
     required: true,
-    ref:"userAddress"
+    ref: "userAddress",
   },
   paymentMethod: {
     type: String,
     required: true,
   },
- 
+
   date: {
     type: Date,
     default: Date.now(),
