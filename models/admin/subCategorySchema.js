@@ -11,8 +11,8 @@ const subCategorySchema = mongoose.Schema({
     required: true,
   },
 
-  imageUrl: {
-    type: String,
+  image: {
+    type: [String],
     required: true,
   },
 });

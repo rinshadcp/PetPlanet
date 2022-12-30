@@ -215,22 +215,12 @@ module.exports = {
   subCategoryAdd: async (req, res) => {
     try {
       const { category, subCategory } = req.body;
-      // if (req.file) {
-      // await ProductModel.findByIdAndUpdate(
-      //     { _id: req.params.id }, { $set: { image: image.filename } }
-      // );
       const image = req.files;
       image.forEach((img) => {});
       console.log(image);
       const productimages =
         image != null ? image.map((img) => img.filename) : null;
-      console.log(categoryimages);
-
-      await ProductModel.findByIdAndUpdate(
-        { _id: req.params.id },
-        { $set: { image: productimages } }
-      );
-      // }
+      console.log(productimages);
       const check_sub = await subCategorySchema.find({
         category_id: category,
       });
@@ -249,7 +239,7 @@ module.exports = {
           const subCategory = new subCategorySchema({
             category_id: category,
             subCategory: req.body.subCategory,
-            imageUrl: categoryimages,
+            image: productimages,
           });
           const sub_cat_data = await subCategory.save().then(() => {
             res.redirect("/admin/category");
@@ -261,7 +251,7 @@ module.exports = {
         const subCategory = new subCategorySchema({
           category_id: category,
           subCategory: req.body.subCategory,
-          imageUrl: productimages,
+          image: productimages,
         });
         const sub_cat_data = await subCategory.save().then(() => {
           res.redirect("/admin/category");
@@ -277,8 +267,7 @@ module.exports = {
   editCategory: async (req, res, next) => {
     try {
       const id = req.params.id;
-      const imageUrl = req.files;
-      console.log(imageUrl);
+      const image = productimages;
       let category = await categorySchema.find();
       const singleCategory = await subCategorySchema
         .findOne({ _id: id })
@@ -327,7 +316,7 @@ module.exports = {
             $set: {
               category_id: category,
               subCategory: subCategory,
-              imageUrl: productimages,
+              image: productimages,
             },
           }
         )
