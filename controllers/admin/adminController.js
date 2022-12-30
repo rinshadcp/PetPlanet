@@ -415,11 +415,18 @@ module.exports = {
     // const items_per_page = 5;
     // const totalproducts = await ProductModel.find().countDocuments()
     // console.log(totalproducts);
-    const products = await addProduct.find();
+    const animal = await animalCategorySchema.find();
+    const age = await ageCategorySchema.find();
+    const products = await addProduct
+      .find({})
+      .populate("category")
+      .populate("brand");
     // .sort({ date: -1 }).skip((page - 1) * items_per_page).limit(items_per_page)
     console.log(products);
     res.render("admin/viewProduct", {
       products,
+      animal,
+      age,
       index: 1,
     });
     //  admin: req.session.admin, page,

@@ -16,10 +16,34 @@
       </select>
 
       <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Categories</label>
+        <label for="exampleInputEmail1" class="form-label">Age Group</label>
         <select class="form-control" name="age">
           <% age.forEach(function(x) { %>
           <option><%= x.age %></option>
+          <% }) %>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Category</label>
+        <select class="form-control" name="category">
+          <% category.forEach(function(x) { %>
+          <option value="<%= x._id %>"><%= x.category %></option>
+          <% }) %>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Sub Category</label>
+        <select class="form-control" name="subCategory">
+          <% subCategory.forEach(function(x) { %>
+          <option><%= x.subCategory %></option>
+          <% }) %>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Brands</label>
+        <select class="form-control" name="brand">
+          <% brand.forEach(function(x) { %>
+          <option value="<%= x._id %>"><%= x.brand %></option>
           <% }) %>
         </select>
       </div>

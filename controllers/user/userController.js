@@ -1,20 +1,31 @@
 const User = require("../../models/user/userModel");
 const asyncHandler = require("express-async-handler");
 const addressSchema = require("../../models/user/addressSchema");
-const flash = require("connect-flash");
+const nodemailer = require("nodemailer");
+
 const addProduct = require("../../models/admin/addProduct");
+const bannerModel = require("../../models/admin/bannerModel");
+const contactSchema = require("../../models/user/contactSchema");
+const categorySchema = require("../../models/admin/categorySchema");
+const brandSchema = require("../../models/admin/brandModel");
+
 const {
   isLoggedIn,
   checkReturnTo,
 } = require("../../middlewrares/authentication");
 
 const home = asyncHandler(async (req, res) => {
-  const products = await addProduct.find();
+  const products = await addProduct
+    .find({})
+    .populate("brand")
+    .sort({ date: -1 })
+    .limit(12);
+  const banner = await bannerModel.find();
   let user = req.user;
   if (user) {
-    res.render("user/index", { products, user, login: true });
+    res.render("user/index", { products, user, banner, login: true });
   } else {
-    res.render("user/index", { products, login: false });
+    res.render("user/index", { products, banner, login: false });
   }
 });
 const renderRegister = (req, res) => {

@@ -19,7 +19,9 @@
             <tr>
               <th>Name</th>
               <th>Animal</th>
+              <th>Age Group</th>
               <th>Category</th>
+              <th>Brand</th>
               <th>Image</th>
               <th>Price</th>
               <th>Actions</th>
@@ -34,6 +36,8 @@
               </td>
               <td><%= x.animal%></td>
               <td><%= x.age%></td>
+              <td><%= x.category.category%></td>
+              <td><%= x.brand.brand %></td>
               <td>
                 <img
                   src="/images/petproduct/<%= x.image %>"
