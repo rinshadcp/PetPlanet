@@ -1,175 +1,89 @@
-<%- include('./partials/userHeader.ejs') -%>
-
-<% if(list.length==0){ %>
-    <div class="text-center">
-      <a href="/"><img src="/images/emptywishlist.webp" alt="empty-wishlist" style=" height:100vh;"></a>
-    </div>
-    <% }else{ %>
-    <!-- Breadcrumb Begin -->
-    <div class="breadcrumb-option">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb__links">
-                        <a href="/"><i class="fa fa-home"></i> Home</a>
-                        <span>Wishlist</span>
-                    </div>
-                </div>
-            </div>
+<%- include('./partials/userHeader.ejs') %> <% if(list.length==0){ %>
+  <section class="empty-cart page-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="block text-center">
+            <i class="tf-ion-ios-cart-outline"></i>
+              <h2 class="text-center">Your wishlist is currently empty.</h2>
+              <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, sed.</p> -->
+              <a href="/shop" class="btn btn-main mt-20">Return to shop</a>
         </div>
+      </div>
     </div>
-    <!-- Breadcrumb End -->
-
-    <!-- Shop Cart Section Begin -->
-    <section class="shop-cart spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="shop__cart__table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Price</th>
-                                    
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <% list.forEach(function(x){ %>
-                            <tbody>
-                                <tr>
-                                    <td class="cart__product__item">
-                                        <img style="width: 50px;" src="/images/petproduct/<%= x.image[0] %> " alt="">
-                                        <div class="cart__product__item__title">
-                                            <h6><%= x.name %></h6>
-                                            <div class="rating">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="cart__price"><%= x.price %></td>
-                                    <!-- <td class="cart__quantity">
-                                        <div class="pro-qty">
-                                            <input type="text" value="1">
-                                        </div>
-                                    </td> -->
-                                    <!-- <td class="cart__total">$ 300.0</td> -->
-                                    <td class="quantity">
-                                        <div class="col col-lg-12 col-md-12 mt-5 cart-wrap ftco-animate">
-                        
-                                            <p class="text-center"><a href="/moveToCart/<%= x._id %>" class="btn btn-primary py-3 px-4 w-70 h-50">Add to Cart</a></p>
-                                        </div>
-                                        
-                                </td>
-                                
-                                    <td class="cart__close"><a href="/removeWishlistProduct/<%= x._id %>"></a><span class="icon_close"></span></td>
-                                    
-                                </tr>
-                               
-
-                            </tbody>
-                            <% }) %> 
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="cart__btn">
-                        <a href="#">Continue Shopping</a>
-                    </div>
-                </div>
-                <!-- <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="cart__btn update__btn">
-                        <a href="#"><span class="icon_loading"></span> Update cart</a>
-                    </div>
-                </div> -->
-            </div>
-            <div class="row">
-                <!-- <div class="col-lg-6">
-                    <div class="discount__content">
-                        <h6>Discount codes</h6>
-                        <form action="#">
-                            <input type="text" placeholder="Enter your coupon code">
-                            <button type="submit" class="site-btn">Apply</button>
-                        </form>
-                    </div>
-                </div> -->
-                <!-- <div class="col-lg-4 offset-lg-2">
-                    <div class="cart__total__procced">
-                        <h6>Cart total</h6>
-                        <ul>
-                            <li>Subtotal <span>$ 750.0</span></li>
-                            <li>Total <span>$ 750.0</span></li>
-                        </ul>
-                        <a href="#" class="primary-btn">Proceed to checkout</a>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-    </section>
-    <!-- Shop Cart Section End -->
-
-    <!-- Instagram Begin -->
-    <div class="instagram">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-1.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-2.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-3.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-4.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-5.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-6.jpg">
-                        <div class="instagram__text">
-                            <i class="fa fa-instagram"></i>
-                            <a href="#">@ ashion_shop</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  </section>
+<% }else{ %>
+<section class="page-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="content">
+          <h1 class="page-name">Whislist</h1>
+          <ol class="breadcrumb">
+            <li><a href="/">Home</a></li>
+            <li class="active">Whislist</li>
+          </ol>
         </div>
+      </div>
     </div>
-    <!-- Instagram End -->
-    <% } %>
-    
-    <%- include('./partials/userFooter.ejs')  %> 
+  </div>
+</section>
+
+<div class="page-wrapper">
+  <div class="cart shopping">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="block">
+            <div class="product-list">
+              <form method="post">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th class="">Item</th>
+                      <th class="">Item Price</th>
+                      <th class="">Actions</th>
+                    </tr>
+                  </thead>
+                  <% list.forEach(function(x){ %>
+
+                  <tbody>
+                    <tr class="">
+                      <td class="">
+                        <div class="product-info">
+                          <img
+                            width="50px;"
+                            src="/images/petproduct/<%= x.image[0] %>"
+                            alt=""
+                          />
+                          <a href="#!"><%= x.name %></a>
+                          <p><%= x.description %></p>
+                        </div>
+                      </td>
+                      <td class="">₹ <%= x.price %></td>
+
+                      <td class="">
+                        <a
+                          class="product-remove"
+                          href="/removeWishlistProduct/<%= x._id %>"
+                          >Remove</a
+                        >
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <a
+                  href="/moveToCart/<%= x._id %>"
+                  class="btn btn-main pull-right"
+                  >Add to cart</a
+                >
+              </form>
+              <% }) %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% } %> <%- include('./partials/userFooter.ejs') %>
