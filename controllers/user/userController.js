@@ -2,7 +2,7 @@ const User = require("../../models/user/userModel");
 const asyncHandler = require("express-async-handler");
 const addressSchema = require("../../models/user/addressSchema");
 const nodemailer = require("nodemailer");
-
+const cartModel = require("../../models/user/cartModel");
 const addProduct = require("../../models/admin/addProduct");
 const bannerModel = require("../../models/admin/bannerModel");
 const contactSchema = require("../../models/user/contactSchema");
@@ -20,8 +20,10 @@ const home = asyncHandler(async (req, res) => {
     .populate("brand")
     .sort({ date: -1 })
     .limit(12);
+
   const banner = await bannerModel.find();
   let user = req.user;
+
   if (user) {
     res.render("user/index", { products, user, banner, login: true });
   } else {

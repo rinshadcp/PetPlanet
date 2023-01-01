@@ -21,7 +21,7 @@ module.exports = {
       let cartTotal = cart.cartTotal;
       let discount = cart.offer.discount;
 
-      res.render("user/cart1", {
+      res.render("user/cart", {
         products,
         cartTotal,
         discount,
@@ -29,7 +29,7 @@ module.exports = {
         login: true,
       });
     } else {
-      res.render("user/cart1", { products: [], user, login: true });
+      res.render("user/cart", { products: [], user, login: true });
     }
   },
 
