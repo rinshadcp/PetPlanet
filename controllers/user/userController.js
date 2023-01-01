@@ -85,15 +85,17 @@ const profile = asyncHandler(async (req, res) => {
     address = [];
   }
 
-  res.render("user/profile", { address, user, login: true, home: false });
+  res.render("user/profile", { address, user, login: true });
 });
 // add address
 
 const addAddress = async (req, res) => {
-  res.render("user/addAddress", { login: true });
+  let user = req.body;
+  res.render("user/addAddress", { login: true, user });
 };
 const manageAddress = asyncHandler(async (req, res) => {
   let userId = req.user._id;
+  let user = req.user;
 
   let address = await addressSchema.findOne({ userId: userId });
 
@@ -105,7 +107,7 @@ const manageAddress = asyncHandler(async (req, res) => {
     address = [];
   }
 
-  res.render("user/manageAddress", { address, login: true, index: 1 });
+  res.render("user/manageAddress", { address, login: true, user, index: 1 });
 });
 const deleteAddress = asyncHandler(async (req, res) => {
   let userId = req.user._id;
@@ -122,6 +124,7 @@ const deleteAddress = asyncHandler(async (req, res) => {
 });
 const newAddress = asyncHandler(async (req, res) => {
   let userId = req.user._id;
+  let user = req.user;
   const { fullName, houseName, city, state, pincode, phone } = req.body;
   let exist = await addressSchema.findOne({ userId: userId });
 
