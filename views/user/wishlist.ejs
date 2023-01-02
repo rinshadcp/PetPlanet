@@ -36,13 +36,13 @@
         <div class="col-md-8 col-md-offset-2">
           <div class="block">
             <div class="product-list">
-              <form method="post">
                 <table class="table">
                   <thead>
                     <tr>
                       <th class="">Item</th>
                       <th class="">Item Price</th>
                       <th class="">Actions</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <% list.forEach(function(x){ %>
@@ -57,7 +57,6 @@
                             alt=""
                           />
                           <a href="#!"><%= x.name %></a>
-                          <p><%= x.description %></p>
                         </div>
                       </td>
                       <td class="">₹ <%= x.price %></td>
@@ -69,19 +68,24 @@
                           >Remove</a
                         >
                       </td>
+                      <td class="quantity">
+                        <div>
+                  
+                          <p class="text-center"><a href="/moveToCart/<%= x._id %>" class="btn btn-primary py-3 px-4">Add to Cart</a></p>
+                        </div>
+                            
+                    </td>
                     </tr>
                   </tbody>
+                  <% }) %>
                 </table>
-                <a
-                  href="/moveToCart/<%= x._id %>"
-                  class="btn btn-main pull-right"
-                  >Add to cart</a
-                >
-              </form>
-              <% }) %>
+               
+                
+              
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>

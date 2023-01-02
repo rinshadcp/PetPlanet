@@ -1,368 +1,262 @@
 <%- include('./partials/userHeader.ejs') -%>
-<body>
-  <div
-    class="hero-wrap hero-bread"
-    style="background-image: url('../../public/images/bg_6.jpg')"
-  >
-    <div class="container">
-      <div
-        class="row no-gutters slider-text align-items-center justify-content-center"
-      >
-        <div class="col-md-9 ftco-animate text-center">
-          <p class="breadcrumbs">
-            <span class="mr-2"><a href="/">Home</a></span>
-            <span>Prooduct details</span>
-          </p>
-          <h1 class="mb-0 bread">Product</h1>
+<section class="page-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="content">
+          <h1 class="page-name">Shop</h1>
+          <ol class="breadcrumb">
+            <li><a href="/">Home</a></li>
+            <li class="active">shop</li>
+          </ol>
         </div>
       </div>
     </div>
   </div>
-
-  <section class="ftco-section mb-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 mb-5 ftco-animate">
-          <a href="/<%= singleProduct.image %>" class="image-popup prod-img-bg"
-            ><img
-              src="/<%= singleProduct.image %> "
-              class="img-fluid h-100"
-              alt="Colorlib Template"
-          /></a>
-        </div>
-        <div class="col-lg-6 product-details pl-md-5 ftco-animate">
-          <h3><%= singleProduct.name %></h3>
-          <div class="rating d-flex">
-            <!-- <p class="text-left mr-4">
-								<a href="#" class="mr-2">5.0</a>
-								<a href="#"><span class="ion-ios-star-outline"></span></a>
-								<a href="#"><span class="ion-ios-star-outline"></span></a>
-								<a href="#"><span class="ion-ios-star-outline"></span></a>
-								<a href="#"><span class="ion-ios-star-outline"></span></a>
-								<a href="#"><span class="ion-ios-star-outline"></span></a>
-							</p>
-							<p class="text-left mr-4">
-								<a href="#" class="mr-2" style="color: #000;">100 <span style="color: #bbb;">Rating</span></a>
-							</p>
-							<p class="text-left">
-								<a href="#" class="mr-2" style="color: #000;">500 <span style="color: #bbb;">Sold</span></a>
-							</p> -->
-          </div>
-          <p class="price"><span>Rs.<%= singleProduct.price %></span></p>
-          <p>
-            A small river named Duden flows by their place and supplies it with
-            the necessary regelialia. It is a paradisematic country, in which
-            roasted parts of sentences fly into your mouth.
-          </p>
-          <p>
-            On her way she met a copy. The copy warned the Little Blind Text,
-            that where it came from it would have been rewritten a thousand
-            times and everything that was left from its origin would be the word
-            "and" and the Little Blind Text should turn around and return to its
-            own, safe country. But nothing the copy said could convince her and
-            so it didn’t take long until a few insidious Copy Writers ambushed
-            her, made her drunk with Longe and Parole and dragged her into their
-            agency, where they abused her for their.
-          </p>
-          <form action="/addToCart/<%= singleProduct._id %>" method="post">
-            <div class="row mt-4">
-              <div class="col-md-6">
-                <div class="form-group d-flex">
-                  <div class="select-wrap"></div>
-                </div>
-              </div>
-              <div class="w-100"></div>
-              <div
-                class="input-group col-md-6 d-flex mb-3"
-                style="margin-top: 150px"
-              >
-                <input
-                  class="mtext-104 cl3 txt-center num-product"
-                  type="number"
-                  name="quantity"
-                  value="1"
-                />
-
-                <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-                  <i class="fs-16 zmdi zmdi-plus"></i>
-                </div>
-              </div>
-              <div class="w-100"></div>
-              <div class="col-md-12 mt-1">
-                <p style="color: #000"><%= singleProduct.stock %></p>
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              style="color: rgb(46, 42, 42)"
-              class="btn bg-primary btn-secondary mt-1"
-            >
-              Add to Cart
-            </button>
+</section>
+<section class="products section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="widget">
+          <h4 class="widget-title">Short By</h4>
+          <form method="post" action="#">
+            <select class="form-control">
+              <option>Man</option>
+              <option>Women</option>
+              <option>Accessories</option>
+              <option>Shoes</option>
+            </select>
           </form>
         </div>
-      </div>
-
-      <!-- <div class="row mt-5">
-        <div class="col-md-12 nav-link-wrap">
+        <div class="widget product-category">
+          <h4 class="widget-title">Categories</h4>
           <div
-            class="nav nav-pills d-flex text-center"
-            id="v-pills-tab"
+            class="panel-group commonAccordion"
+            id="accordion"
             role="tablist"
-            aria-orientation="vertical"
+            aria-multiselectable="true"
           >
-            <a
-              class="nav-link ftco-animate active mr-lg-1"
-              id="v-pills-1-tab"
-              data-toggle="pill"
-              href="#v-pills-1"
-              role="tab"
-              aria-controls="v-pills-1"
-              aria-selected="true"
-              >Description</a
-            >
-
-            <a
-              class="nav-link ftco-animate mr-lg-1"
-              id="v-pills-2-tab"
-              data-toggle="pill"
-              href="#v-pills-2"
-              role="tab"
-              aria-controls="v-pills-2"
-              aria-selected="false"
-              >Manufacturer</a
-            >
-
-            <a
-              class="nav-link ftco-animate"
-              id="v-pills-3-tab"
-              data-toggle="pill"
-              href="#v-pills-3"
-              role="tab"
-              aria-controls="v-pills-3"
-              aria-selected="false"
-              >Reviews</a
-            >
-          </div>
-        </div>
-        <div class="col-md-12 tab-wrap">
-          <div class="tab-content bg-light" id="v-pills-tabContent">
-            <div
-              class="tab-pane fade show active"
-              id="v-pills-1"
-              role="tabpanel"
-              aria-labelledby="day-1-tab"
-            >
-              <div class="p-4">
-                <h3 class="mb-4"><%= singleProduct.name %></h3>
-                <p>
-                  On her way she met a copy. The copy warned the Little Blind
-                  Text, that where it came from it would have been rewritten a
-                  thousand times and everything that was left from its origin
-                  would be the word "and" and the Little Blind Text should turn
-                  around and return to its own, safe country. But nothing the
-                  copy said could convince her and so it didn’t take long until
-                  a few insidious Copy Writers ambushed her, made her drunk with
-                  Longe and Parole and dragged her into their agency, where they
-                  abused her for their.
-                </p>
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                  <a
+                    role="button"
+                    data-toggle="collapse"
+                    data-parent="#accordion"
+                    href="#collapseOne"
+                    aria-expanded="true"
+                    aria-controls="collapseOne"
+                  >
+                    Shoes
+                  </a>
+                </h4>
               </div>
-            </div>
-
-            <div
-              class="tab-pane fade"
-              id="v-pills-2"
-              role="tabpanel"
-              aria-labelledby="v-pills-day-2-tab"
-            >
-              <div class="p-4">
-                <h3 class="mb-4">Manufactured By Nike</h3>
-                <p>
-                  On her way she met a copy. The copy warned the Little Blind
-                  Text, that where it came from it would have been rewritten a
-                  thousand times and everything that was left from its origin
-                  would be the word "and" and the Little Blind Text should turn
-                  around and return to its own, safe country. But nothing the
-                  copy said could convince her and so it didn’t take long until
-                  a few insidious Copy Writers ambushed her, made her drunk with
-                  Longe and Parole and dragged her into their agency, where they
-                  abused her for their.
-                </p>
-              </div>
-            </div>
-            <div
-              class="tab-pane fade"
-              id="v-pills-3"
-              role="tabpanel"
-              aria-labelledby="v-pills-day-3-tab"
-            >
-              <div class="row p-4">
-                <div class="col-md-7">
-                  <h3 class="mb-4">23 Reviews</h3>
-                  <div class="review">
-                    <div
-                      class="user-img"
-                      style="
-                        background-image: url(../../public/images/person_1.jpg);
-                      "
-                    ></div>
-                    <div class="desc">
-                      <h4>
-                        <span class="text-left">Jacob Webb</span>
-                        <span class="text-right">14 March 2018</span>
-                      </h4>
-                      <p class="star">
-                        <span>
-                          <i class="ion-ios-star-outline"></i>
-                          <i class="ion-ios-star-outline"></i>
-                          <i class="ion-ios-star-outline"></i>
-                          <i class="ion-ios-star-outline"></i>
-                          <i class="ion-ios-star-outline"></i>
-                        </span>
-                        <span class="text-right"
-                          ><a href="#" class="reply"
-                            ><i class="icon-reply"></i></a
-                        ></span>
-                      </p>
-                      <p>
-                        When she reached the first hills of the Italic
-                        Mountains, she had a last view back on the skyline of
-                        her hometown Bookmarksgrov
-                      </p>
-                    </div>
-                  </div>
-                  <div class="review">
-                    <div
-                      class="user-img"
-                      style="
-                        background-image: url(../../public/images/person_2.jpg);
-                      "
-                    ></div>
-                    <div class="desc">
-                      <h4>
-                        <span class="text-left">Jacob Webb</span>
-                        <span class="text-right">14 March 2018</span>
-                      </h4>
-                      <p class="star">
-                        <span>
-                          <i class="ion-ios-star-outline"></i>
-                          <i class="ion-ios-star-outline"></i>
-                          <i class="ion-ios-star-outline"></i>
-                          <i class="ion-ios-star-outline"></i>
-                          <i class="ion-ios-star-outline"></i>
-                        </span>
-                        <span class="text-right"
-                          ><a href="#" class="reply"
-                            ><i class="icon-reply"></i></a
-                        ></span>
-                      </p>
-                      <p>
-                        When she reached the first hills of the Italic
-                        Mountains, she had a last view back on the skyline of
-                        her hometown Bookmarksgrov
-                      </p>
-                    </div>
-                  </div>
-                  <div class="review">
-                    <div
-                      class="user-img"
-                      style="
-                        background-image: url(../../public/images/person_3.jpg);
-                      "
-                    ></div>
-                    <div class="desc">
-                      <h4>
-                        <span class="text-left">Jacob Webb</span>
-                        <span class="text-right">14 March 2018</span>
-                      </h4>
-                      <p class="star">
-                        <span>
-                          <i class="ion-ios-star-outline"></i>
-                          <i class="ion-ios-star-outline"></i>
-                          <i class="ion-ios-star-outline"></i>
-                          <i class="ion-ios-star-outline"></i>
-                          <i class="ion-ios-star-outline"></i>
-                        </span>
-                        <span class="text-right"
-                          ><a href="#" class="reply"
-                            ><i class="icon-reply"></i></a
-                        ></span>
-                      </p>
-                      <p>
-                        When she reached the first hills of the Italic
-                        Mountains, she had a last view back on the skyline of
-                        her hometown Bookmarksgrov
-                      </p>
-                    </div>
-                  </div>
+              <div
+                id="collapseOne"
+                class="panel-collapse collapse in"
+                role="tabpanel"
+                aria-labelledby="headingOne"
+              >
+                <div class="panel-body">
+                  <ul>
+                    <li><a href="#!">Brand & Twist</a></li>
+                    <li><a href="#!">Shoe Color</a></li>
+                    <li><a href="#!">Shoe Color</a></li>
+                  </ul>
                 </div>
-                <div class="col-md-4">
-                  <div class="rating-wrap">
-                    <h3 class="mb-4">Give a Review</h3>
-                    <p class="star">
-                      <span>
-                        <i class="ion-ios-star-outline"></i>
-                        <i class="ion-ios-star-outline"></i>
-                        <i class="ion-ios-star-outline"></i>
-                        <i class="ion-ios-star-outline"></i>
-                        <i class="ion-ios-star-outline"></i>
-                        (98%)
-                      </span>
-                      <span>20 Reviews</span>
-                    </p>
-                    <p class="star">
-                      <span>
-                        <i class="ion-ios-star-outline"></i>
-                        <i class="ion-ios-star-outline"></i>
-                        <i class="ion-ios-star-outline"></i>
-                        <i class="ion-ios-star-outline"></i>
-                        <i class="ion-ios-star-outline"></i>
-                        (85%)
-                      </span>
-                      <span>10 Reviews</span>
-                    </p>
-                    <p class="star">
-                      <span>
-                        <i class="ion-ios-star-outline"></i>
-                        <i class="ion-ios-star-outline"></i>
-                        <i class="ion-ios-star-outline"></i>
-                        <i class="ion-ios-star-outline"></i>
-                        <i class="ion-ios-star-outline"></i>
-                        (98%)
-                      </span>
-                      <span>5 Reviews</span>
-                    </p>
-                    <p class="star">
-                      <span>
-                        <i class="ion-ios-star-outline"></i>
-                        <i class="ion-ios-star-outline"></i>
-                        <i class="ion-ios-star-outline"></i>
-                        <i class="ion-ios-star-outline"></i>
-                        <i class="ion-ios-star-outline"></i>
-                        (98%)
-                      </span>
-                      <span>0 Reviews</span>
-                    </p>
-                    <p class="star">
-                      <span>
-                        <i class="ion-ios-star-outline"></i>
-                        <i class="ion-ios-star-outline"></i>
-                        <i class="ion-ios-star-outline"></i>
-                        <i class="ion-ios-star-outline"></i>
-                        <i class="ion-ios-star-outline"></i>
-                        (98%)
-                      </span>
-                      <span>0 Reviews</span>
-                    </p>
-                  </div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingTwo">
+                <h4 class="panel-title">
+                  <a
+                    class="collapsed"
+                    role="button"
+                    data-toggle="collapse"
+                    data-parent="#accordion"
+                    href="#collapseTwo"
+                    aria-expanded="false"
+                    aria-controls="collapseTwo"
+                  >
+                    Duty Wear
+                  </a>
+                </h4>
+              </div>
+              <div
+                id="collapseTwo"
+                class="panel-collapse collapse"
+                role="tabpanel"
+                aria-labelledby="headingTwo"
+              >
+                <div class="panel-body">
+                  <ul>
+                    <li><a href="#!">Brand & Twist</a></li>
+                    <li><a href="#!">Shoe Color</a></li>
+                    <li><a href="#!">Shoe Color</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingThree">
+                <h4 class="panel-title">
+                  <a
+                    class="collapsed"
+                    role="button"
+                    data-toggle="collapse"
+                    data-parent="#accordion"
+                    href="#collapseThree"
+                    aria-expanded="false"
+                    aria-controls="collapseThree"
+                  >
+                    WorkOut Shoes
+                  </a>
+                </h4>
+              </div>
+              <div
+                id="collapseThree"
+                class="panel-collapse collapse"
+                role="tabpanel"
+                aria-labelledby="headingThree"
+              >
+                <div class="panel-body">
+                  <ul>
+                    <li><a href="#!">Brand & Twist</a></li>
+                    <li><a href="#!">Shoe Color</a></li>
+                    <li><a href="#!">Gladian Shoes</a></li>
+                    <li><a href="#!">Swis Shoes</a></li>
+                  </ul>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div> -->
+      </div>
+      <div class="col-md-9">
+        <div class="row">
+          <% product.forEach(function(x) { %> <% if(x.status == "listed") { %>
+          <div class="col-md-4">
+            <div class="product-item">
+              <div class="product-thumb">
+                <span class="bage">Sale</span>
+                <img
+                  class="img-responsive"
+                  src="images/petproduct/<%= x.image  %> "
+                  alt="product-img"
+                />
+                <div class="preview-meta">
+                  <ul>
+                    <!-- <li>
+                      <span data-toggle="modal" data-target="#product-modal">
+                        <i class="tf-ion-ios-search-strong"></i>
+                      </span>
+                    </li> -->
+                    <li>
+                      <a onclick="itemAdded('<%= x._id %>')"
+                        ><i class="tf-ion-ios-heart"></i
+                      ></a>
+                    </li>
+                    <li>
+                      <a href="/moveToCart/<%= x._id %>"
+                        ><i class="tf-ion-android-cart"></i
+                      ></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="product-content">
+                <h4><a href="product-single"><%= x.name %> </a></h4>
+                <p class="product-short-description"><%= x.description %></p>
+
+                <p class="price">₹ <%=x.price %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% } %> <% }) %>
     </div>
-  </section>
-</body>
+
+    <section class="d-flex justify-content-center mt-2">
+      <% if(hasPreviousPage){ %>
+      <a
+        style="
+          text-decoration: none;
+          padding: 0.5rem;
+          margin: 0 1rem;
+          color: rgb(223, 54, 54);
+        "
+        class="text-center"
+        href="/shop?page=<%= PreviousPage %>"
+        ><i class="fa-solid fa-chevron-left" aria-hidden="true"></i
+      ></a>
+      <% } %>
+      <a
+        style="
+          text-decoration: none;
+          padding: 0.5rem;
+          margin: 0 1rem;
+          color: black;
+          border: 1px solid black;
+        "
+        href="/shop?page=<%= page %>"
+      >
+        <%= page %>
+      </a>
+      <% if(hasNextPage) { %>
+      <a
+        style="
+          text-decoration: none;
+          padding: 0.5rem;
+          margin: 0 1rem;
+          color: black;
+        "
+        href="/shop?page=<%=  page+1 %>"
+        ><i class="fa-solid fa-chevron-right" aria-hidden="true"></i
+      ></a>
+      <% } %>
+    </section>
+  </div>
+</section>
+
+<script>
+  function itemAdded(id) {
+    $.ajax({
+      url: "/addToWishlist",
+      data: {
+        id,
+      },
+      method: "post",
+      success: (response) => {
+        if (response.success) {
+          Swal.fire({
+            icon: "success",
+            title: "Success",
+            text: "item added to wishlist",
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "error",
+            text: "item already exist ",
+          });
+        }
+      },
+    });
+  }
+
+  function search() {
+    let input = document.getElementById("searchbar").value;
+    input = input.toLowerCase();
+    let x = document.getElementsByClassName("search");
+    for (i = 0; i < x.length; i++) {
+      if (!x[i].innerHTML.toLowerCase().includes(input)) {
+        x[i].style.display = "none";
+      } else {
+        x[i].style.display = "list-item";
+      }
+    }
+  }
+</script>
 <%- include('./partials/userFooter.ejs') %>

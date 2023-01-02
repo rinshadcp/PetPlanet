@@ -87,7 +87,7 @@ app.use(notFound);
 app.use(errorHandler);
 
 app.get("*", (req, res) => {
-  app.render(error / error);
+  app.render("error");
 });
 
 // start server

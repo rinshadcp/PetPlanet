@@ -166,7 +166,9 @@ const showProductdetails = asyncHandler(async (req, res) => {
 });
 
 const shop = asyncHandler(async (req, res) => {
-  const agecategory = req.query.category;
+  const agecategory = req.query.age;
+  const animalcategory = req.query.animal;
+  const category = req.query.category;
   const brand = req.query.brand;
   const sort = req.query.sort;
 
@@ -174,6 +176,7 @@ const shop = asyncHandler(async (req, res) => {
   const items_per_page = 10;
   const totalproducts = await addProduct.find().countDocuments();
   const mainCategory = await categorySchema.find({});
+  const brands = await brandSchema.find({});
 
   if (category) {
     let product = await addProduct
@@ -182,13 +185,16 @@ const shop = asyncHandler(async (req, res) => {
       .sort({ date: -1 })
       .skip((page - 1) * items_per_page)
       .limit(items_per_page);
+    let user = req.user;
 
     res.render("user/shop", {
       product,
       mainCategory,
-      brands,
+      brand,
       items_per_page,
       totalproducts,
+      user,
+      login: true,
       page,
       hasNextPage: items_per_page * page < totalproducts,
       hasPreviousPage: page > 1,
@@ -201,13 +207,16 @@ const shop = asyncHandler(async (req, res) => {
       .sort({ date: -1 })
       .skip((page - 1) * items_per_page)
       .limit(items_per_page);
+    let user = req.user;
 
     res.render("user/shop", {
       product,
-      brands,
+      brand,
       mainCategory,
       items_per_page,
       totalproducts,
+      user,
+      login: true,
       page,
       hasNextPage: items_per_page * page < totalproducts,
       hasPreviousPage: page > 1,
@@ -220,13 +229,16 @@ const shop = asyncHandler(async (req, res) => {
       .sort({ price: 1 })
       .skip((page - 1) * items_per_page)
       .limit(items_per_page);
+    let user = req.user;
 
     res.render("user/shop", {
       product,
-      brands,
+      brand,
       mainCategory,
       items_per_page,
       totalproducts,
+      user,
+      login: true,
       page,
       hasNextPage: items_per_page * page < totalproducts,
       hasPreviousPage: page > 1,
@@ -239,13 +251,16 @@ const shop = asyncHandler(async (req, res) => {
       .sort({ price: -1 })
       .skip((page - 1) * items_per_page)
       .limit(items_per_page);
+    let user = req.user;
 
     res.render("user/shop", {
       product,
-      brands,
+      brand,
       mainCategory,
       items_per_page,
       totalproducts,
+      user,
+      login: true,
       page,
       hasNextPage: items_per_page * page < totalproducts,
       hasPreviousPage: page > 1,
@@ -258,13 +273,16 @@ const shop = asyncHandler(async (req, res) => {
       .sort({ dare: -1 })
       .skip((page - 1) * items_per_page)
       .limit(items_per_page);
+    let user = req.user;
 
     res.render("user/shop", {
       product,
-      brands,
+      brand,
       mainCategory,
       items_per_page,
       totalproducts,
+      user,
+      login: true,
       page,
       hasNextPage: items_per_page * page < totalproducts,
       hasPreviousPage: page > 1,
@@ -276,12 +294,16 @@ const shop = asyncHandler(async (req, res) => {
       .sort({ date: -1 })
       .skip((page - 1) * items_per_page)
       .limit(items_per_page);
+    let user = req.user;
+
     res.render("user/shop", {
       product,
       mainCategory,
-      brands,
+      brand,
       items_per_page,
       totalproducts,
+      user,
+      login: true,
       page,
       hasNextPage: items_per_page * page < totalproducts,
       hasPreviousPage: page > 1,
