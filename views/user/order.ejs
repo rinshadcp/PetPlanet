@@ -77,17 +77,32 @@
                         <div class="d-flex justify-content-center" style="width: 20%; ">
                             <li style="margin-left: 25px;"><%= moment(order.date).format("LL")  %></li>
                         </div>
-                        
+                        <% if( x.orderStatus == "Delivered"  ) %>
                         <div class="d-flex justify-content-center" style="width: 15%;">
-                            <li style="margin-right: 35px;"> <a href="/login/productdetail/<%= x.productId._id %>" class="">
+                            <li style="margin-right: 35px;"> <a href="/productdetail/<%= x.productId._id %>" class="">
                                     <i class="fa fa-eye" aria-hidden="false"></i></a></li>
                         </div>
                 </div>
+                <% if( x.orderStatus == "Cancelled") { %>
+                <div class="d-flex justify-content-center" style="width: 15%;">
+                    <li style="margin-right: 35px;"> <button > <i style="color: rgb(51, 218, 29);"
+                        class=" fa fa-check" aria-hidden="true"></i>
+
+                    </button></li>
+                </div>
+                <% } else if( x.orderStatus == "Delivered") { %> 
+                    <div class="d-flex justify-content-center" style="width: 15%;">
+                        <li style="margin-right: 35px;"> <button onclick="orderCancelled()" class=""> <i style="color: red;"
+                            class=" fa fa-ban" aria-hidden="true"></i>
+                        </button></li>
+                    </div>
+                <% } else { %> 
                 <div class="d-flex justify-content-center" style="width: 15%;">
                     <li style="margin-right: 35px;"> <button onclick="cancelorder('<%= order._id %>','<%= x.productId._id %>')" class=""> <i style="color: red;"
                         class=" fa fa-ban" aria-hidden="true"></i>
                     </button></li>
                 </div>
+                <% } %> 
                 
 
 
@@ -105,16 +120,16 @@
             <section class="d-flex justify-content-center mt-2">
                 <% if(hasPreviousPage){ %>
                   <a style="text-decoration: none;padding: .5rem; margin:0 1rem; color:rgb(223, 54, 54)" class="text-center"
-                    href="/login/orders?page=<%= PreviousPage %>"><i class="fa-solid fa-chevron-left"
+                    href="/orders?page=<%= PreviousPage %>"><i class="fa-solid fa-chevron-left"
                       aria-hidden="true"></i></a>
                   <% } %>
                     <a style="text-decoration: none;padding: .5rem; margin:0 1rem; color:black; border: 1px solid black;"
-                      href="/login/orders?page=<%= page %>">
+                      href="/orders?page=<%= page %>">
                       <%= page %>
                     </a>
                     <% if(hasNextPage) { %>
                       <a style="text-decoration: none;padding: .5rem; margin:0 1rem; color:black;"
-                        href="/login/orders?page=<%=  page+1 %>"><i class="fa-solid fa-chevron-right"
+                        href="/orders?page=<%=  page+1 %>"><i class="fa-solid fa-chevron-right"
                           aria-hidden="true"></i></a>
                       <% } %>
                 </section>
@@ -131,9 +146,9 @@
     
     function cancelorder(id , productId ) {
         if(confirm('Do you want to cancel the order')){
-            var div=$('#card').html();
+            
             $.ajax({
-          url: "/login/cancelOrder",
+          url: "/cancelOrder",
           data: {
             id,
             productId,
@@ -153,11 +168,19 @@
         });
         } else {
               Swal.fire({
-                icon: "success",
+                icon: "error",
                 title: "cancelled",
-                text: "cancelled",
+                text: "",
               });
         }
+    }
+
+    function orderCancelled(){
+        Swal.fire({
+                icon: "error",
+                title: "Order delivered ",
+                text: "",
+              });
     }
 </script>
 
@@ -171,4 +194,4 @@
     });
 </script>
 
-<%- include('./partials/userFooter.ejs') %>
+<%- include('./partials/userFooter.ejs') -%>

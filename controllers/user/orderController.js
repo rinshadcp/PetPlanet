@@ -140,7 +140,8 @@ module.exports = {
   //order success
 
   orderSuccess: (req, res) => {
-    res.render("user/orderSuccess", { login: true });
+    let user = req.user;
+    res.render("user/orderSuccess", { login: true, user });
   },
 
   //order management

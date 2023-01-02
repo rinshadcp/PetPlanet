@@ -1,132 +1,83 @@
 <%- include('./partials/userHeader.ejs') -%>
-
-<!-- breadcrumb -->
-<div class="m-t-70 d-none d-lg-block" style="margin-top: 105px"></div>
-<!-- <div class="container ">
-     <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-         <a href="/login/userHome" class="stext-109 cl8 hov-cl1 trans-04">
-             Home
-             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-         </a>
-         <a href="/login/cart" class="stext-109 cl8 hov-cl1 trans-04">
-             Cart
-             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-         </a>
-         <span class="stext-109 cl4">
-             Checkout
-         </span>
-     </div>
- </div> -->
-<!-- Checkout -->
-<div id="checkout" class="container bg0 p-t-20 p-b-85">
-  <div class="row">
-    <div class="col-lg-10 col-xl-7 m-lr-auto">
-      <div class="m-l-25 m-r--38 m-lr-0-xl">
-        <div class="wrap-table-shopping-cart">
+<section class="page-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="content">
+          <h1 class="page-name">Checkout</h1>
+          <ol class="breadcrumb">
+            <li><a href="/">Home</a></li>
+            <li class="active">checkout</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="page-wrapper">
+  <div class="checkout shopping">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
           <% if(address !=0){ %>
-          <table class="table-shopping-cart">
-            <tr class="table_head">
-              <th class="p-l-15">
-                <h6 class="text-info">Current Address</h6>
-              </th>
-              <td class="p-r-20">
-                <button
-                  class="btn text-primary"
-                  data-toggle="collapse"
-                  data-target="#collapseExample"
-                  aria-expanded="false"
-                  aria-controls="collapseExample"
-                >
-                  <h6 class="text-info">Change</h6>
-                </button>
-              </td>
-            </tr>
-            <tr class="table_row">
-              <td class="p-l-30">
-                <p>
-                  <strong>Name :</strong>
-                  <%= address[index].fullName %>
-                </p>
-                <p>
-                  <strong>house Name :</strong>
-                  <%= address[index].houseName %>
-                </p>
-                <p>
-                  <strong>City :</strong>
-                  <%= address[index].city %>
-                </p>
-                <p>
-                  <strong>State :</strong>
-                  <%= address[index].state %>
-                </p>
-                <p>
-                  <strong>Pincode :</strong>
-                  <%= address[index].pincode %>
-                </p>
-                <p>
-                  <strong>Phone Number :</strong>
-                  <%= address[index].phone %>
-                </p>
-                <!-- <p><strong>Address :</strong>
-                 <%= address[index].city %> ,
-                 <%= address[index].state %> - <%= address[index].pincode %></span>
-                 </p> -->
-              </td>
-            </tr>
-          </table>
-          <div class="collapse" id="collapseExample">
-            <form action="/login/changeAddress" method="post">
-              <div class="card card-body">
-                <% address.forEach(function(address,index){ %>
-                <div class="form-check card card-body">
+          <div class="block billing-details">
+            <h4 class="widget-title">Billing Details</h4>
+            <form class="checkout-form">
+              <div class="form-group">
+                <label for="full_name"><strong> Full Name</strong>:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="full_name"
+                  placeholder="<%= address[index].fullName %>"
+                />
+              </div>
+              <div class="form-group">
+                <label for="user_address"><strong>Address</strong></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="user_address"
+                  placeholder="<%= address[index].houseName %>"
+                />
+              </div>
+              <div class="checkout-country-code clearfix">
+                <div class="form-group">
+                  <label for="user_post_code"><strong>Pin Code</strong></label>
                   <input
-                    class="form-check-input"
-                    type="radio"
-                    value="<%= index %>"
-                    name="index"
-                    id="exampleRadios1"
-                    value="option1"
+                    type="text"
+                    class="form-control"
+                    id="user_post_code"
+                    name="pincode"
+                    value="<%= address[index].pincode %>"
                   />
-                  <label class="form-check-label" for="exampleRadios1">
-                    <p>
-                      <strong>Name :</strong>
-
-                      <%= address.fullName %>
-                    </p>
-                    <p>
-                      <strong>house Name :</strong>
-                      <%= address.houseName %>
-                    </p>
-                    <p>
-                      <strong>City :</strong>
-                      <%= address.city %>
-                    </p>
-                    <p>
-                      <strong>State :</strong>
-                      <%= address.state %>
-                    </p>
-                    <p>
-                      <strong>Pincode :</strong>
-                      <%= address.pincode %>
-                    </p>
-                    <p>
-                      <strong>Phone Number :</strong>
-                      <%= address.phone %>
-                    </p>
-                  </label>
                 </div>
-                <% }) %>
-                <button
-                  type="submit"
-                  class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10"
-                >
-                  Deliver Here
-                </button>
+                <div class="form-group">
+                  <label for="user_city"><strong>City</strong></label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="user_city"
+                    name="city"
+                    value="<%= address[index].city %>"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="user_country"><strong>State</strong></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="user_country"
+                  placeholder="<%= address[index].state %>"
+                />
               </div>
             </form>
           </div>
           <% } %>
-          <div class="card card-body">
+          <div class="block">
+            <h4 class="widget-title">ADD/CHANGE ADDRESS</h4>
+            <!-- <p>Credit Cart Details (Secure payment)</p> -->
             <button
               type="button"
               data-toggle="collapse"
@@ -138,11 +89,7 @@
             </button>
             <div class="collapse" id="newAddress">
               <div class="card card-body mt-4">
-                <form
-                  action="/login/checkoutNewAddress"
-                  class="mb-0"
-                  method="post"
-                >
+                <form action="/checkoutNewAddress" class="mb-0" method="post">
                   <div class="row mb-4">
                     <div class="col">
                       <div class="form-outline">
@@ -239,142 +186,188 @@
                 </form>
               </div>
             </div>
+            <button
+              class="btn text-primary"
+              data-toggle="collapse"
+              data-target="#collapseExample"
+              aria-expanded="false"
+              aria-controls="collapseExample"
+            >
+              <h6 class="text-info">CHANGE ADDRESS</h6>
+            </button>
+
+            <div class="collapse" id="collapseExample">
+              <form action="/changeAddress" method="post">
+                <div class="card card-body">
+                  <% address.forEach(function(address,index){ %>
+                  <div class="form-check card card-body">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      value="<%= index %>"
+                      name="index"
+                      id="exampleRadios1"
+                      value="option1"
+                    />
+                    <label class="form-check-label" for="exampleRadios1">
+                      <p>
+                        <strong>Name :</strong>
+
+                        <%= address.fullName %>
+                      </p>
+                      <p>
+                        <strong>house Name :</strong>
+                        <%= address.houseName %>
+                      </p>
+                      <p>
+                        <strong>City :</strong>
+                        <%= address.city %>
+                      </p>
+                      <p>
+                        <strong>State :</strong>
+                        <%= address.state %>
+                      </p>
+                      <p>
+                        <strong>Pincode :</strong>
+                        <%= address.pincode %>
+                      </p>
+                      <p>
+                        <strong>Phone Number :</strong>
+                        <%= address.phone %>
+                      </p>
+                    </label>
+                  </div>
+                  <% }) %>
+                  <button
+                    type="submit"
+                    class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10"
+                  >
+                    Deliver Here
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="product-checkout-details">
+            <div class="block">
+              <h4 class="widget-title">Order Summary</h4>
+              <% cartItems.forEach(function(product){ %>
+              <div class="media product-card">
+                <a class="pull-left" href="product-single.html">
+                  <img
+                    class="media-object"
+                    src="/images/petproduct/<%= product.productId.image %>"
+                    alt="Image"
+                    style="width: 60px"
+                  />
+                </a>
+                <div class="media-body">
+                  <h4 class="media-heading">
+                    <a href="/product-single"><%= product.productId.name %></a>
+                  </h4>
+                  <p class="price">Quantity : <%= product.quantity %></p>
+                  <!-- <span class="remove">Remove</span> -->
+                  <p><strong>Total :₹ <%= product.total %> </strong></p>
+                </div>
+              </div>
+              <% }) %>
+              <div class="discount-code">
+                <p>
+                  Have a discount ?
+                  <a data-toggle="modal" data-target="#coupon-modal" href="#!"
+                    >enter it here</a
+                  >
+                </p>
+              </div>
+
+              <ul class="summary-prices">
+                <li>
+                  <span>Subtotal:</span>
+                  <span class="price">₹ <%= cartTotal+discount %></span>
+                </li>
+                <li>
+                  <span>Discount:</span>
+                  <span class="price"> ₹<%= discount %> </span>
+                </li>
+                <li>
+                  <span>Shipping:</span>
+                  <span>Free</span>
+                </li>
+              </ul>
+
+              <div class="summary-total">
+                <span>Total</span>
+                <span>₹ <%= cartTotal %></span>
+
+                <div class="form-check p-t-10">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="paymentMethod"
+                    id="paynow"
+                    value="Razorpay"
+                    checked
+                  />
+                  <label class="form-check-label" for="paynow">
+                    Razorpay
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="paymentMethod"
+                    id="cod"
+                    value="COD"
+                  />
+                  <label class="form-check-label" for="cod">
+                    Cash on delivery
+                  </label>
+                </div>
+                <% if(address != 0 ) {%>
+                <button
+                  onclick="placeOrder('<%= index %>')"
+                  class="btn-success mt-4 flex-c-m stext-101 cl0 size-116 bor14 p-lr-15 trans-04 pointer"
+                >
+                  Place Order
+                </button>
+                <% }else { %>
+                <button
+                  onclick="adressError()"
+                  class="btn-success mt-4 flex-c-m stext-101 cl0 size-116 bor14 p-lr-15 trans-04 pointer"
+                >
+                  Place Order
+                </button>
+                <% } %>
+              </div>
+              <div class="verified-icon">
+                <img src="user/images/shop/verified.png" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-
-    <div id="order" class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
-      <div
-        class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm"
-      >
-        <h4 class="mtext-109 cl2 p-b-30">Your orders</h4>
-        <% cartItems.forEach(function(product){ %>
-        <div class="flex-w flex-t bor12 p-b-13">
-          <img
-            src="/<%= product.productId.image %>"
-            alt=""
-            style="width: 60px"
-          />
-          <div class="m-l-30">
-            <p><strong> <%= product.productId.name %> </strong></p>
-            <p><strong>Quantity : <%= product.quantity %> </strong></p>
-            <p><strong>Total : <%= product.total %> </strong></p>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="coupon-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <input
+              class="form-control"
+              type="text"
+              placeholder="Enter Coupon Code"
+            />
           </div>
-        </div>
-        <% }) %>
-
-        <div class="flex-w flex-t p-t-27 p-b-33">
-          <div class="size-208 p-b-5">
-            <span class="mtext-101 cl2">Sub Total </span>
-          </div>
-
-          <div class="size-209 p-t-1 p-b-5 d-flex justify-content-end">
-            <span class="mtext-110 cl2">₹ <%= cartTotal+discount %> </span>
-          </div>
-
-          <div class="size-208 p-b-5">
-            <span class="mtext-101 cl2">Discount </span>
-          </div>
-
-          <div class="size-209 p-t-1 p-b-5 d-flex justify-content-end">
-            <span class="mtext-110 cl2"> ₹<%= discount %> </span>
-          </div>
-
-          <div class="size-208 p-b-5">
-            <span class="mtext-101 cl2">Shpping </span>
-          </div>
-
-          <div class="size-209 p-t-1 p-b-5 d-flex justify-content-end">
-            <span class="mtext-110 cl2">Free</span>
-          </div>
-
-          <div class="size-208 p-b-5">
-            <span class="mtext-101 cl2">Total </span>
-          </div>
-
-          <div class="size-209 p-t-1 p-b-5 d-flex justify-content-end">
-            <span class="mtext-110 cl2">₹ <%= cartTotal %></span>
-          </div>
-        </div>
-
-        <div
-          id="coupon"
-          class="d-flex justify-content-between flex-w flex-t bor12 p-t-27 p-b-33"
-        >
-          <style>
-            #codeInput::placeholder {
-              font-size: small;
-            }
-            #codeInput {
-              font-size: small;
-            }
-            .apply:hover {
-              background-color: #717fe0;
-              color: #fff;
-            }
-          </style>
-          <div class="row">
-            <span class="mtext-101 cl2 col-6">
-              <input
-                type="text"
-                class="border p-3"
-                id="codeInput"
-                placeholder="Apply coupen"
-                style="border-radius: 10px; height: 3rem; width: 12rem"
-              />
-            </span>
-          </div>
-
-          <div class="p-t-1 flex-w">
-            <span>
-              <button
-                class="btn border apply"
-                style="border-radius: 10px; width: 75px; height: 3rem"
-                onclick="getcoupen('<%= cartTotal %>','<%= cartId %>')"
-              >
-                Apply
-              </button>
-            </span>
-          </div>
-        </div>
-
-        <div class="form-check p-t-10">
-          <input
-            class="form-check-input"
-            type="radio"
-            name="paymentMethod"
-            id="paynow"
-            value="Razorpay"
-            checked
-          />
-          <label class="form-check-label" for="paynow"> Razorpay </label>
-        </div>
-        <div class="form-check">
-          <input
-            class="form-check-input"
-            type="radio"
-            name="paymentMethod"
-            id="cod"
-            value="COD"
-          />
-          <label class="form-check-label" for="cod"> Cash on delivery </label>
-        </div>
-        <% if(address != 0 ) {%>
-        <button
-          onclick="placeOrder('<%= index %>')"
-          class="btn-success mt-4 flex-c-m stext-101 cl0 size-116 bor14 p-lr-15 trans-04 pointer"
-        >
-          Place Order
-        </button>
-        <% }else { %>
-        <button
-          onclick="adressError()"
-          class="btn-success mt-4 flex-c-m stext-101 cl0 size-116 bor14 p-lr-15 trans-04 pointer"
-        >
-          Place Order
-        </button>
-        <% } %>
+          <button type="submit" class="btn btn-main">Apply Coupon</button>
+        </form>
       </div>
     </div>
   </div>
@@ -409,7 +402,7 @@
       key: "rzp_test_mp1q8YWcYr4vEC", // Enter the Key ID generated from the Dashboard
       amount: order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
       currency: "INR",
-      name: "Insoles",
+      name: "Petplanet",
       description: "Test Transaction",
       image: "https://example.com/your_logo",
       order_id: order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
