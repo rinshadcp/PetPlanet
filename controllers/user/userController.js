@@ -8,11 +8,13 @@ const bannerModel = require("../../models/admin/bannerModel");
 const contactSchema = require("../../models/user/contactSchema");
 const categorySchema = require("../../models/admin/categorySchema");
 const brandSchema = require("../../models/admin/brandModel");
+const animalCategory = require("../../models/admin/animalCategorySchema");
 
 const {
   isLoggedIn,
   checkReturnTo,
 } = require("../../middlewrares/authentication");
+const brandModel = require("../../models/admin/brandModel");
 
 const home = asyncHandler(async (req, res) => {
   const products = await addProduct
@@ -22,12 +24,21 @@ const home = asyncHandler(async (req, res) => {
     .limit(12);
 
   const banner = await bannerModel.find();
+  const Brand = await brandModel.find();
+  const Pet = await animalCategory.find();
   let user = req.user;
 
   if (user) {
-    res.render("user/index", { products, user, banner, login: true });
+    res.render("user/index", {
+      products,
+      user,
+      banner,
+      Pet,
+      Brand,
+      login: true,
+    });
   } else {
-    res.render("user/index", { products, banner, login: false });
+    res.render("user/index", { products, banner, Pet, Brand, login: false });
   }
 });
 const renderRegister = (req, res) => {

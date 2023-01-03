@@ -36,7 +36,7 @@ router
   );
 
 router.get("/logout", logout);
-router.get("/shop", shop);
+router.get("/shop", isLoggedIn, shop);
 
 //user profile and address management
 

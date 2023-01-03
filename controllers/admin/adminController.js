@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const sharp = require("sharp");
 const adminSignup = require("../../models/admin/adminSignup");
 const addProduct = require("../../models/admin/addProduct");
 const asyncHandler = require("express-async-handler");
@@ -380,6 +381,11 @@ module.exports = {
       const productimages =
         image != null ? image.map((img) => img.filename) : null;
       console.log(productimages);
+      await sharp(req.file.path)
+        .resize(200, 200)
+        .jpeg({ quality: 90 })
+        .toFile(path.resolve(req.file.destination, "resized", image));
+      fs.unlinkSync(req.file.path);
 
       const newProduct = addProduct({
         animal,

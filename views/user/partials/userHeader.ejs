@@ -273,13 +273,108 @@
           <div id="navbar" class="navbar-collapse collapse text-center">
             <ul class="nav navbar-nav">
               <!-- Home -->
-              <li class="dropdown">
+              <!-- <li class="dropdown">
                 <a href="/">Home</a>
-              </li>
+              </li> -->
               <!-- / Home -->
+              <li class="dropdown full-width dropdown-slide">
+                <a
+                  href="#!"
+                  class="dropdown-toggle"
+                  data-toggle="dropdown"
+                  data-hover="dropdown"
+                  data-delay="350"
+                  role="button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  >Shop by Pet <span class="tf-ion-ios-arrow-down"></span
+                ></a>
+                <div class="dropdown-menu">
+                  <div class="row">
+                   
+                    <!-- Introduction -->
+                    <div class="col-sm-3 col-xs-12">
+                      <ul>
+                        <li class="dropdown-header"><h4>Pets</h4></li>
+                        <li role="separator" class="divider"></li>
+                        <% Pet.forEach((pet)=>{ %> 
+                        <li><a href="/shop"><b><%= pet.animal  %> </b></a></li>
+                        <!-- <li><a href="about.html">About Us</a></li>
+                        <li><a href="404.html">404 Page</a></li>
+                        <li><a href="coming-soon.html">Coming Soon</a></li>
+                        <li><a href="faq.html">FAQ</a></li> -->
+                    <% }) %> 
+
+                      </ul>
+                    </div>
+
+                    <!-- Contact -->
+                    <!-- <div class="col-sm-3 col-xs-12">
+                      <ul>
+                        <li class="dropdown-header">Dashboard</li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="dashboard.html">User Interface</a></li>
+                        <li><a href="order.html">Orders</a></li>
+                        <li><a href="address.html">Address</a></li>
+                        <li>
+                          <a href="profile-details.html">Profile Details</a>
+                        </li>
+                      </ul>
+                    </div> -->
+
+                    <!-- Utility -->
+                    <!-- <div class="col-sm-3 col-xs-12">
+                      <ul>
+                        <li class="dropdown-header">Utility</li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="login.html">Login Page</a></li>
+                        <li><a href="signin.html">Signin Page</a></li>
+                        <li>
+                          <a href="forget-password.html">Forget Password</a>
+                        </li>
+                      </ul>
+                    </div> -->
+
+                    <!-- Mega Menu -->
+                    <div class="col-sm-3 col-xs-12">
+                      <a href="/shop">
+                        <img
+                          class="img-responsive"
+                          src="/images/dog1.jpg"
+                          alt=""
+                        />
+                        
+                      </a>
+                    </div>
+                    <div class="col-sm-3 col-xs-12">
+                      <a href="/shop">
+                        <img
+                          class="img-responsive"
+                          src="/images/cat4.jpg"
+                          alt=""
+                        />
+                        
+                      </a>
+                    </div>
+                    <div class="col-sm-3 col-xs-12">
+                      <a href="/shop">
+                        <img
+                          class="img-responsive"
+                          src="/images/bird1.jpg"
+                          alt=""
+                        />
+                        
+                      </a>
+                    </div>
+                  </div>
+                  <!-- / .row -->
+                </div>
+                <!-- / .dropdown-menu -->
+              </li>
+              <!-- / Pages -->
 
               <!-- Elements -->
-              <li class="dropdown dropdown-slide">
+              <!-- <li class="dropdown dropdown-slide">
                 <a
                   href="#!"
                   class="dropdown-toggle"
@@ -292,19 +387,20 @@
                   >Shop by Pet<span class="tf-ion-ios-arrow-down"></span
                 ></a>
                 <div class="dropdown-menu">
-                  <div class="row">
+                  <div class="row"> -->
                     <!-- Basic -->
-                    <div class="col-lg-6 col-md-6 mb-sm-3">
-                      <ul>
+                    <!-- <div class="col-lg-6 col-md-6 mb-sm-3"> -->
+                     
+                      <!-- <ul> -->
                         <!-- <li class="dropdown-header">Pages</li>
                         <li role="separator" class="divider"></li> -->
-                        <li><a href="/shop">Dogs</a></li>
-                        <li><a href="checkout.html">Cats</a></li>
-                        <li><a href="cart.html">Birds</a></li>
+                        <!-- <li><a href="/shop"></a></li> -->
+                        <!-- <li><a href="/shop">Cats</a></li>
+                        <li><a href="/shop">Birds</a></li> -->
                         <!-- <li><a href="pricing.html">Pricing</a></li> -->
                         <!-- <li><a href="confirmation.html">Confirmation</a></li> -->
-                      </ul>
-                    </div>
+                      <!-- </ul>
+                    </div> -->
 
                     <!-- Layout -->
                     <!-- <div class="col-lg-6 col-md-6 mb-sm-3">
@@ -319,11 +415,13 @@
                         </li>
                       </ul>
                     </div> -->
-                  </div>
+                  <!-- </div> -->
                   <!-- / .row -->
-                </div>
+
+                  
+                <!-- </div> -->
                 <!-- / .dropdown-menu -->
-              </li>
+              <!-- </li> -->
               <!-- / Elements -->
 
               <!-- Pages -->
@@ -341,21 +439,25 @@
                 ></a>
                 <div class="dropdown-menu">
                   <div class="row">
+                   
                     <!-- Introduction -->
                     <div class="col-sm-3 col-xs-12">
                       <ul>
-                        <li class="dropdown-header">Introduction</li>
+                        <li class="dropdown-header"><h4>Popular Brands</h4></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                        <li><a href="about.html">About Us</a></li>
+                        <% Brand.forEach((brand)=>{ %>
+                        <li><a href="/shop"><b><%= brand.brand  %> </b></a></li>
+                        <!-- <li><a href="about.html">About Us</a></li>
                         <li><a href="404.html">404 Page</a></li>
                         <li><a href="coming-soon.html">Coming Soon</a></li>
-                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="faq.html">FAQ</a></li> -->
+                    <% }) %> 
+
                       </ul>
                     </div>
 
                     <!-- Contact -->
-                    <div class="col-sm-3 col-xs-12">
+                    <!-- <div class="col-sm-3 col-xs-12">
                       <ul>
                         <li class="dropdown-header">Dashboard</li>
                         <li role="separator" class="divider"></li>
@@ -366,10 +468,10 @@
                           <a href="profile-details.html">Profile Details</a>
                         </li>
                       </ul>
-                    </div>
+                    </div> -->
 
                     <!-- Utility -->
-                    <div class="col-sm-3 col-xs-12">
+                    <!-- <div class="col-sm-3 col-xs-12">
                       <ul>
                         <li class="dropdown-header">Utility</li>
                         <li role="separator" class="divider"></li>
@@ -379,16 +481,106 @@
                           <a href="forget-password.html">Forget Password</a>
                         </li>
                       </ul>
-                    </div>
+                    </div> -->
 
                     <!-- Mega Menu -->
                     <div class="col-sm-3 col-xs-12">
-                      <a href="shop.html">
+                      <a href="/shop">
                         <img
+                        style="width: 150px;height: 150px;"
                           class="img-responsive"
-                          src="images/shop/header-img.jpg"
-                          alt="menu image"
+                          src="/images/brand.jpg"
+                          alt=""
                         />
+                        
+                      </a>
+                    </div>
+                    <div class="col-sm-3 col-xs-12">
+                      <a href="/shop">
+                        <img
+                        style="width: 150px;height: 150px;"
+                          class="img-responsive"
+                          src="/images/brand (3).webp"
+                          alt=""
+                        />
+                        
+                      </a>
+                    </div>
+                    <div class="col-sm-3 col-xs-12">
+                      <a href="/shop">
+                        <img
+                        style="width: 150px;height: 150px;"
+                          class="img-responsive"
+                          src="/images/brand3.jpg"
+                          alt=""
+                        />
+                        
+                      </a>
+                    </div>
+                    <div class="col-sm-3 col-xs-12">
+                      <a href="/shop">
+                        <img
+                        style="width: 150px;height: 150px;"
+                          class="img-responsive"
+                          src="/images/brand (4).webp"
+                          alt=""
+                        />
+                        
+                      </a>
+                    </div>
+                    <div class="col-sm-3 col-xs-12">
+                      <a href="/shop">
+                        <img
+                        style="width: 150px;height: 150px;"
+                          class="img-responsive"
+                          src="/images/brand (8).webp"
+                          alt=""
+                        />
+                        
+                      </a>
+                    </div>
+                    <div class="col-sm-3 col-xs-12">
+                      <a href="/shop">
+                        <img
+                        style="width: 150px;height: 150px;"
+                          class="img-responsive"
+                          src="/images/brand (1).webp"
+                          alt=""
+                        />
+                        
+                      </a>
+                    </div>
+                    <div class="col-sm-3 col-xs-12">
+                      <a href="/shop">
+                        <img
+                        style="width: 150px;height: 150px;"
+                          class="img-responsive"
+                          src="/images/brand (7).webp"
+                          alt=""
+                        />
+                        
+                      </a>
+                    </div>
+                    <div class="col-sm-3 col-xs-12">
+                      <a href="/shop">
+                        <img
+                        style="width: 150px;height: 150px;"
+                          class="img-responsive"
+                          src="/images/brand8.jpg"
+                          alt=""
+                        />
+                        
+                      </a>
+                    </div>
+                    <div class="col-sm-3 col-xs-12">
+                      <a href="/shop">
+                        <img
+                        style="width: 150px;height: 150px;"
+                          class="img-responsive"
+                          src="/images/brand (6).webp"
+                          alt=""
+                        />
+                        
                       </a>
                     </div>
                   </div>
@@ -399,7 +591,7 @@
               <!-- / Pages -->
 
               <!-- Blog -->
-              <li class="dropdown dropdown-slide">
+              <!-- <li class="dropdown dropdown-slide">
                 <a
                   href="#!"
                   class="dropdown-toggle"
@@ -422,11 +614,11 @@
                   <li><a href="blog-grid.html">Blog 2 Columns</a></li>
                   <li><a href="blog-single.html">Blog Single</a></li>
                 </ul>
-              </li>
+              </li> -->
               <!-- / Blog -->
 
               <!-- Shop -->
-              <li class="dropdown dropdown-slide">
+              <!-- <li class="dropdown dropdown-slide">
                 <a
                   href="#!"
                   class="dropdown-toggle"
@@ -443,7 +635,7 @@
                   <li><a href="buttons.html">Buttons</a></li>
                   <li><a href="alerts.html">Alerts</a></li>
                 </ul>
-              </li>
+              </li> -->
               <!-- / Blog -->
             </ul>
             <!-- / .nav .navbar-nav -->
