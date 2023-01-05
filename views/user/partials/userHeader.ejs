@@ -192,7 +192,7 @@
                 </ul>
               </li>
               <!-- / Search -->
-              <% if(!login){ %>
+              <% if(!currentUser){ %>
 
               <li class="dropdown favourite dropdown-slide">
                 <a href="/login">
@@ -217,7 +217,7 @@
                 <ul class="dropdown-menu">
                   <li>
                     <a href="/profile"
-                      ><b><p>Hi, <%=user.username %></p></b></a
+                      ><b><p>Hi, <%=user.firstname %></p></b></a
                     >
                   </li>
                   <li>

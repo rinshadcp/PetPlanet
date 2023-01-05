@@ -1,5 +1,7 @@
 const { response } = require("express");
 const addProduct = require("../../models/admin/addProduct");
+const brandModel = require("../../models/admin/brandModel");
+const animalCategory = require("../../models/admin/animalCategorySchema");
 // const couponSchema = require("../../models/admin/couponSchema");
 const cartModel = require("../../models/user/cartModel");
 const { isLoggedIn } = require("../../middlewrares/authentication");
@@ -16,6 +18,8 @@ module.exports = {
       .findOne({ userId: userId })
       .populate("products.productId");
 
+    const Brand = await brandModel.find();
+    const Pet = await animalCategory.find();
     if (cart) {
       let products = cart.products;
       let cartTotal = cart.cartTotal;
@@ -26,10 +30,11 @@ module.exports = {
         cartTotal,
         discount,
         user,
-        login: true,
+        Pet,
+        Brand,
       });
     } else {
-      res.render("user/cart", { products: [], user, login: true });
+      res.render("user/cart", { products: [], user, Pet, Brand });
     }
   },
 

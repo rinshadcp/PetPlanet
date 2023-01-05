@@ -1,153 +1,159 @@
+<%- include('./partials/flash.ejs') %>
 <!DOCTYPE html>
+
+<!--
+ // WEBSITE: https://themefisher.com
+ // TWITTER: https://twitter.com/themefisher
+ // FACEBOOK: https://www.facebook.com/themefisher
+ // GITHUB: https://github.com/themefisher/
+-->
+
 <html lang="en">
   <head>
-    <title>Login</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!--===============================================================================================-->
-    <link
-      rel="icon"
-      type="image/png"
-      href="user/userLogin/images/icons/favicon.ico"
+    <!-- Basic Page Needs
+  ================================================== -->
+    <meta charset="utf-8" />
+    <title>Petplanet</title>
+
+    <!-- Mobile Specific Metas
+  ================================================== -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="Construction Html5 Template" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
     />
-    <!--===============================================================================================-->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="user/userLogin/vendor/bootstrap/css/bootstrap.min.css"
-    />
-    <!--===============================================================================================-->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="user/userLogin/fonts/font-awesome-4.7.0/css/font-awesome.min.css"
-    />
-    <!--===============================================================================================-->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="user/userLogin/fonts/iconic/css/material-design-iconic-font.min.css"
-    />
-    <!--===============================================================================================-->
+    <meta name="author" content="Themefisher" />
+    <meta name="generator" content="Themefisher Constra HTML Template v1.0" />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+
+    <!-- Themefisher Icon font -->
+    <link rel="stylesheet" href="user/plugins/themefisher-font/style.css" />
+    <!-- bootstrap.min css -->
     <link
       rel="stylesheet"
-      type="text/css"
-      href="user/userLogin/vendor/animate/animate.css"
+      href="user/plugins/bootstrap/css/bootstrap.min.css"
     />
-    <!--===============================================================================================-->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="user/userLogin/vendor/css-hamburgers/hamburgers.min.css"
-    />
-    <!--===============================================================================================-->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="user/userLogin/vendor/animsition/css/animsition.min.css"
-    />
-    <!--===============================================================================================-->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="user/userLogin/vendor/select2/select2.min.css"
-    />
-    <!--===============================================================================================-->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="user/userLogin/vendor/daterangepicker/daterangepicker.css"
-    />
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="user/userLogin/css/util.css" />
-    <link rel="stylesheet" type="text/css" href="user/userLogin/css/main.css" />
-    <!--===============================================================================================-->
+
+    <!-- Animate css -->
+    <link rel="stylesheet" href="user/plugins/animate/animate.css" />
+    <!-- Slick Carousel -->
+    <link rel="stylesheet" href="user/plugins/slick/slick.css" />
+    <link rel="stylesheet" href="user/plugins/slick/slick-theme.css" />
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="user/css/style.css" />
   </head>
-  <body>
-    <div class="limiter">
-      <div class="container-login100">
-        <div class="wrap-login100">
-          <form
-            class="login100-form validate-form"
-            action="/signup"
-            method="post"
-            enctype="multipart/form-data"
-          >
-            <span class="login100-form-title p-b-26"> Welcome </span>
-            <!-- <span class="login100-form-title p-b-48">
-              <i class="zmdi zmdi-font"></i>
-            </span> -->
 
-            <div
-              class="wrap-input100 validate-input"
-              data-validate="Valid email is: a@b.c"
-            >
-              <input class="input100" type="text" name="username" />
-              <span class="focus-input100" data-placeholder="Username"></span>
+  <body id="body">
+    <section class="signin-page account">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+            <div class="block text-center">
+              <a class="logo" href="/">
+                <!-- <img src="images/logo.png" alt="" /> -->
+                <b><h3>Petplanet</h3></b>
+              </a>
+              <h2 class="text-center">Create Your Account</h2>
+              <form
+                class="validated-form"
+                action="/signup"
+                method="post"
+                enctype="multipart/form-data"
+              >
+                <div class="form-group">
+                  <input
+                    name="firstname"
+                    type="text"
+                    class="form-control"
+                    placeholder="First Name"
+                  />
+                </div>
+                <div class="form-group">
+                  <input
+                    name="lastname"
+                    type="text"
+                    class="form-control"
+                    placeholder="Last Name"
+                  />
+                </div>
+                <div class="form-group">
+                  <input
+                    name="username"
+                    type="text"
+                    class="form-control"
+                    placeholder="Username"
+                  />
+                </div>
+                <div class="form-group">
+                  <input
+                    name="phone"
+                    type="tel"
+                    class="form-control"
+                    placeholder="Mobile Number"
+                  />
+                </div>
+                <div class="form-group">
+                  <input
+                    name="email"
+                    type="email"
+                    class="form-control"
+                    placeholder="Email"
+                  />
+                </div>
+                <div class="form-group">
+                  <input
+                    name="password"
+                    type="password"
+                    class="form-control"
+                    placeholder="Password"
+                  />
+                </div>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-main text-center">
+                    Sign In
+                  </button>
+                </div>
+              </form>
+              <p class="mt-20">
+                Already hava an account ?<a href="/login"> Login</a>
+              </p>
+              <p><a href="/forget-password"> Forgot your password?</a></p>
             </div>
-
-            <div class="wrap-input100 validate-input">
-              <input class="input100" type="tel" name="phone" />
-              <span class="focus-input100" data-placeholder="Phone"></span>
-            </div>
-
-            <div
-              class="wrap-input100 validate-input"
-              data-validate="Valid email is: a@b.c"
-            >
-              <input class="input100" type="email" name="email" />
-              <span class="focus-input100" data-placeholder="Email"></span>
-            </div>
-
-            <div
-              class="wrap-input100 validate-input"
-              data-validate="Enter password"
-              required
-              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{3,4}$"
-            >
-              <span class="btn-show-pass">
-                <i class="zmdi zmdi-eye"></i>
-              </span>
-              <input class="input100" type="password" name="password" />
-              <span class="focus-input100" data-placeholder="Password"></span>
-            </div>
-
-            <div class="container-login100-form-btn">
-              <div class="wrap-login100-form-btn">
-                <div class="login100-form-bgbtn"></div>
-                <button class="login100-form-btn" type="submit">
-                  Register
-                </button>
-              </div>
-            </div>
-
-            <div class="text-center p-t-115">
-              <span class="txt1"> Already have an account? </span>
-
-              <a class="txt2" href="/login"> Sign In </a>
-            </div>
-          </form>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div id="dropDownSelect1"></div>
+    <!-- 
+    Essential Scripts
+    =====================================-->
 
-    <!--===============================================================================================-->
-    <script src="user/userLogin/vendor/jquery/jquery-3.2.1.min.js"></script>
-    <!--===============================================================================================-->
-    <script src="user/userLogin/vendor/animsition/js/animsition.min.js"></script>
-    <!--===============================================================================================-->
-    <script src="user/userLogin/vendor/bootstrap/js/popper.js"></script>
-    <script src="user/userLogin/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <!--===============================================================================================-->
-    <script src="user/userLogin/vendor/select2/select2.min.js"></script>
-    <!--===============================================================================================-->
-    <script src="user/userLogin/vendor/daterangepicker/moment.min.js"></script>
-    <script src="user/userLogin/vendor/daterangepicker/daterangepicker.js"></script>
-    <!--===============================================================================================-->
-    <script src="user/userLogin/vendor/countdowntime/countdowntime.js"></script>
-    <!--===============================================================================================-->
-    <script src="user/userLogin/js/main.js"></script>
+    <!-- Main jQuery -->
+    <script src="user/plugins/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.1 -->
+    <script src="user/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Bootstrap Touchpin -->
+    <script src="user/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+    <!-- Instagram Feed Js -->
+    <script src="user/plugins/instafeed/instafeed.min.js"></script>
+    <!-- Video Lightbox Plugin -->
+    <script src="user/plugins/ekko-lightbox/dist/ekko-lightbox.min.js"></script>
+    <!-- Count Down Js -->
+    <script src="user/plugins/syo-timer/build/jquery.syotimer.min.js"></script>
+
+    <!-- slick Carousel -->
+    <script src="user/plugins/slick/slick.min.js"></script>
+    <script src="user/plugins/slick/slick-animation.min.js"></script>
+
+    <!-- Google Mapl -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>
+    <script type="text/javascript" src="plugins/google-map/gmap.js"></script>
+
+    <!-- Main Js File -->
+    <script src="user/js/script.js"></script>
   </body>
 </html>

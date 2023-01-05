@@ -1,12 +1,14 @@
 const wishlistSchema = require("../../models/user/wishlistSchema");
-
+const brandModel = require("../../models/admin/brandModel");
+const animalCategory = require("../../models/admin/animalCategorySchema");
 module.exports = {
   //wishlist page
 
-  wishlist: (req, res) => {
+  wishlist: async (req, res) => {
     let user = req.user;
     let userId = user._id;
-
+    let Brand = await brandModel.find();
+    let Pet = await animalCategory.find();
     return new Promise(async (resolve, reject) => {
       let list = await wishlistSchema
         .findOne({ userId: userId })
@@ -20,12 +22,13 @@ module.exports = {
         });
     }).then((list) => {
       if (list) {
-        res.render("user/wishlist", { login: true, list, user });
+        res.render("user/wishlist", { Pet, Brand, list, user });
       } else {
         res.render("user/wishlist", {
-          login: true,
           list: [],
           user,
+          Pet,
+          Brand,
         });
       }
     });

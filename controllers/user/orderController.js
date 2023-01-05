@@ -1,6 +1,8 @@
 const addressSchema = require("../../models/user/addressSchema");
 const cartModel = require("../../models/user/cartModel");
 const orderSchema = require("../../models/user/orderSchema");
+const brandModel = require("../../models/admin/brandModel");
+const animalCategory = require("../../models/admin/animalCategorySchema");
 const Razorpay = require("razorpay");
 const moment = require("moment");
 
@@ -21,6 +23,8 @@ module.exports = {
         .populate("products.productId");
       let address = await addressSchema.findOne({ userId });
 
+      const Brand = await brandModel.find();
+      const Pet = await animalCategory.find();
       if (cart != null && cart.products.length > 0) {
         let cartTotal = cart.cartTotal;
         console.log(cartTotal);
@@ -40,7 +44,8 @@ module.exports = {
           address,
           index,
           user,
-          login: true,
+          Pet,
+          Brand,
         });
       } else {
         res.redirect("/cart");
@@ -101,6 +106,33 @@ module.exports = {
       });
     }
   },
+  // verify payment
+
+  verifyPayment: async (req, res) => {
+    let cart = await cartModel.findOne({ userId });
+    console.log(req.body);
+    const crypto = require("crypto");
+    let details = req.body;
+    console.log(details);
+    let hmac = crypto.createHmac("sha256", "RV5KxjCb2F6JQwSsoMxADYxs");
+    hmac.update(
+      details.payment.razorpay_order_id +
+        "|" +
+        details.payment.razorpay_payment_id
+    );
+    hmac = hmac.digest("hex");
+    if (hmac === details.payment.razorpay_signature) {
+      let orderId = details.order.receipt;
+      await orderSchema.updateOne(
+        { _id: orderId },
+        { $set: { paymentStatus: "Paid" } }
+      );
+      await cartModel.findByIdAndDelete({ _id: cart._id });
+      res.json({ status: true });
+    } else {
+      res.json({ status: false });
+    }
+  },
 
   //checkout page new address updation
 
@@ -139,9 +171,11 @@ module.exports = {
 
   //order success
 
-  orderSuccess: (req, res) => {
+  orderSuccess: async (req, res) => {
     let user = req.user;
-    res.render("user/orderSuccess", { login: true, user });
+    const Brand = await brandModel.find();
+    const Pet = await animalCategory.find();
+    res.render("user/orderSuccess", { user, Pet, Brand });
   },
 
   //order management
@@ -157,6 +191,9 @@ module.exports = {
       .sort({ date: -1 })
       .skip((page - 1) * items_per_page)
       .limit(items_per_page);
+    const Brand = await brandModel.find();
+    const Pet = await animalCategory.find();
+    const user = req.user;
 
     console.log(orders);
     if (orders) {
@@ -165,12 +202,15 @@ module.exports = {
         orders,
         index: 1,
         page,
+        Pet,
+        Brand,
+        user,
         hasNextPage: items_per_page * page < totalproducts,
         hasPreviousPage: page > 1,
         PreviousPage: page - 1,
       });
     } else {
-      res.render("user/orders", { orders: [] });
+      res.render("user/orders", { orders: [], Pet, Brand, user });
     }
   },
 

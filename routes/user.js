@@ -10,6 +10,9 @@ const {
   renderLogin,
   login,
   logout,
+  sendOtp,
+  verifyOtp,
+  resendOtp,
   profile,
   newAddress,
   manageAddress,
@@ -37,6 +40,10 @@ router
 
 router.get("/logout", logout);
 router.get("/shop", isLoggedIn, shop);
+
+router.post("/signup/otp", sendOtp);
+router.post("/resendOtp", resendOtp);
+router.post("/varifyOtp", verifyOtp);
 
 //user profile and address management
 
@@ -74,9 +81,9 @@ router.get("/checkout", isLoggedIn, orderController.checkout);
 router.post("/placeOrder", orderController.placeOrder);
 router.get("/orderSuccess", isLoggedIn, orderController.orderSuccess);
 router.post("/checkoutNewAddress", orderController.checkoutNewAddress);
-// router.post('/verifyPayment' , isLoggedIn ,orderController.verifyPayment)
-// router.get('/orders',isLoggedIn, orderController.orders)
-// router.post('/cancelOrder',isLoggedIn,orderController.cancelOrder)
-// router.post('/checkCoupen' ,isLoggedIn, cartController.checkCoupen)
+router.post("/verifyPayment", isLoggedIn, orderController.verifyPayment);
+router.get("/orders", isLoggedIn, orderController.orders);
+router.post("/cancelOrder", isLoggedIn, orderController.cancelOrder);
+router.post("/checkCoupen", isLoggedIn, cartController.checkCoupen);
 
 module.exports = router;
