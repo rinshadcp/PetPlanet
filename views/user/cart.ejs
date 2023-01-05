@@ -64,18 +64,23 @@
                       <td class="">₹ <%= x.productId.price %></td>
                       <td class="quantity">
                         <div class="input-group mb-3" style="margin-top: 38px">
+                          <div class="" style="display: flex;">
                           <a
                             onclick="QtyDecrement('<%= x.productId._id %>','<%= x.productId.price %>')"
                           >
                             <button id="button" style="width: 40px">-</button>
                           </a>
+                          </div>
+                          <div  style="justify-content: flex-end;">
                           <input
                             type="text"
-                            style="width: 40px"
+                            style="width: 40px;height: 52px;"
                             name="quantity"
                             class="quantity form-control input-number"
                             value="<%= x.quantity %>"
                           />
+                        </div>
+                        <div style="justify-content: left;">
                           <a
                             onclick="QtyIncrement('<%= x.productId._id %>','<%= x.productId.price %> ')"
                           >
@@ -84,9 +89,10 @@
                             </button>
                           </a>
                         </div>
+                        </div>
                       </td>
                       <td class="">
-                        <a class="product-remove" href=""/removeProduct/<%= x.productId._id %>/<%= x.total %>"">Remove</a>
+                        <a class="product-remove" href="/removeProduct/<%= x.productId._id %>/<%= x.total %>">Remove</a>
                       </td>
                     </tr>
                     <!-- <tr class="">
@@ -147,6 +153,7 @@
         price,
       },
       method: "post",
+      
       success: (response) => {
         console.log("cart updated");
         window.location.reload();
@@ -164,6 +171,7 @@
       },
       method: "post",
       success: (response) => {
+        
         console.log("cart updated");
         window.location.reload();
       },

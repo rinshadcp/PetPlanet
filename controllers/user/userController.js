@@ -8,6 +8,7 @@ const bannerModel = require("../../models/admin/bannerModel");
 const contactSchema = require("../../models/user/contactSchema");
 const categorySchema = require("../../models/admin/categorySchema");
 const animalCategory = require("../../models/admin/animalCategorySchema");
+const passportLocalMongoose = require("passport-local-mongoose");
 
 const {
   isLoggedIn,
@@ -31,7 +32,7 @@ let transporter = nodemailer.createTransport({
   service: "Gmail",
 
   auth: {
-    user: "petplanet@gmail.com",
+    user: "insolesshoestore@gmail.com",
     pass: "liflarxzssptrpgo",
   },
 });
@@ -66,11 +67,15 @@ const renderRegister = (req, res) => {
 
 // DO_SIGNUP
 const sendOtp = asyncHandler(async (req, res) => {
+  fName = req.body.firstname;
+  lName = req.body.lastname;
+
   Email = req.body.email;
-  Name = req.body.name;
+  uName = req.body.username;
   Phone = req.body.phone;
   Password = req.body.password;
-  const user = await signupModel.findOne({ email: Email });
+  console.log(Phone);
+  const user = await User.findOne({ email: req.body.email });
 
   // send mail with defined transport object
   if (!user) {
@@ -119,51 +124,49 @@ const resendOtp = asyncHandler(async (req, res) => {
   });
 });
 
-const verifyOtp = asyncHandler(async (req, res) => {
-  if (req.body.otp == otp) {
-    const newUser = signupModel({
-      name: Name,
-      email: Email,
-      phone: Phone,
-      password: Password,
-    });
-    await bcrypt.genSalt(10, (err, salt) => {
-      bcrypt.hash(newUser.password, salt, (err, hash) => {
-        if (err) throw err;
-        newUser.password = hash;
-        newUser
-          .save()
-          .then(() => {
-            console.log(newUser);
-            req.session.user = newUser;
-            res.redirect("/login");
-          })
-          .catch((err) => {
-            console.log(err);
-            res.redirect("/login");
-          });
+const verifyOtp = asyncHandler(
+  async (req, res) => {
+    if (req.body.otp == otp) {
+      // const { firstname, lastname, username, phone, email, password } =
+      //   req.body;
+      // console.log(".........................", req.body);
+      const user = new User({
+        firstname: fName,
+        lastname: lName,
+        username: uName,
+        phone: Phone,
+        email: Email,
       });
-    });
-  } else {
-    res.render("user/otp");
+      const registeredUser = await User.register(user, Password);
+      console.log(registeredUser);
+      req.login(registeredUser, (err) => {
+        if (err) return next(err);
+        req.flash("success", "Welcome to home!");
+        res.redirect("/login");
+      });
+    } else {
+      res.render("user/otp");
+    }
   }
-});
 
-const register = asyncHandler(async (req, res, next) => {
-  try {
-    const { firstname, lastname, username, phone, email, password } = req.body;
-    const user = new User({ firstname, lastname, username, phone, email });
-    const registeredUser = await User.register(user, password);
-    req.login(registeredUser, (err) => {
-      if (err) return next(err);
-      req.flash("success", "Welcome to home!");
-      res.redirect("/");
-    });
-  } catch (e) {
-    req.flash("error", e.message);
-    res.redirect("/signup");
-  }
-});
+  //
+);
+
+// const register = asyncHandler(async (req, res, next) => {
+//   try {
+//     const { firstname, lastname, username, phone, email, password } = req.body;
+//     const user = new User({ firstname, lastname, username, phone, email });
+//     const registeredUser = await User.register(user, password);
+//     req.login(registeredUser, (err) => {
+//       if (err) return next(err);
+//       req.flash("success", "Welcome to home!");
+//       res.redirect("/");
+//     });
+//   } catch (e) {
+//     req.flash("error", e.message);
+//     res.redirect("/signup");
+//   }
+// });
 const renderLogin = (req, res) => {
   res.render("user/login");
 };
@@ -445,7 +448,6 @@ const shop = asyncHandler(async (req, res) => {
 module.exports = {
   home,
   renderRegister,
-  register,
   renderLogin,
   login,
   logout,

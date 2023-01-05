@@ -50,6 +50,57 @@
                     />
                   </td>
                   <td><%= x.productId.name %></td>
+                  <td>
+                    <div
+                      style="width: 100%"
+                      class="d-flex justify-content-around align-items-around"
+                    >
+                      <input
+                        type="hidden"
+                        name="stat"
+                        class="stat class"
+                        value="<%= x.orderStatus  %>"
+                      />
+
+                      <div style="width: 20%" id="status1">
+                        <p
+                          id="Status_i"
+                          style="margin-left: 55px"
+                          class="OrderStatus text-center text-success"
+                        >
+                          <%= x.orderStatus %>
+                        </p>
+                      </div>
+                      
+                  </td>
+                  <td><%= x.productId.price  %></td>
+                  <td><%= moment(order.date).format("LL")  %></td>
+                  <td> <% if( x.orderStatus == "Delivered"  ) %>
+                        <div class="d-flex justify-content-center" style="width: 15%;">
+                            <a href="/productdetail/<%= x.productId._id %>"  class="btn btn-default">
+                             View</a>
+                        </div>
+                 </td>
+                  <td><% if( x.orderStatus == "Cancelled") { %>
+                <div class="d-flex justify-content-center" style="width: 15%;">
+                    <button > <i style="color: rgb(51, 218, 29);"
+                        class=" fa fa-check" aria-hidden="true"></i>
+
+                    </button></li>
+                </div>
+                <% } else if( x.orderStatus == "Delivered") { %> 
+                    <div class="d-flex justify-content-center" style="width: 15%;">
+                         <button onclick="orderCancelled()" class=""> <i style="color: red;"
+                            class=" fa fa-ban" aria-hidden="true"></i>
+                        </button></li>
+                    </div>
+                <% } else { %> 
+                <div class="d-flex justify-content-center" style="width: 15%;">
+                     <button onclick="cancelorder('<%= order._id %>','<%= x.productId._id %>')" class=""> <i style="color: red;"
+                        class=" fa fa-ban" aria-hidden="true"></i>
+                    </button></li>
+                </div>
+                <% } %> </td>
                 </tr>
               </tbody>
               <% }) %> <% }) %>
@@ -57,7 +108,61 @@
           </div>
         </div>
       </div>
+      
     </div>
   </div>
 </section>
+
+
+<script>
+    
+    function cancelorder(id , productId ) {
+        if(confirm('Do you want to cancel the order')){
+            
+            $.ajax({
+          url: "/cancelOrder",
+          data: {
+            id,
+            productId,
+           
+          },
+          method: "post",
+          success: (response) => {
+              if (response.status) {
+                  Swal.fire({
+                      icon: "success",
+                      title: "Order cancelled ",
+                      text: "order cancelled",
+                    });
+                window.location.reload()
+            } 
+          },
+        });
+        } else {
+              Swal.fire({
+                icon: "error",
+                title: "cancelled",
+                text: "",
+              });
+        }
+    }
+
+    function orderCancelled(){
+        Swal.fire({
+                icon: "error",
+                title: "Order delivered ",
+                text: "",
+              });
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+
+        console.log(stat)
+        if (stat == 'Cancelled') {
+            $("p.OrderStatus").addClass("text-danger");
+        }
+    });
+</script>
 <%- include ('./partials/userFooter.ejs') %>

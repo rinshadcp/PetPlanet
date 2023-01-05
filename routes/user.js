@@ -25,7 +25,7 @@ const cartController = require("../controllers/user/cartController");
 const wishlistController = require("../controllers/user/wishlistController");
 const orderController = require("../controllers/user/orderController");
 router.get("/", home);
-router.route("/signup").get(renderRegister).post(register);
+router.route("/signup").get(renderRegister);
 
 router
   .route("/login")
@@ -41,9 +41,9 @@ router
 router.get("/logout", logout);
 router.get("/shop", isLoggedIn, shop);
 
-router.post("/signup/otp", sendOtp);
+router.post("/otp", sendOtp);
 router.post("/resendOtp", resendOtp);
-router.post("/varifyOtp", verifyOtp);
+router.post("/verifyOtp", verifyOtp);
 
 //user profile and address management
 

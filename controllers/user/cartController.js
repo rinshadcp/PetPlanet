@@ -6,7 +6,7 @@ const animalCategory = require("../../models/admin/animalCategorySchema");
 const cartModel = require("../../models/user/cartModel");
 const { isLoggedIn } = require("../../middlewrares/authentication");
 const userModel = require("../../models/user/userModel");
-
+const asyncHandler = require("express-async-handler");
 module.exports = {
   // cart showing page
 
@@ -137,9 +137,8 @@ module.exports = {
 
   //cart quantity increment
 
-  QtyIncrement: async (req, res) => {
-    let user = req.user;
-    let userId = user._id;
+  QtyIncrement: asyncHandler(async (req, res) => {
+    let userId = req.user._id;
 
     let productId = req.body.productId;
     console.log(productId);
@@ -162,17 +161,18 @@ module.exports = {
         // res.redirect("/login/cart");
         res.json(response);
       });
-  },
+  }),
 
   //cart quantity decrement
 
-  QtyDecrement: async (req, res) => {
+  QtyDecrement: asyncHandler(async (req, res) => {
     let userId = req.user._id;
 
     let productId = req.body.productId;
     let price = req.body.price;
     let product = await addProduct.findById(productId);
     let index;
+    console.log(userId, productId, price, product);
     const cartM = await cartModel
       .findOne({ userId: userId })
       .populate("products");
@@ -199,8 +199,9 @@ module.exports = {
         .then(() => {
           res.json(response);
         });
+      console.log(cart);
     }
-  },
+  }),
 
   //CHECK COUPON CODE
 
