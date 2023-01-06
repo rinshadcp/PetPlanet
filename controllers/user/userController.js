@@ -296,6 +296,7 @@ const shop = asyncHandler(async (req, res) => {
   const agecategory = req.query.age;
   const animalcategory = req.query.animal;
   const category = req.query.category;
+  console.log(category);
   const brand = req.query.brand;
   const sort = req.query.sort;
 

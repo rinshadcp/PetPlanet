@@ -19,18 +19,22 @@
     <div class="row">
       <div class="col-md-3">
         <div class="widget">
-          <h4 class="widget-title">Short By</h4>
+          <h4 class="widget-title">Shop By Categories</h4>
           <form method="post" action="#">
-            <select class="form-control">
-              <option>Man</option>
-              <option>Women</option>
+            <% mainCategory.forEach(function(x) { %>
+            <ul class="mt-2">
+              <li class="mt-2" style="margin-top: 5px">
+                <a href="shop?category=<%= x._id %> "><%= x.category %></a>
+              </li>
+            </ul>
+            <!-- <option>Women</option>
               <option>Accessories</option>
-              <option>Shoes</option>
-            </select>
+              <option>Shoes</option> -->
+            <% }) %>
           </form>
         </div>
         <div class="widget product-category">
-          <h4 class="widget-title">Categories</h4>
+          <h4 class="widget-title">Shop</h4>
           <div
             class="panel-group commonAccordion"
             id="accordion"
@@ -48,7 +52,7 @@
                     aria-expanded="true"
                     aria-controls="collapseOne"
                   >
-                    Shoes
+                    Brand
                   </a>
                 </h4>
               </div>
@@ -59,11 +63,15 @@
                 aria-labelledby="headingOne"
               >
                 <div class="panel-body">
+                  <% Brand.forEach(function(x){ %>
                   <ul>
-                    <li><a href="#!">Brand & Twist</a></li>
-                    <li><a href="#!">Shoe Color</a></li>
-                    <li><a href="#!">Shoe Color</a></li>
+                    <li>
+                      <a href="shop?brand=<%= x._id %>"><%= x.brand %> </a>
+                    </li>
+                    <!-- <li><a href="#!">Shoe Color</a></li>
+                    <li><a href="#!">Shoe Color</a></li> -->
                   </ul>
+                  <% }) %>
                 </div>
               </div>
             </div>
@@ -79,7 +87,7 @@
                     aria-expanded="false"
                     aria-controls="collapseTwo"
                   >
-                    Duty Wear
+                    Pet
                   </a>
                 </h4>
               </div>
@@ -90,43 +98,13 @@
                 aria-labelledby="headingTwo"
               >
                 <div class="panel-body">
+                  <% Pet.forEach(function(x){ %>
                   <ul>
-                    <li><a href="#!">Brand & Twist</a></li>
-                    <li><a href="#!">Shoe Color</a></li>
-                    <li><a href="#!">Shoe Color</a></li>
+                    <li><a href="#!"><%= x.animal %> </a></li>
+                    <!-- <li><a href="#!">Shoe Color</a></li>
+                    <li><a href="#!">Shoe Color</a></li> -->
                   </ul>
-                </div>
-              </div>
-            </div>
-            <div class="panel panel-default">
-              <div class="panel-heading" role="tab" id="headingThree">
-                <h4 class="panel-title">
-                  <a
-                    class="collapsed"
-                    role="button"
-                    data-toggle="collapse"
-                    data-parent="#accordion"
-                    href="#collapseThree"
-                    aria-expanded="false"
-                    aria-controls="collapseThree"
-                  >
-                    WorkOut Shoes
-                  </a>
-                </h4>
-              </div>
-              <div
-                id="collapseThree"
-                class="panel-collapse collapse"
-                role="tabpanel"
-                aria-labelledby="headingThree"
-              >
-                <div class="panel-body">
-                  <ul>
-                    <li><a href="#!">Brand & Twist</a></li>
-                    <li><a href="#!">Shoe Color</a></li>
-                    <li><a href="#!">Gladian Shoes</a></li>
-                    <li><a href="#!">Swis Shoes</a></li>
-                  </ul>
+                  <% }) %>
                 </div>
               </div>
             </div>
