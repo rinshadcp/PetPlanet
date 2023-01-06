@@ -25,8 +25,12 @@ module.exports = {
 
   // admin home
 
-  adminHome: (req, res) => {
-    res.render("admin/index");
+  adminHome: async (req, res) => {
+    const orders = await orderSchema
+      .find({})
+      .populate("products.productId")
+      .populate("userId");
+    res.render("admin/index", { orders });
   },
 
   viewUser: asyncHandler(async (req, res) => {
@@ -725,6 +729,7 @@ module.exports = {
         .find({})
         .populate("products.productId")
         .populate("userId");
+
       // .sort({ date: -1 })
       // .skip((page - 1) * items_per_page)
       // .limit(items_per_page);
