@@ -32,8 +32,8 @@ let transporter = nodemailer.createTransport({
   service: "Gmail",
 
   auth: {
-    user: "insolesshoestore@gmail.com",
-    pass: "liflarxzssptrpgo",
+    user: "petplanet7337@gmail.com",
+    pass: "vttiwxoxfvvaupzi",
   },
 });
 
@@ -75,7 +75,7 @@ const sendOtp = asyncHandler(async (req, res) => {
   Phone = req.body.phone;
   Password = req.body.password;
   console.log(Phone);
-  const user = await User.findOne({ email: req.body.email });
+  const user = await User.findOne({ email: Email });
 
   // send mail with defined transport object
   if (!user) {
