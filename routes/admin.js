@@ -1,59 +1,80 @@
 const express = require("express");
 const router = express.Router();
+const passport = require("passport");
+const { isAdminLoggedIn } = require("../middlewrares/authentication");
 const controller = require("../controllers/admin/adminController");
 
-router.get("/", controller.adminHome);
+router.get("/", controller.adminLoginPage);
+router.get("/logout", controller.adminLogout);
+router.get("/adminHome", controller.adminHome);
+router.post(
+  "/adminHome",
+  passport.authenticate("local", {
+    failureFlash: true,
+    failureRedirect: "/admin",
+  }),
+  controller.adminLogin
+);
 
 //User Management
-router.post("/blockUser/:id", controller.blockUser);
-router.post("/unblockUser/:id", controller.unblockUser);
-router.get("/viewUser", controller.viewUser);
+router.post("/blockUser/:id", isAdminLoggedIn, controller.blockUser);
+router.post("/unblockUser/:id", isAdminLoggedIn, controller.unblockUser);
+router.get("/viewUser", isAdminLoggedIn, controller.viewUser);
 
-router.get("/animalPage", controller.animalPage);
-router.get("/agePage", controller.agePage);
-router.get("/addProductPage", controller.addproductpage);
-router.get("/viewProduct", controller.viewproduct);
-router.patch("/unListProduct/:id", controller.unListProduct);
-router.patch("/listProduct/:id", controller.listProduct);
-router.get("/addProductPage", controller.editProduct);
-router.put("/editProductForm/:id", controller.editProduct);
-router.put("/editProductForm/:id", controller.editProductForm);
+router.get("/animalPage", isAdminLoggedIn, controller.animalPage);
+router.get("/agePage", isAdminLoggedIn, controller.agePage);
+router.get("/addProductPage", isAdminLoggedIn, controller.addproductpage);
+router.get("/viewProduct", isAdminLoggedIn, controller.viewproduct);
+router.patch("/unListProduct/:id", isAdminLoggedIn, controller.unListProduct);
+router.patch("/listProduct/:id", isAdminLoggedIn, controller.listProduct);
+router.get("/addProductPage", isAdminLoggedIn, controller.editProduct);
+router.put("/editProductForm/:id", isAdminLoggedIn, controller.editProduct);
+router.put("/editProductForm/:id", isAdminLoggedIn, controller.editProductForm);
 
-router.post("/addAnimal", controller.addAnimal);
-router.post("/deleteAnimal/:id", controller.deleteAnimal);
-router.post("/addAge", controller.addAge);
-router.post("/deleteAge/:id", controller.deleteAge);
-router.post("/addproduct", controller.addproduct);
-router.route("/brand").get(controller.brand).post(controller.addBrand);
-router.post("/deleteBrand/:id", controller.deleteBrand);
+router.post("/addAnimal", isAdminLoggedIn, controller.addAnimal);
+router.post("/deleteAnimal/:id", isAdminLoggedIn, controller.deleteAnimal);
+router.post("/addAge", isAdminLoggedIn, controller.addAge);
+router.post("/deleteAge/:id", isAdminLoggedIn, controller.deleteAge);
+router.post("/addproduct", isAdminLoggedIn, controller.addproduct);
+router
+  .route("/brand")
+  .get(isAdminLoggedIn, controller.brand)
+  .post(isAdminLoggedIn, controller.addBrand);
+router.post("/deleteBrand/:id", isAdminLoggedIn, controller.deleteBrand);
 
 //Category Management
-router.get("/category", controller.category);
-router.post("/categoryAdd", controller.categoryAdd);
-router.get("/categoryForm", controller.categoryForm);
-router.post("/deleteCategory/:id", controller.deleteCategory);
-router.post("/updateCategory/:id", controller.updateCategory);
-router.get("/editCategory/:id", controller.editCategory);
-router.post("/subCategoryAdd", controller.subCategoryAdd);
-router.get("/addMainCategory", controller.addMainCategory);
+router.get("/category", isAdminLoggedIn, controller.category);
+router.post("/categoryAdd", isAdminLoggedIn, controller.categoryAdd);
+router.get("/categoryForm", isAdminLoggedIn, controller.categoryForm);
+router.post("/deleteCategory/:id", isAdminLoggedIn, controller.deleteCategory);
+router.post("/updateCategory/:id", isAdminLoggedIn, controller.updateCategory);
+router.get("/editCategory/:id", isAdminLoggedIn, controller.editCategory);
+router.post("/subCategoryAdd", isAdminLoggedIn, controller.subCategoryAdd);
+router.get("/addMainCategory", isAdminLoggedIn, controller.addMainCategory);
 
 //banner management
-router.post("/deleteBanner/:id", controller.deleteBanner);
-router.post("/updateBanner/:id", controller.updateBanner);
-router.route("/banner").get(controller.banner).post(controller.addBanner);
-router.get("/showBanner", controller.showBanner);
-router.post("/editBanner/:id", controller.editBanner);
+router.post("/deleteBanner/:id", isAdminLoggedIn, controller.deleteBanner);
+router.post("/updateBanner/:id", isAdminLoggedIn, controller.updateBanner);
+router
+  .route("/banner")
+  .get(isAdminLoggedIn, controller.banner)
+  .post(isAdminLoggedIn, controller.addBanner);
+router.get("/showBanner", isAdminLoggedIn, controller.showBanner);
+router.post("/editBanner/:id", isAdminLoggedIn, controller.editBanner);
 
 //coupon management
-router.route("/coupon").get(controller.coupon).post(controller.addCoupon);
-router.post("/deleteCoupon/:id", controller.deleteCoupon);
-router.post("/updateCoupon/:id", controller.updateCoupon);
-router.post("/editCoupon/:id", controller.editCoupon);
-router.get("/showCoupon", controller.showCoupon);
+router
+  .route("/coupon")
+  .get(isAdminLoggedIn, controller.coupon)
+  .post(isAdminLoggedIn, controller.addCoupon);
+router.post("/deleteCoupon/:id", isAdminLoggedIn, controller.deleteCoupon);
+router.post("/updateCoupon/:id", isAdminLoggedIn, controller.updateCoupon);
+router.post("/editCoupon/:id", isAdminLoggedIn, controller.editCoupon);
+router.get("/showCoupon", isAdminLoggedIn, controller.showCoupon);
 
 //order management
-router.get("/orders", controller.orders);
-router.post("/invoice/:id/:productId", controller.invoice);
-router.post("/changeStatus", controller.changeStatus);
+router.get("/orders", isAdminLoggedIn, controller.orders);
+router.post("/invoice/:id/:productId", isAdminLoggedIn, controller.invoice);
+router.post("/changeStatus", isAdminLoggedIn, controller.changeStatus);
 
 module.exports = router;

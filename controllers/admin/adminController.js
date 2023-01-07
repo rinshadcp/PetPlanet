@@ -1,9 +1,7 @@
 const bcrypt = require("bcrypt");
 const sharp = require("sharp");
-const adminSignup = require("../../models/admin/adminSignup");
 const addProduct = require("../../models/admin/addProduct");
 const asyncHandler = require("express-async-handler");
-const signupModel = require("../../models/user/userModel");
 const userSchema = require("../../models/user/userModel");
 const couponSchema = require("../../models/admin/couponSchema");
 const orderSchema = require("../../models/user/orderSchema");
@@ -19,8 +17,30 @@ const moment = require("moment");
 module.exports = {
   // admin Login
 
-  adminLogin: (req, res) => {
+  adminLoginPage: (req, res) => {
     res.render("admin/login");
+  },
+
+  adminLogin: async (req, res) => {
+    let userData = req.body;
+
+    let user = await userSchema.findOne({
+      $and: [{ username: userData.username }, { type: "admin" }],
+    });
+    if (user) {
+      req.flash("success", "welcome back!");
+      res.redirect("adminHome");
+    } else {
+      // req.flash("error", e.message);
+      res.redirect("/admin");
+    }
+  },
+
+  adminLogout: (req, res) => {
+    // req.logout();
+    req.session.destroy();
+    // req.flash('success', "Goodbye!");
+    res.redirect("/admin");
   },
 
   // admin home
