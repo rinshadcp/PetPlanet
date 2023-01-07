@@ -6,7 +6,6 @@ const User = require("../models/user/userModel");
 const {
   home,
   renderRegister,
-  register,
   renderLogin,
   login,
   logout,
@@ -39,7 +38,8 @@ router
   );
 
 router.get("/logout", logout);
-router.get("/shop", isLoggedIn, shop);
+router.get("/shop", shop);
+router.get("/productdetail/:id", showProductdetails);
 
 router.post("/otp", sendOtp);
 router.post("/resendOtp", resendOtp);
@@ -49,16 +49,17 @@ router.post("/verifyOtp", verifyOtp);
 
 router.get("/profile", isLoggedIn, profile);
 router.get("/addAddressPage", isLoggedIn, addAddress);
-router.post("/newAddress", newAddress);
+router.post("/newAddress", isLoggedIn, newAddress);
 router.get("/manageAddress", isLoggedIn, manageAddress);
 router.get("/deleteAddress/:id", isLoggedIn, deleteAddress);
 
 //wishlist routes
 
 router.get("/wishlist", isLoggedIn, wishlistController.wishlist);
-router.post("/addToWishlist", wishlistController.addToWishlist);
+router.post("/addToWishlist", isLoggedIn, wishlistController.addToWishlist);
 router.get(
   "/removeWishlistProduct/:id",
+  isLoggedIn,
   wishlistController.removeWishlistProduct
 );
 router.get("/moveToCart/:id", isLoggedIn, wishlistController.moveToCart);
