@@ -10,10 +10,6 @@ const categorySchema = require("../../models/admin/categorySchema");
 const animalCategory = require("../../models/admin/animalCategorySchema");
 const passportLocalMongoose = require("passport-local-mongoose");
 
-const {
-  isLoggedIn,
-  checkReturnTo,
-} = require("../../middlewrares/authentication");
 const brandModel = require("../../models/admin/brandModel");
 var otp = Math.random();
 otp = otp * 1000000;

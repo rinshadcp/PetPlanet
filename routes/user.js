@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-const { isLoggedIn } = require("../middlewrares/authentication");
+const { isLoggedIn, checkReturnTo } = require("../middlewrares/authentication");
 const User = require("../models/user/userModel");
 const {
   home,

@@ -31,7 +31,7 @@ module.exports = {
       req.flash("success", "welcome back!");
       res.redirect("adminHome");
     } else {
-      // req.flash("error", e.message);
+      req.flash("error", "Username or Password is incorrect");
       res.redirect("/admin");
     }
   },
