@@ -256,7 +256,10 @@
               <h4 class="widget-title">Order Summary</h4>
               <% cartItems.forEach(function(product){ %>
               <div class="media product-card">
-                <a class="pull-left" href="product-single.html">
+                <a
+                  class="pull-left"
+                  href="/productdetail/<%= product.productId._id %>"
+                >
                   <img
                     class="media-object"
                     src="/images/petproduct/<%= product.productId.image %>"
@@ -266,7 +269,9 @@
                 </a>
                 <div class="media-body">
                   <h4 class="media-heading">
-                    <a href="/product-single"><%= product.productId.name %></a>
+                    <a href="/productdetail/<%= product.productId._id %>"
+                      ><%= product.productId.name %></a
+                    >
                   </h4>
                   <p class="price">Quantity : <%= product.quantity %></p>
                   <!-- <span class="remove">Remove</span> -->
