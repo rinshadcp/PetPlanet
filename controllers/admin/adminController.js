@@ -516,7 +516,7 @@ module.exports = {
       let category = await categorySchema.find().populate("category");
       let subCategory = await subCategorySchema.find();
       let brand = await brandSchema.find();
-      res.render("/admin/editProductForm", {
+      res.render("admin/editProductForm", {
         singleProduct,
         age,
         animal,
@@ -534,26 +534,25 @@ module.exports = {
   editProduct: asyncHandler(async (req, res) => {
     try {
       const id = req.params.id;
-      if (req.files) {
-        // await ProductModel.findByIdAndUpdate(
-        //     { _id: req.params.id }, { $set: { image: image.filename } }
-        // );
-        const image = req.files;
-        image.forEach((img) => {});
-        console.log(image);
-        const productimages =
-          image != null ? image.map((img) => img.filename) : null;
-        console.log(productimages);
+      // await ProductModel.findByIdAndUpdate(
+      //     { _id: req.params.id }, { $set: { image: image.filename } }
+      // );
+      const image = req.files;
+      image.forEach((img) => {});
+      console.log(image);
+      const productimages =
+        image != null ? image.map((img) => img.filename) : null;
+      console.log(productimages);
 
-        // await ProductModel.findByIdAndUpdate({ _id: req.params.id }, { $set: { image: productimages } })
-      }
+      // await ProductModel.findByIdAndUpdate({ _id: req.params.id }, { $set: { image: productimages } })
+
       const {
-        age,
-        name,
         animal,
-        brand,
+        age,
         category,
         subCategory,
+        brand,
+        name,
         description,
         price,
       } = req.body;
@@ -563,12 +562,12 @@ module.exports = {
           { _id: id },
           {
             $set: {
+              animal,
               age,
-              brand,
               category,
               subCategory,
+              brand,
               name,
-              animal,
               description,
               price,
               image: productimages,

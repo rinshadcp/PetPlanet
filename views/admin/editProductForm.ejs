@@ -17,7 +17,7 @@
         <div class="card mb-4">
           <div class="card-body">
             <form
-              action="/admin/editProduct/<%= singleProduct._id %>?_method=PUT"
+              action="/admin/editProduct/<%= singleProduct._id %>"
               method="post"
               enctype="multipart/form-data"
             >
@@ -28,8 +28,8 @@
                   >
 
                   <select class="form-control" name="category">
-                    <% animalCategory.forEach(function(x) { %>
-                    <option value="<%= x._id %>"><%= x.animal %></option>
+                    <% animal.forEach(function(x) { %>
+                    <option><%= x.animal %></option>
                     <% }) %>
                   </select>
                 </div>
@@ -38,14 +38,44 @@
               <div class="mb-3">
                 <div class="form-group">
                   <label class="form-label" for="basic-default-fullname">
-                    Category</label
+                    Age Group</label
                   >
                   <select class="form-control" name="subCategory">
-                    <% ageCategory.forEach(function(x) { %>
+                    <% age.forEach(function(x) { %>
                     <option><%= x.age %></option>
                     <% }) %>
                   </select>
                 </div>
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label"
+                  >Category</label
+                >
+                <select class="form-control" name="category">
+                  <% category.forEach(function(x) { %>
+                  <option value="<%= x._id %>"><%= x.category %></option>
+                  <% }) %>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label"
+                  >Sub Category</label
+                >
+                <select class="form-control" name="subCategory">
+                  <% subCategory.forEach(function(x) { %>
+                  <option><%= x.subCategory %></option>
+                  <% }) %>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label"
+                  >Brands</label
+                >
+                <select class="form-control" name="brand">
+                  <% brand.forEach(function(x) { %>
+                  <option value="<%= x._id %>"><%= x.brand %></option>
+                  <% }) %>
+                </select>
               </div>
 
               <div class="mb-3">
@@ -88,6 +118,7 @@
                     class="custom-file-input"
                     name="image"
                     required
+                    accept="image/*"
                   />
                   <label class="custom-file-label" for="customFile"
                     >Choose file</label

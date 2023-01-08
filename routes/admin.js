@@ -27,9 +27,13 @@ router.get("/addProductPage", isAdminLoggedIn, controller.addproductpage);
 router.get("/viewProduct", isAdminLoggedIn, controller.viewproduct);
 router.patch("/unListProduct/:id", isAdminLoggedIn, controller.unListProduct);
 router.patch("/listProduct/:id", isAdminLoggedIn, controller.listProduct);
-router.get("/addProductPage", isAdminLoggedIn, controller.editProduct);
-router.put("/editProductForm/:id", isAdminLoggedIn, controller.editProduct);
-router.put("/editProductForm/:id", isAdminLoggedIn, controller.editProductForm);
+// router.get("/addProductPage", isAdminLoggedIn, controller.editProduct);
+router.post("/editProduct/:id", isAdminLoggedIn, controller.editProduct);
+router.post(
+  "/editProductForm/:id",
+  isAdminLoggedIn,
+  controller.editProductForm
+);
 
 router.post("/addAnimal", isAdminLoggedIn, controller.addAnimal);
 router.post("/deleteAnimal/:id", isAdminLoggedIn, controller.deleteAnimal);
