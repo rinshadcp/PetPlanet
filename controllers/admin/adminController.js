@@ -225,7 +225,7 @@ module.exports = {
         });
       }
     } catch (error) {
-      res.render("error");
+      res.render("admin/404");
     }
   },
 
@@ -283,7 +283,7 @@ module.exports = {
         });
       }
     } catch (error) {
-      res.render("error");
+      res.render("admin/404");
     }
   },
 
@@ -300,7 +300,7 @@ module.exports = {
 
       res.render("admin/editCategory", { singleCategory, category });
     } catch {
-      res.render("error");
+      res.render("admin/404");
     }
   },
 
@@ -353,7 +353,7 @@ module.exports = {
           console.log(err);
         });
     } catch {
-      res.render("error");
+      res.render("admin/404");
     }
   },
 
@@ -525,7 +525,7 @@ module.exports = {
         brand,
       });
     } catch {
-      res.render("error");
+      res.render("admin/404");
     }
   }),
 
@@ -534,7 +534,7 @@ module.exports = {
   editProduct: asyncHandler(async (req, res) => {
     try {
       const id = req.params.id;
-      if (req.file) {
+      if (req.files) {
         // await ProductModel.findByIdAndUpdate(
         //     { _id: req.params.id }, { $set: { image: image.filename } }
         // );
@@ -580,7 +580,7 @@ module.exports = {
           res.redirect("/admin/viewProduct");
         });
     } catch {
-      res.render("error");
+      res.render("admin/404");
     }
   }),
 
@@ -612,7 +612,7 @@ module.exports = {
         });
     } catch (e) {
       throw Error(e);
-      // res.render("error");
+      res.render("admin/404");
     }
   },
 
@@ -631,7 +631,7 @@ module.exports = {
       let banner = await bannerModel.findById({ _id: bannerId });
       res.render("admin/editBanner", { banner });
     } catch {
-      res.render("error");
+      res.render("admin/404");
     }
   },
 
@@ -659,7 +659,7 @@ module.exports = {
         res.redirect("admin/showBanner");
       });
     } catch {
-      res.render("error");
+      res.render("admin/404");
     }
   },
 
@@ -723,7 +723,7 @@ module.exports = {
         res.redirect("/admin/showCoupon");
       });
     } catch {
-      res.render("error");
+      res.render("admin/404");
     }
   },
 
@@ -735,7 +735,7 @@ module.exports = {
       let coupon = await couponSchema.findById({ _id: couponId });
       res.render("admin/editCoupon", { coupon });
     } catch {
-      res.render("error");
+      res.render("admin/404");
     }
   },
   //orders page
@@ -764,7 +764,7 @@ module.exports = {
         // PreviousPage: page - 1,
       });
     } catch {
-      res.render("error");
+      res.render("admin/404");
     }
   }),
   //invoice
@@ -785,7 +785,7 @@ module.exports = {
       res.render("admin/invoice", { order, address, products, moment });
     } catch {
       console.log("catchhhhh");
-      res.render("error");
+      res.render("admin/404");
     }
   },
 
@@ -829,7 +829,7 @@ module.exports = {
       }
       res.json({ success: "success" });
     } catch {
-      res.render(error);
+      res.render("admin/404");
     }
   },
 };
