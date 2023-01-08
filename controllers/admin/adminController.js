@@ -185,7 +185,7 @@ module.exports = {
   category: async (req, res) => {
     let subCategory = await subCategorySchema.find({}).populate("category_id");
 
-    res.render("admin/category", { subCategory });
+    res.render("admin/Category", { subCategory });
   },
 
   //adding new category
